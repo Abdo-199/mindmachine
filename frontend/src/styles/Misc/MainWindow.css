@@ -8,7 +8,7 @@
     flex: 1;
 }
 
-#test {
+#windowWrapper {
     min-height: 100vh; /* Dies stellt sicher, dass der Footer immer am unteren Rand des Bildschirms bleibt */
     display: flex;
     flex-direction: column;
@@ -16,4 +16,11 @@
 
 html, body {
     margin: 0;
+}
+
+#legalNotice-container {
+    margin: 80px;
+    padding: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
 }

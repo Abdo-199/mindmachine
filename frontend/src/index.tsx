@@ -9,6 +9,7 @@ import {
   BrowserRouter, Route, Routes
 } from 'react-router-dom';
 
+<<<<<<< HEAD
 
 import AdminPanel from './components/AdminPanel/AdminPanel';
 import FileInformation from './components/FileInformation/FileInformation';
@@ -28,15 +29,36 @@ const RouteLayout = () => (
       <Route path="/FileInformation" element={<FileInformation  />} />
     </Routes>
     </BrowserRouter>
+=======
+const RouteLayout = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<LoginWindow />} />
+      <Route path="/MainWindow" element={<MainWindow content='HomeWindow' />} />
+      <Route path="/AdminPanel" element={<MainWindow content='AdminPanel' />} />
+      <Route path="/SearchResult" element={<MainWindow content='SearchResult' />} />
+      <Route path="/SearchHistory" element={<MainWindow content='SearchHistory' />} />
+      <Route path="/FileInformation" element={<MainWindow content='FileInformation' />} />
+      <Route path="/LegalNotice" element={<MainWindow content='LegalNotice' />} />
+    </Routes>
+  </BrowserRouter>
+>>>>>>> 69b5543159729b358c95428f9cb62fec621c915b
 );
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
+<<<<<<< HEAD
     <div>
       <RouteLayout></RouteLayout>
     </div>
+=======
+  <div>
+    <RouteLayout></RouteLayout>
+  </div>
+>>>>>>> 69b5543159729b358c95428f9cb62fec621c915b
 );
 
 

@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 import "../../styles/SearchResult/SearchResult.css";
 import Header from '../Misc/Header'
 import Card from '@mui/material/Card';
@@ -7,10 +8,14 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material';
+=======
+import Header from '../Misc/Header'
+>>>>>>> 69b5543159729b358c95428f9cb62fec621c915b
 
 
 const SearchResult = () => {
     return (
+<<<<<<< HEAD
 
         <div style={{backgroundColor:'white'}}>
             <Header></Header>
@@ -35,6 +40,11 @@ const SearchResult = () => {
             </div>
         </div>
 
+=======
+        <div>
+            Hier kommen die SearchResults hin!
+        </div>
+>>>>>>> 69b5543159729b358c95428f9cb62fec621c915b
     )
 }
 export default SearchResult

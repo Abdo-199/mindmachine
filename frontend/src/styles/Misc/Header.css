@@ -11,3 +11,12 @@
 #header-container div p {
     font-size: 1.4rem;
 }
+
+.header-button {
+    transition: .3s;
+}
+
+.header-button:hover {
+    color: blue;
+    cursor: pointer;
+}

@@ -1,8 +1,18 @@
 #footer-container {
     width: 100%;
-    background-color: gray;
+    background-color: #83B600;
     height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#legalNotice-link {
+    margin-left: 7px;
+    transition: .3s;
+}
+
+#legalNotice-link:hover {
+    color: blue;
+    cursor: pointer;
 }

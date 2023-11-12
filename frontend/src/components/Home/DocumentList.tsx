@@ -1,38 +1,22 @@
-import React, { useState } from 'react'
-import DocumentRow from './DocumentRow'
+import DocumentRow from "./DocumentRow";
 
-const DocumentList = () => {
-  
-  const [documentRows, setDocumentRows] = useState([]);
-
+const DocumentList = ({ docRows }: { docRows: File[] }) => {
   return (
-    <table id="documentList-table">
-      <tr id="document-headerRow">
-        <th>Name</th>
-        <th>Size</th>
-        <th>Date</th>
-        <th>More</th>
-      </tr>
-      
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
-      <DocumentRow></DocumentRow>
+    <>
+      <table id="documentList-table">
+        <tr id="document-headerRow">
+          <th>Name</th>
+          <th>Size</th>
+          <th>Date</th>
+          <th>More</th>
+        </tr>
 
-      {documentRows.map((item, index) => {
-        return <DocumentRow></DocumentRow>
-      })}
-    </table>
-  )
-}
+        {docRows.map((item, index) => {
+          return <DocumentRow key={index} file={item}></DocumentRow>;
+        })}
+      </table>
+    </>
+  );
+};
 
-export default DocumentList
+export default DocumentList;
