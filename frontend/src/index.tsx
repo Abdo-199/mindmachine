@@ -9,27 +9,13 @@ import {
   BrowserRouter, Route, Routes
 } from 'react-router-dom';
 
-<<<<<<< HEAD
-
+/*
 import AdminPanel from './components/AdminPanel/AdminPanel';
 import FileInformation from './components/FileInformation/FileInformation';
 import SearchHistory from './components/SearchHistory/SearchHistory';
-import SearchResult from './components/SearchResult/SearchResult';
+import SearchResult from './components/SearchResult/SearchResult';*/
 
-const RouteLayout = () => (
 
-  <BrowserRouter>
-    
-    <Routes>
-      <Route path="/" element={<LoginWindow  />} />
-      <Route path="/MainWindow" element={<MainWindow  />} />
-      <Route path="/AdminPanel" element={<AdminPanel />} />
-      <Route path="/SearchResult" element={<SearchResult  />} />
-      <Route path="/SearchHistory" element={<SearchHistory />} />
-      <Route path="/FileInformation" element={<FileInformation  />} />
-    </Routes>
-    </BrowserRouter>
-=======
 const RouteLayout = () => (
   <BrowserRouter>
     <Routes>
@@ -42,7 +28,6 @@ const RouteLayout = () => (
       <Route path="/LegalNotice" element={<MainWindow content='LegalNotice' />} />
     </Routes>
   </BrowserRouter>
->>>>>>> 69b5543159729b358c95428f9cb62fec621c915b
 );
 
 const root = ReactDOM.createRoot(
@@ -50,15 +35,10 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-<<<<<<< HEAD
     <div>
       <RouteLayout></RouteLayout>
     </div>
-=======
-  <div>
-    <RouteLayout></RouteLayout>
-  </div>
->>>>>>> 69b5543159729b358c95428f9cb62fec621c915b
+
 );
 
 

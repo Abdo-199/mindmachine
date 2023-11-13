@@ -1,20 +1,46 @@
-.resultcontainer {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: rgb(170, 202, 55);
-    width: 650px;
-    margin-top: 100px;
-    padding-top: 50px;
-    padding-bottom: 70px;
-    border-radius: 10%;
+#SearchInput {
+  margin-top: 20px;
+  margin-left: 150px;
+  border-radius: 5px;
+}
+#SearchInputButton {
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 5px;
+  background-color: #83b600;
 }
 
-::placeholder {
-  color: rgb(255, 255, 255);
-  opacity: 0.5; /* Firefox */
-  font-style: italic;
+#SearchResultCard {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 150px;
 }
 
+#OpenPDF {
+  color: black;
+  background-color: #83b600;
+}
 
+#CopyResult {
+  color: white;
+  background-color: blue;
+}
 
+#Alert {
+  margin-top: 20px;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+#DemoPaper {
+  max-height: 160px;
+  margin-top: 20px;
+  margin-left: 20px;
+  min-width: 140px;
+}
+
+#FontAwesomeIcon {
+  margin-top: 20px;
+  margin-left: 40px;
+  
+}

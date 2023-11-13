@@ -1,15 +1,5 @@
 import React from 'react'
 import Header from '../Misc/Header'
-<<<<<<< HEAD
-const SearchHistory = () => {
-    return (
-    <div >
-        <Header></Header>
-    </div>
-    )
-}
-export default SearchHistory
-=======
 import { useState } from "react";
 import "../../styles/SearchHistory/SearchHistory.css"
 
@@ -74,4 +64,3 @@ const SearchHistory = () => {
 };
 
 export default SearchHistory;
->>>>>>> 69b5543159729b358c95428f9cb62fec621c915b
