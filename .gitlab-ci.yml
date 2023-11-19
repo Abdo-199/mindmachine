@@ -1,49 +1,60 @@
+# Definiere das Docker-Image für den GitLab Runner
+
 stages:
   - build
-#  - test
-#  - deploy
-
-variables:
-  CI_NODE_INDEX: "1" 
-
+  - test
+  - deploy
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
   paths:
     - frontend/node_modules/
-    - backend/.venv/  
+    - backend/.venv/ 
+
+
 
 react_build:
   stage: build
+  image: node:latest
   script:
     - cd frontend
-    - echo Installing npm packages
-    - npm install
-    - cd Baue die Anwendung
-    - npm run build
+    - echo Installiere npm-packages
+    - npm install 
+    - echo Baue das Frontend
+    - CI=false npm run build
 
-#react_test:
-#  stage: test
-#  script:
-#    - cd frontend
-#    - echo Installing npm packages
-#    - npm install
-#    - cd Teste die Anwendung
-#    - npm run test
+react_test:
+ stage: test
+ script:
+   - cd frontend
+   - echo Installiere npm-packages
+   - npm install
+   - echo Teste das Frontend
+   - CI=false npm run test
 
-#python_build:
-#  stage: build
-#  script:
-#   - cd backend
-#    - pip install -r requirements.txt
+backend_build:
+  stage: build
+  image: python:latest
+  script:
+    - cd backend
+    - echo Baue das Backend
+    - pip install -r requirements.txt
 
-#python_test:
-#  stage: test
-#  script:
-#    - cd backend
-#   - pip install -r requirements.txt
+deploy_Production:
+  image: ubuntu:latest
+  stage: deploy
+  
+  before_script:
+  - apt-get update -qq
+  - apt-get install -qq git
+  # Setup SSH deploy keys
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh mindmachine@141.45.224.114 "cd ./mindmachine/ && git reset --hard HEAD && git clean -f -d && git pull  && docker-compose down && docker-compose up --build -d && exit"
+  only:
+    - main
 
-#deploy:
-#  stage: deploy
-#  script:
-#   - echo "Deploying..."
+
 

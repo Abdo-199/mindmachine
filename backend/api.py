@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, File, UploadFile, Form
 from fileSystemHandler import FileSystemHandler
 from statisticsHandler import StatisticsHandler
 from ldap3 import Server, Connection
@@ -11,7 +11,7 @@ class API:
         self.db = dataBase
         self.router = APIRouter()
         self.stats = StatisticsHandler(self.db)
-        self.fs = FileSystemHandler("/")
+        self.file_system_handler = FileSystemHandler()
 
         self.setup_routes()
         self.app.include_router(self.router)
@@ -20,7 +20,7 @@ class API:
 
         #validate HTW Credentials
         @self.router.post("/login")
-        async def validate_credentials(request: LoginModel):
+        async def validate_credentials(request: LoginRequestModel) -> LoginResponseModel:
 
             ldap_server = Server('ldap://login-dc-01.login.htw-berlin.de')
             base_dn = 'dc=login,dc=htw-berlin,dc=de'
@@ -30,11 +30,9 @@ class API:
             conn.start_tls()
 
             if conn.bind():
-                print("LDAP authentication successful")
-                return {"isAuthenticated": True, "isAdmin": True}
+                return LoginResponseModel(isAuthenticated=True, isAdmin=True)
           
-            print("LDAP authentication failed")
-            return {"isAuthenticated": False, "isAdmin": False}
+            return LoginResponseModel(isAuthenticated=False, isAdmin=False)
         
         #search
         @self.router.get("/search/{query}")
@@ -43,7 +41,8 @@ class API:
         
         #upload document for user id
         @self.router.post("/upload/{user_id}")
-        async def upload_document(user_id):
+        async def upload_document(user_id, files: list[UploadFile] = File(...)):
+            self.file_system_handler.upload(user_id, files)
             return True
 
         #get document
@@ -52,18 +51,20 @@ class API:
             return True
 
         #delete document
-        @self.router.delete("/document/{document_id}")
-        async def delete_document(document_id):
+        @self.router.delete("/deleteDocument/{user_id}/{document_id}")
+        async def delete_document(user_id, document_id):
+            self.file_system_handler.delete_document(user_id, document_id)
             return True
         
         #send file structure
         @self.router.get("/filestructure/{user_id}")
         async def get_file_structure(user_id):
-            return True
+            return self.file_system_handler.get_fs_for_user(user_id)
         
         #edit document name
-        @self.router.put("/document/{document_id}")
-        async def edit_document_name(document_id):
+        @self.router.put("/editDocumentName/{user_id}")
+        async def edit_document_name(user_id, request: RenameFileModel):
+            self.file_system_handler.edit_document_name(user_id, request.old_name, request.new_name)
             return True
         
 

@@ -5,3 +5,4 @@ uvicorn
 pydantic
 qdrant-client
 ldap3
+python-multipart

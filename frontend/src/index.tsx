@@ -24,7 +24,7 @@ const RouteLayout = () => (
       <Route path="/AdminPanel" element={<MainWindow content='AdminPanel' />} />
       <Route path="/SearchResult" element={<MainWindow content='SearchResult' />} />
       <Route path="/SearchHistory" element={<MainWindow content='SearchHistory' />} />
-      <Route path="/FileInformation" element={<MainWindow content='FileInformation' />} />
+      <Route path="/FileInformation/:filenameParams" element={<MainWindow content='FileInformation' />} />
       <Route path="/LegalNotice" element={<MainWindow content='LegalNotice' />} />
     </Routes>
   </BrowserRouter>

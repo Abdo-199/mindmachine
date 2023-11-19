@@ -1,0 +1,18 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    tty: true
+    restart: always
+  
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend-vol:/usr/src/app/data
+      - ../documents:/usr/src/app/documents
+    tty: true
+    restart: always

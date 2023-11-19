@@ -21,8 +21,8 @@ const Header = () => {
                 <p>Home</p>
             </div>
 
-            <div className='header-button' onClick={() => navigate("/SearchResult")}>
-                <p>Search Results</p>
+            <div className='header-button' onClick={() => navigate("/SearchHistory")}>
+                <p>Search History</p>
             </div>
 
             {isAdmin == true && <div className='header-button' onClick={() => navigate("/AdminPanel")}>

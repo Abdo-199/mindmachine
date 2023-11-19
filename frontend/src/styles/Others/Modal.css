@@ -1,0 +1,62 @@
+/* Add padding and center-align text to the container */
+.container {
+  padding: 16px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* The Modal (background) */
+.modal {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  /* background-color: #474e5d; */
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 60%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+.hr-style {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* The Modal Close Button (x) */
+.close {
+  position: relative;
+  right: 10px;
+  top: -10px;
+  align-self: flex-start;
+  font-size: 40px;
+  font-weight: bold;
+  color: #9a9a9a;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+.renameFileOptions-buttons {
+  width: 100%;
+  padding: 20px 0px 20px 0px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

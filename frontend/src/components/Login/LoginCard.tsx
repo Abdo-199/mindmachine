@@ -1,3 +1,4 @@
+import { configDotenv } from "dotenv";
 import "../../styles/Login/LoginStyles.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,11 +9,9 @@ const LoginCard = () => {
 
   const navigate = useNavigate();
 
-
-  const Login = async (username: string, password: string) =>  {
-
+  const Login = async (username: string, password: string) => {
     let bodyData = { username: username, password: password };
-  
+
     let fetchData = {
       method: "POST",
       body: JSON.stringify(bodyData),
@@ -20,8 +19,9 @@ const LoginCard = () => {
         "Content-Type": "application/json",
       },
     };
-  
-    const url = "http://localhost:8000/login";
+    
+    //${process.env.backend_address}/login
+    const url = `http://localhost:8000/login`;
     const response = await fetch(url, fetchData)
       .then((response) => {
         return response.json();
@@ -29,18 +29,23 @@ const LoginCard = () => {
       .then((data) => {
         if (!data.isAuthenticated) {
           alert("Error. Wrong Credentials");
-        }
-        else {
-          localStorage.setItem("userID", username)
-          localStorage.setItem("isAdmin", data.isAdmin)
+        } else {
+          localStorage.setItem("userID", username);
+          localStorage.setItem("isAdmin", data.isAdmin);
 
           //Weiterleitung zu MainWindow
-          navigate("/MainWindow")
+          navigate("/MainWindow");
         }
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
+  };
+
+  const FastLogin = (e: any) =>{
+    if (e.key === "Enter") {
+      Login(username, password);
+    }
   }
 
   return (
@@ -64,6 +69,7 @@ const LoginCard = () => {
         placeholder="type in username ..."
         value={username}
         onChange={(e) => setUsername(e.target.value)}
+        onKeyDown={(e) => FastLogin(e)}
       ></input>
       <br></br>
       <label htmlFor="password">Password</label>
@@ -75,11 +81,17 @@ const LoginCard = () => {
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        onKeyDown={(e) => FastLogin(e)}
       ></input>
       <br></br>
       <br></br>
       <div>
-        <button className="login-button" onClick={() => Login(username, password)}>Login</button>
+        <button
+          className="login-button"
+          onClick={() => Login(username, password)}
+        >
+          Login
+        </button>
       </div>
     </div>
     //

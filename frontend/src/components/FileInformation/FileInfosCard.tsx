@@ -1,21 +1,30 @@
-import React, { useState } from 'react'
-import '../../styles/FileInformation/FileInformation.css'
+import React, { useState } from "react";
+import "../../styles/FileInformation/FileInformation.css";
 
-const FileInfosCard = () => {
-
-    const [filename, setFileName] = useState("MeinDokument");
-    const [size, setSize] = useState("5.3MB");
-    const [dateAdded, setDateAdded] = useState("05.11.2023");
-    const [description, setDescription] = useState("Blablabla");
+const FileInfosCard = ({file_name, file_size, file_date}: {file_name: string | undefined, file_size: string | undefined, file_date: string | undefined}) => {
+    
+  const [size, setSize] = useState("5.3MB");
+  const [dateAdded, setDateAdded] = useState("05.11.2023");
+  const [description, setDescription] = useState("Blablabla");
 
   return (
-    <div id="fileInfosCard">
-        <p><span>Filename: </span>{filename}</p>
-        <p><span>Size: </span>{size}</p>
-        <p><span>Date added: </span>{dateAdded}</p>
-        <p><span>Description: </span>{description}</p>
-    </div>
-  )
-}
+    <>
+      <div id="fileInfosCard">
+        <p>
+          <span>Filename: </span>
+          {file_name}
+        </p>
+        <p>
+          <span>Size: </span>
+          {file_size}
+        </p>
+        <p>
+          <span>Date added: </span>
+          {file_date}
+        </p>
+      </div>
+    </>
+  );
+};
 
-export default FileInfosCard
+export default FileInfosCard;
