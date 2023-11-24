@@ -10,6 +10,7 @@ import SearchResult from '../SearchResult/SearchResult';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import FileInformationWindow from '../FileInformation/FileInformationWindow'
 import { useNavigate } from "react-router-dom";
+import LogOut from '../Logout/logout'
 
 interface MainWindowProps {
   content: string;
@@ -56,6 +57,7 @@ const MainWindow: React.FC<MainWindowProps> = ({ content }) => {
     <div id="windowWrapper">
       <div id="mainWindow-container">
         <Header></Header>
+        <LogOut></LogOut>
         <div id="mainContent">
           {toRenderContent}
         </div>

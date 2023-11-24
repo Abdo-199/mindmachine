@@ -32,7 +32,8 @@ const LoginCard = () => {
         } else {
           localStorage.setItem("userID", username);
           localStorage.setItem("isAdmin", data.isAdmin);
-
+          sessionStorage.setItem("login_datum", new Date().getTime().toString());
+          
           //Weiterleitung zu MainWindow
           navigate("/MainWindow");
         }
