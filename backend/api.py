@@ -1,8 +1,17 @@
-from fastapi import FastAPI, APIRouter, File, UploadFile, Form
+from fastapi import FastAPI, APIRouter, File, UploadFile, Form, HTTPException
 from fileSystemHandler import FileSystemHandler
 from statisticsHandler import StatisticsHandler
 from ldap3 import Server, Connection
+from qdrant import QDrant
 from dataDefinitions import *
+from database import log_search
+from typing import List
+
+
+class VectorModel(BaseModel):
+
+    pass
+
 
 class API:
 
@@ -96,6 +105,55 @@ class API:
         @self.router.get("/searchhistory/{user_id}")
         async def get_search_history(user_id):
             return True
+
+        @self.router.post("/search")
+        async def search(query: str, student_number: int):
+            try:
+                # Perform the search using Qdrant
+                results = QDrant().search_vectors(collection_name="your_collection", query_vector=query)
+
+                # Log the search in the database
+                log_search(student_number, query)
+
+                return results
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=str(e))
+
+        @self.router.post("/create_collection/{collection_name}")
+        async def create_collection(collection_name: str):
+            try:
+                qdrant_client = QDrant()
+                qdrant_client.create_collection(collection_name)
+                return {"message": "Collection created successfully"}
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=str(e))
+
+        @self.router.post("/add_vectors/{collection_name}")
+        async def add_vectors(collection_name: str, vectors: List[VectorModel]):
+            try:
+                qdrant_client = QDrant()
+                qdrant_client.add_vectors(collection_name, vectors)
+                return {"message": "Vectors added successfully"}
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=str(e))
+
+        @self.router.delete("/delete_vectors/{collection_name}")
+        async def delete_vectors(collection_name: str, vector_ids: List[int]):
+            try:
+                qdrant_client = QDrant()
+                qdrant_client.delete_vectors(collection_name, vector_ids)
+                return {"message": "Vectors deleted successfully"}
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=str(e))
+
+        @self.router.post("/add_text/{collection_name}/{vector_id}")
+        async def add_text(collection_name: str, vector_id: int, text: str):
+            try:
+                qdrant_client = QDrant()
+                qdrant_client.add_text_as_vector(collection_name, text, vector_id)
+                return {"message": "Text added as vector successfully"}
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=str(e))
 
         
 
