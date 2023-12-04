@@ -7,3 +7,4 @@ qdrant-client
 ldap3
 python-multipart
 sentence-transformers
+sqlalchemy
