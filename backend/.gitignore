@@ -49,5 +49,9 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
-#local files
+# local files
 /user
+
+# Binary files
+*.DS_Store
+*.db
