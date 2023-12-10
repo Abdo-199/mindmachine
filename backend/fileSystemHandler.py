@@ -66,8 +66,19 @@ class FileSystemHandler:
             os.rename(old_file_full_path, new_file_full_path)
 
     def get_document_path(self, user_id, document_name):
-        if os.path.exists(self.root_directory + user_id + "/" + document_name):
-            return self.root_directory + user_id + "/" + document_name
+        """
+        Returns the path of a document for a given user.
+
+        Args:
+            user_id (str): The ID of the user.
+            document_name (str): The name of the document.
+
+        Returns:
+            str: The path of the document if it exists, False otherwise.
+        """
+        document_path = self.root_directory + user_id + "/" + document_name
+        if os.path.isfile(document_path):
+            return document_path
         else:
             return False
 
