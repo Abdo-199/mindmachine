@@ -1,6 +1,5 @@
 import PyPDF2
-from sentence_transformers import SentenceTransformer
-from Helper_Modules.DocVec import DocVec
+from Neural_Search.Helper_Modules.DocVec import DocVec
 
 
 def pdf_to_text(path):

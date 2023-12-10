@@ -1,10 +1,7 @@
-from qdrant import QDrant
 from api import API
 from fastapi.middleware.cors import CORSMiddleware
 
-db = QDrant()
-
-api = API(db)
+api = API()
 app = api.app
 
 origins = ["*"]

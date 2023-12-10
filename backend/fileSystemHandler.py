@@ -1,13 +1,16 @@
 import os
 import config
 from datetime import datetime
+from Neural_Search.Helper_Modules.PdfReader import pdf_to_docVec
 
 class FileSystemHandler:
     
-    def __init__(self):
+    def __init__(self, qdClient):
         self.root_directory = config.root_directory
         self.file_extension = config.file_extension
+        self.qdClient = qdClient
 
+    # the Document will be uploaded to the file system and at the same time will be encoded and saved in qdrant
     def upload(self, user_id, files):
         self.file_system_exist(user_id=user_id)
 
@@ -15,6 +18,8 @@ class FileSystemHandler:
             file_path = os.path.join(self.root_directory + user_id, file.filename)
             with open(file_path, "wb") as f:
                 f.write(file.file.read())
+                docVec = pdf_to_docVec(file_path, self.qdClient.encoder)
+                self.qdClient.add_docVec(user_id, docVec)
 
     def get_fs_for_user(self, user_id):
 
@@ -60,8 +65,11 @@ class FileSystemHandler:
             # Rename the file
             os.rename(old_file_full_path, new_file_full_path)
 
-    def get_document(self, document_id):
-        pass
+    def get_document_path(self, user_id, document_name):
+        if os.path.exists(self.root_directory + user_id + "/" + document_name):
+            return self.root_directory + user_id + "/" + document_name
+        else:
+            return False
 
     def file_system_exist(self, user_id):
         if os.path.exists(self.root_directory + user_id):
@@ -71,7 +79,7 @@ class FileSystemHandler:
 
     def convert_bytes(self, byte_size):
         # Define the units and their respective labels
-        units = ['B', 'KB', 'MB', 'GB', 'TB']
+        units = config.units
 
         # Start with the smallest unit (bytes) and convert
         unit_index = 0
@@ -86,7 +94,7 @@ class FileSystemHandler:
 
         stat = os.stat(file_path)
         file_last_date =  datetime.fromtimestamp(stat.st_mtime)
-        formatted_date = file_last_date.strftime("%d.%m.%Y")
+        formatted_date = file_last_date.strftime(config.date_time_format)
 
         return formatted_date
         

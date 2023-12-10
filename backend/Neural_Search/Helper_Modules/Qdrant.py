@@ -1,14 +1,13 @@
 from qdrant_client import QdrantClient, models
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue
+from sentence_transformers import SentenceTransformer
+import config
 
 class Qdrant:
 
-  def __init__(self, url, api_key, encoder):
+  def __init__(self, encoder = SentenceTransformer("all-MiniLM-L6-v2")):
     self.encoder = encoder
-    self.qdrant_client = QdrantClient(
-      url=url,
-      api_key=api_key,
-    )
+    self.qdrant_client = QdrantClient(host=config.qdrant_host, port=config.qdrant_port)
 
   def check_user(self, userName):
     try:
@@ -54,7 +53,7 @@ class Qdrant:
       limit=8,
     )
 
-  def get_scores(self, search_text, hits):
+  def get_scores(self, hits):
     max_score_value = -1
     max_score_value_indoc = None
     for hit in hits:
@@ -73,8 +72,9 @@ class Qdrant:
   def search(self, collection_name, search_text):
     docs_filter = Filter(must=[FieldCondition(key="isDoc", match=MatchValue(value=True))])
     docs_hits = self.get_hits(collection_name, search_text, docs_filter)
-    relevant_doc = self.get_scores(search_text, docs_hits)
+    relevant_doc = self.get_scores(docs_hits)
 
     paras_filter = Filter(must=[FieldCondition(key="source_doc", match=MatchValue(value=relevant_doc))])
     paras_hits = self.get_hits(collection_name, search_text, paras_filter)
-    relevant_doc = self.get_scores(search_text, paras_hits)
+    relevant_para = self.get_scores(paras_hits)
+    return {"relevant_doc": relevant_doc, "relevant_paragraph": relevant_para}

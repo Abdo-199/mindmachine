@@ -4,15 +4,14 @@ FROM python:3.9
 # Set the working directory in the container to /usr/src/app
 WORKDIR /usr/src/app/
 
-# Copy the backend directory contents into the container at /usr/src/app
-COPY . .
-
-# RUN ls /usr/src/app/ # Verify that the file is in the target directory
-# RUN echo "Hello, World!" > /usr/src/app/test.txt # Write a test file to the target directory to check for permission issues
-# RUN cat /usr/src/app/test.txt
+# Copy only the requirements.txt first to leverage Docker cache
+COPY requirements.txt ./
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your application's code
+COPY . .
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000

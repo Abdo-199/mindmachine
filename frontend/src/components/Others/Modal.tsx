@@ -19,12 +19,11 @@ const Modal = ({
             <h1>
               {header}
             </h1>
-            {/* <Header title={header} fontSize={"1.5rem"}></Header> */}
             <div>
               {content} {/* An diese Stelle kommt der Inhalt hin */}
             </div>
           </div>
-          <span className="close" onClick={() => closeModal()}>
+          <span className="close" onClick={closeModal}>
             &times;
           </span>
         </div>

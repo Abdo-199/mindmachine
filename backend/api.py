@@ -1,27 +1,24 @@
 from fastapi import FastAPI, APIRouter, File, UploadFile, Form, HTTPException
+from fastapi.responses import FileResponse
 from fileSystemHandler import FileSystemHandler
 from statisticsHandler import StatisticsHandler
 from ldap3 import Server, Connection
-from qdrant import QDrant
+from Neural_Search.Helper_Modules.Qdrant import Qdrant
 from dataDefinitions import *
 from database import log_search
 from typing import List
+import config
 
-
-class VectorModel(BaseModel):
-
-    pass
 
 
 class API:
 
-    def __init__(self, dataBase) -> None:
+    def __init__(self) -> None:
         self.app = FastAPI()
-        self.db = dataBase
         self.router = APIRouter()
-        self.stats = StatisticsHandler(self.db)
-        self.file_system_handler = FileSystemHandler()
-
+        self.qdClient = Qdrant()
+        self.stats = StatisticsHandler(self.qdClient)
+        self.file_system_handler = FileSystemHandler(self.qdClient)
         self.setup_routes()
         self.app.include_router(self.router)
 
@@ -31,8 +28,8 @@ class API:
         @self.router.post("/login")
         async def validate_credentials(request: LoginRequestModel) -> LoginResponseModel:
 
-            ldap_server = Server('ldap://login-dc-01.login.htw-berlin.de')
-            base_dn = 'dc=login,dc=htw-berlin,dc=de'
+            ldap_server = Server(config.ldap_server)
+            base_dn = config.base_dn
             username = f'cn={request.username},ou=idmusers,' + base_dn
  
             conn = Connection(ldap_server, user=username, password=request.password, auto_bind=False)
@@ -44,20 +41,36 @@ class API:
             return LoginResponseModel(isAuthenticated=False, isAdmin=False)
         
         #search
-        @self.router.get("/search/{query}")
-        async def search(query):
-            return True
+        @self.router.get("/search")
+        async def search(user_id: str, query: str):
+            try:
+
+                # Perform the search using Qdrant
+                results = self.qdClient.search(user_id, query)
+
+                # TODO: return wert/objekt mit frontend abstimmen
+
+                # TODO: Automate the table creation
+                # Log the search in the database
+                # log_search(student_number, query) 
+
+                return results
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=str(e))
         
-        #upload document for user id
+        #upload document for user id to the file system and qdrant
         @self.router.post("/upload/{user_id}")
         async def upload_document(user_id, files: list[UploadFile] = File(...)):
             self.file_system_handler.upload(user_id, files)
             return True
 
-        #get document
-        @self.router.get("/document/{document_id}")
-        async def get_document(document_id):
-            return True
+        #Sends a pdf file to the Website for the viewer
+        @self.router.get("/document")
+        async def get_document(user_id :str, document_name :str):  # (user_id: str, document_name: str):
+            filepath = self.file_system_handler.get_document_path(user_id, document_name)
+            if not filepath:
+                raise HTTPException(status_code=404, detail="File not found")
+            return FileResponse(path=filepath, filename=document_name, media_type="application/pdf")
 
         #delete document
         @self.router.delete("/deleteDocument/{user_id}/{document_id}")
@@ -154,6 +167,3 @@ class API:
                 return {"message": "Text added as vector successfully"}
             except Exception as e:
                 raise HTTPException(status_code=500, detail=str(e))
-
-        
-

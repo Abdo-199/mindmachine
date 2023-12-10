@@ -4,7 +4,8 @@ import { faFile } from "@fortawesome/free-solid-svg-icons";
 import FileOptions from "./FileOptions";
 import FileInfosCard from "./FileInfosCard";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Modal from "../Others/Modal";
 
 const FileInformationWindow = ({
   docRows,
@@ -13,7 +14,6 @@ const FileInformationWindow = ({
   docRows: any[];
   SetDocRows: any;
 }) => {
-
   const { filenameParams } = useParams() as { filenameParams: string };
 
   type FileObject = {
@@ -25,12 +25,23 @@ const FileInformationWindow = ({
   const [thisFile, SetThisFile] = useState<FileObject | null>();
 
   useEffect(() => {
-    SearchAndSetObject()
-  }, [])
+    SearchAndSetObject();
+  }, []);
+
+  const [modalHandlerDeleteConfirm, SetModalHandlerDeleteConfirm] =
+    useState(false);
+
+  const ModalHandlerDeleteConfirm = () => {
+    // Modalhandler zur Benachrichtigung des Löschvorgangs
+    SetModalHandlerDeleteConfirm((current) => !current);
+  };
+
+  const navigate = useNavigate();
 
   // Funktion zum Suchen und Setzen des gefundenen Objekts
   const SearchAndSetObject = () => {
-    const foundItem = docRows.find(item => item.file_name === filenameParams);
+    const foundItem = docRows.find((item) => item.file_name === filenameParams);
+    console.log(modalHandlerDeleteConfirm);
 
     if (foundItem) {
       SetThisFile(foundItem);
@@ -44,15 +55,49 @@ const FileInformationWindow = ({
           <FontAwesomeIcon icon={faFile} style={{ fontSize: "9rem" }} />
         </div>
         <div id="fileInfosCard-wrapper">
-          <FileInfosCard file_name={thisFile?.file_name} file_size={thisFile?.file_size} file_date={thisFile?.file_date}></FileInfosCard>
+          <FileInfosCard
+            file_name={thisFile?.file_name}
+            file_size={thisFile?.file_size}
+            file_date={thisFile?.file_date}
+          ></FileInfosCard>
           {thisFile && (
             <FileOptions
+              modalHandlerDeleteConfirm={modalHandlerDeleteConfirm}
+              ModalHandlerDeleteConfirm={ModalHandlerDeleteConfirm}
               filename={thisFile.file_name}
               SetThisFile={SetThisFile}
               docRows={docRows}
               SetDocRows={SetDocRows}
             ></FileOptions>
           )}
+          {modalHandlerDeleteConfirm ? (
+            <Modal
+              header={"Deleting a File"}
+              content={
+                <div>
+                  <hr className="hr-style"></hr>
+                  <div>
+                    <span>File has been deleted successfully.</span>
+                  </div>
+                  <br></br>
+                  <hr className="hr-style"></hr>
+                  <button
+                    className="fileOption-button"
+                    onClick={() => {
+                      ModalHandlerDeleteConfirm();
+                      navigate("/MainWindow");
+                    }}
+                  >
+                    OK
+                  </button>
+                </div>
+              }
+              closeModal={() => {
+                ModalHandlerDeleteConfirm();
+                navigate("/MainWindow");
+              }}
+            ></Modal>
+          ) : null}
         </div>
       </div>
     </>

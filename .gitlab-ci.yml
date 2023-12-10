@@ -9,8 +9,6 @@ cache:
     - frontend/node_modules/
     - backend/.venv/ 
 
-
-
 react_build:
   stage: build
   image: node:latest
@@ -21,6 +19,21 @@ react_build:
     - echo Baue das Frontend
     - CI=false npm run build
 
+
+backend_build:
+  stage: build
+  image: python:3.9
+  cache:
+    key: python-cache
+    paths:
+      - .cache/pip
+      - backend/.venv/
+  script:
+    - cd backend
+    - echo Baue das Backend
+    - pip install --cache-dir .cache/pip -r requirements.txt
+
+
 react_test:
  stage: test
  script:
@@ -29,14 +42,6 @@ react_test:
    - npm install
    - echo Teste das Frontend
    - CI=false npm run test
-
-backend_build:
-  stage: build
-  image: python:latest
-  script:
-    - cd backend
-    - echo Baue das Backend
-    - pip install -r requirements.txt
 
 deploy_Production:
   image: ubuntu:latest

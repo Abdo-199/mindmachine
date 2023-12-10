@@ -56,6 +56,7 @@ const HomeWindow = ({
       `http://141.45.224.114:8000/upload/${localStorage.getItem("userID")}`,
       {
         method: "POST",
+        mode: "cors",
         body: formData,
       }
     )
