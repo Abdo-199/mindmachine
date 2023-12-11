@@ -1,5 +1,7 @@
 import os
 import config
+import ocrmypdf
+import pikepdf
 from datetime import datetime
 from Neural_Search.Helper_Modules.PdfReader import pdf_to_docVec
 
@@ -9,17 +11,67 @@ class FileSystemHandler:
         self.root_directory = config.root_directory
         self.file_extension = config.file_extension
         self.qdClient = qdClient
+        ocrmypdf.configure_logging(ocrmypdf.Verbosity.default)
+        os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-    # the Document will be uploaded to the file system and at the same time will be encoded and saved in qdrant
     def upload(self, user_id, files):
-        self.file_system_exist(user_id=user_id)
+        """
+        Uploads pdfs for a given user.
+        This pdf is saved in the user's directory, if OCR is successful. 
+        The OCR recognises text on the pdf, if the text is not editable.  
 
+        Args:
+            user_id (str): The ID of the user.
+            files (list): A list of pdfs to be uploaded.
+
+        Returns:
+            list: A list of status indicating the success or failure of each file upload.
+                  Each element in the list is a list containing the filename and a boolean
+                  value indicating the upload status (True for success, False for failure).
+        """
+        self.file_system_exist(user_id=user_id)
+        status_return = []
         for file in files:
             file_path = os.path.join(self.root_directory + user_id, file.filename)
             with open(file_path, "wb") as f:
+                # saves original file to user directory
                 f.write(file.file.read())
-                docVec = pdf_to_docVec(file_path, self.qdClient.encoder)
-                self.qdClient.add_docVec(user_id, docVec)
+                try:
+                    # saves ocr file to temp directory
+                    temp_file_path = config.temp_pdf_directory + file.filename
+                    os.makedirs(config.temp_pdf_directory, exist_ok=True)
+                    # open pdf with pikepdf and remove restrictions
+                    pdf = pikepdf.open(file_path, password='')
+                    pdf.save(temp_file_path)
+                    # recognize text with ocrmypdf
+                    ocrmypdf.ocr(
+                        temp_file_path,
+                        temp_file_path,
+                        output_type='pdf',
+                        skip_text=True,
+                        language=['deu', 'eng'],
+                        optimize=0,
+                        invalidate_digital_signatures=True
+                    )
+                    # encode pdf to vectors
+                    docVec = pdf_to_docVec(temp_file_path, self.qdClient.encoder)
+
+                    #check if there were paragraphs recognized
+                    if len(docVec.paras_vecs) <= 1 and docVec.paras_vecs[0]['paragraph'] == '':
+                        raise Exception("No paragraphs recognized")   
+                                     
+                    # save vectors to qdrant
+                    self.qdClient.add_docVec(user_id, docVec)
+                    if os.path.exists(temp_file_path):
+                        os.remove(temp_file_path)
+                    status_return.append([file.filename, True])
+                except Exception as e:
+                    print(e)
+                    status_return.append([file.filename, False])
+                    self.delete_document(user_id, file.filename)
+                    continue
+
+        return status_return
 
     def get_fs_for_user(self, user_id):
 

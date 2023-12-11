@@ -12,3 +12,5 @@ qdrant_port = 6333
 
 date_time_format = '%d.%m.%Y'
 units = ['B', 'KB', 'MB', 'GB', 'TB']
+
+temp_pdf_directory = '/usr/src/app/data/temp_pdf/'
