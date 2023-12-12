@@ -5,7 +5,7 @@ Author: Abdelrahman Elsharkawi
 Creation Date: 11.11.2023
 """
 import PyPDF2
-from Neural_Search.Helper_Modules.DocVec import DocVec
+from Neural_Search.DocVec import DocVec
 import re
 
 def exclude_special_characters(input_string):

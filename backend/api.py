@@ -3,7 +3,7 @@ from fastapi.responses import FileResponse
 from fileSystemHandler import FileSystemHandler
 from statisticsHandler import StatisticsHandler
 from ldap3 import Server, Connection
-from Neural_Search.Helper_Modules.Qdrant import Qdrant
+from Neural_Search.Qdrant import Qdrant
 from dataDefinitions import *
 
 from typing import List

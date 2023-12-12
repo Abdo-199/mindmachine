@@ -3,7 +3,7 @@ import config
 import ocrmypdf
 import pikepdf
 from datetime import datetime
-from Neural_Search.Helper_Modules.PdfReader import pdf_to_docVec
+from Neural_Search.PdfReader import pdf_to_docVec
 
 class FileSystemHandler:
     
