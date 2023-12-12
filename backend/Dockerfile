@@ -4,14 +4,6 @@ FROM python:3.9
 # Set the working directory in the container to /usr/src/app
 WORKDIR /usr/src/app/
 
-RUN apt-get update && apt-get install -y \
-    ghostscript \
-    tesseract-ocr \
-    tesseract-ocr-deu \
-    pngquant \
-    unpaper \
-    && rm -rf /var/lib/apt/lists/*
-
 # Copy only the requirements.txt first to leverage Docker cache
 COPY requirements.txt ./
 

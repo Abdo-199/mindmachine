@@ -16,8 +16,6 @@ app.add_middleware(
 
 def main():
     pass
-    
-    
 
 if __name__ == '__main__':
     # start uvicorn server to host the FastAPI app
