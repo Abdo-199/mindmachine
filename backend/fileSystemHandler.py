@@ -3,12 +3,12 @@ import config
 import ocrmypdf
 import pikepdf
 from datetime import datetime
-from Neural_Search.Helper_Modules.PdfReader import pdf_to_docVec
+from Neural_Search.PdfReader import pdf_to_docVec
 
 class FileSystemHandler:
     
     def __init__(self, qdClient):
-        self.root_directory = config.root_directory
+        self.document_directory = config.document_directory
         self.file_extension = config.file_extension
         self.qdClient = qdClient
         ocrmypdf.configure_logging(ocrmypdf.Verbosity.default)
@@ -32,7 +32,7 @@ class FileSystemHandler:
         self.file_system_exist(user_id=user_id)
         status_return = []
         for file in files:
-            file_path = os.path.join(self.root_directory + user_id, file.filename)
+            file_path = os.path.join(self.document_directory + user_id, file.filename)
             with open(file_path, "wb") as f:
                 # saves original file to user directory
                 f.write(file.file.read())
@@ -79,11 +79,11 @@ class FileSystemHandler:
         self.file_system_exist(user_id=user_id)
 
         # Only search for files with a certain extension, see file_extension in config.py
-        files = [file for file in os.listdir(self.root_directory + user_id) if file.endswith(self.file_extension)]
+        files = [file for file in os.listdir(self.document_directory + user_id) if file.endswith(self.file_extension)]
 
         for file_name in files:
 
-            file_path = os.path.join(self.root_directory + user_id, file_name)
+            file_path = os.path.join(self.document_directory + user_id, file_name)
             file_size = os.path.getsize(file_path)
 
             # Convert Bytes to Megabytes
@@ -102,15 +102,16 @@ class FileSystemHandler:
 
     def delete_document(self, user_id, document_id):
          # Check if the current file exists
-        if os.path.exists(self.root_directory + user_id + "/" + document_id):
+        if os.path.exists(self.document_directory + user_id + "/" + document_id):
              # Remove the file
-            os.remove(self.root_directory + user_id + "/" + document_id)
+            os.remove(self.document_directory + user_id + "/" + document_id)
+            self.qdClient.delete_doc(user_id, document_id)
             
 
     def edit_document_name(self, user_id, old_name, new_name):
     
-        old_file_full_path = self.root_directory + user_id + "/" + old_name
-        new_file_full_path = self.root_directory + user_id + "/" + new_name
+        old_file_full_path = self.document_directory + user_id + "/" + old_name
+        new_file_full_path = self.document_directory + user_id + "/" + new_name
 
         # Check if the current file exists
         if os.path.exists(old_file_full_path):
@@ -118,16 +119,16 @@ class FileSystemHandler:
             os.rename(old_file_full_path, new_file_full_path)
 
     def get_document_path(self, user_id, document_name):
-        if os.path.exists(self.root_directory + user_id + "/" + document_name):
-            return self.root_directory + user_id + "/" + document_name
+        if os.path.exists(self.document_directory + user_id + "/" + document_name):
+            return self.document_directory + user_id + "/" + document_name
         else:
             return False
 
     def file_system_exist(self, user_id):
-        if os.path.exists(self.root_directory + user_id):
+        if os.path.exists(self.document_directory + user_id):
             pass
         else:
-            os.makedirs(self.root_directory + user_id)  
+            os.makedirs(self.document_directory + user_id)  
 
     def convert_bytes(self, byte_size):
         # Define the units and their respective labels
