@@ -1,5 +1,11 @@
 #root_directory = "./user/"
-root_directory = "/usr/src/app/mm_docs/user/"
+root_directory = "/usr/src/app/"
+
+document_directory =  root_directory + "mm_docs/user/"
+
+data_directory = root_directory + "data/"
+
+database_name = "userid_search_history_admin.db"
 
 #'/home/mindmachine/user/'
 file_extension = '.pdf'
