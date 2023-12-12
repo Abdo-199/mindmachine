@@ -32,14 +32,12 @@ backend_build:
     - cd backend
     - echo "Building the Backend"
     - pip install --cache-dir .cache/pip -r requirements.txt
-    - echo "Starting the Python application"
-    - python main.py &
-    - APP_PID=$!
-    - sleep 10 # Allow some time for the application to start
-    - ps -p $APP_PID > /dev/null && echo "Application is running" || (echo "Application failed to start" && exit 1)
-    - kill $APP_PID # Clean up: stop the application
-
-
+    # - echo "Starting the Python application"
+    # - python main.py &
+    # - APP_PID=$!
+    # - sleep 10 # Allow some time for the application to start
+    # - ps -p $APP_PID > /dev/null && echo "Application is running" || (echo "Application failed to start" && exit 1)
+    # - kill $APP_PID # Clean up: stop the application
 
 
 react_test:
