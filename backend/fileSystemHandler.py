@@ -105,6 +105,7 @@ class FileSystemHandler:
         if os.path.exists(self.document_directory + user_id + "/" + document_id):
              # Remove the file
             os.remove(self.document_directory + user_id + "/" + document_id)
+            self.qdClient.delete_doc(user_id, document_id)
             
 
     def edit_document_name(self, user_id, old_name, new_name):
