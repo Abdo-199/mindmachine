@@ -11,3 +11,4 @@ transformers
 sqlalchemy
 sentence-transformers
 PyPDF2
+ocrmypdf

@@ -44,3 +44,17 @@
 #documentList-table tr th {
     text-align: left;
 }
+
+#file-upload-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#upload-check-icon {
+    font-size: 1.6rem;
+    color: #83B600;
+    margin-left: 20px;
+    /* border: 1px solid black;
+    border-radius: 50px; */
+}

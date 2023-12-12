@@ -73,8 +73,8 @@ class API:
         #upload document for user id to the file system and qdrant
         @self.router.post("/upload/{user_id}")
         async def upload_document(user_id, files: list[UploadFile] = File(...)):
-            self.file_system_handler.upload(user_id, files)
-            return True
+            status_return = self.file_system_handler.upload(user_id, files)
+            return status_return
 
         #Sends a pdf file to the Website for the viewer
         @self.router.get("/document")
