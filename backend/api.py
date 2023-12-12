@@ -31,7 +31,6 @@ class API:
         async def validate_credentials(request: LoginRequestModel) -> LoginResponseModel:
 
             user = self.DatabaseHandler.get_user(request.username )
-            print(f"User: {user}")
             if user is None:
                 self.DatabaseHandler.add_user(request.username, "Where to get name?", "Where to get E-Mail?", False)
                 user = self.DatabaseHandler.get_user(request.username)
