@@ -156,6 +156,16 @@ class Qdrant:
     return {"relevant_docs": relevant_docs[:4], "relevant_paragraphs": relevant_para[:4]}
   
   def delete_doc(self, collection_name, doc_name):
+    """
+      Delete a document from the Qdrant collection.
+
+      Parameters:
+      - collection_name (str): Name of the Qdrant collection.
+      - doc_name (str): Name of the document to be deleted.
+
+      Returns:
+      None
+    """
     self.qdrant_client.delete(
     collection_name=collection_name,
     points_selector=models.Filter(
@@ -171,3 +181,38 @@ class Qdrant:
       ],
     ),
     )
+
+  def rename_doc(self, collection_name, doc_name, new_name):
+      """
+        Rename a document in the Qdrant collection.
+
+        Parameters:
+        - collection_name (str): Name of the Qdrant collection.
+        - doc_name (str): Current name of the document.
+        - new_name (str): New name for the document.
+
+        Returns:
+        bool: True if the renaming is successful, False otherwise.
+      """
+      self.rename_vec(collection_name, doc_name, new_name, "name")
+      self.rename_vec(collection_name, doc_name, new_name, "source_doc")
+
+  def rename_vec(self, collection_name, doc_name, new_name, key):
+      """
+        looks for all vectors with a specific key and changes the value of this key in the payload
+      """
+      self.qdrant_client.set_payload(
+      collection_name=collection_name,
+      payload={
+          key: new_name,
+      },
+      points=models.Filter(
+        must=[
+            models.FieldCondition(
+                key=key,
+                match=models.MatchValue(value=doc_name),
+            ),
+        ],
+      ),
+      )
+      return True
