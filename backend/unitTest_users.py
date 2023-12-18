@@ -2,7 +2,7 @@ import unittest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 # from database_orm import Base, User, UserSettings, log_search, get_search_history, get_user_settings, update_user_settings, MAX_SEARCH_HISTORY_PER_USER
-from databaseHandler import Base, User, SearchHistory, DatabaseHandler, MAX_SEARCH_HISTORY_PER_USER
+from databaseHandler import Base, User, SearchHistory, UserSettings, DatabaseHandler, MAX_SEARCH_HISTORY_PER_USER
 
 class TestUserCRUD(unittest.TestCase):
     @classmethod
@@ -80,6 +80,22 @@ class TestUserCRUD(unittest.TestCase):
         # This entry should be 'Search Query 3' if the first two entries were deleted
         expected_oldest_query = 'Search Query 3'
         self.assertEqual(history[-1].search_query, expected_oldest_query)
+
+    def test_update_and_get_user_settings(self):
+        # Create a test user
+        user_id = 'setting_test_user'
+        self.add_user(user_id, 'Settings Test User', 'settings@test.com', False)
+
+        # Test updating user settings
+        logout_timer_test = 7200  # Example value
+        max_disk_space_test = 2048  # Example value
+        self.db_handler.update_user_settings(user_id, logout_timer_test, max_disk_space_test)
+
+        # Retrieve and test the updated settings
+        settings = self.db_handler.get_user_settings(user_id)
+        self.assertIsNotNone(settings)
+        self.assertEqual(settings.logout_timer, logout_timer_test)
+        self.assertEqual(settings.max_disk_space, max_disk_space_test)
 
 
 if __name__ == '__main__':
