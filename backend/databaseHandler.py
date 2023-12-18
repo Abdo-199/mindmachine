@@ -1,15 +1,19 @@
-from sqlalchemy import create_engine, Column, Integer, String, Boolean, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, relationship
+from sqlalchemy import create_engine, Column, DateTime, Float, Integer, String, Boolean, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship, declarative_base
+from datetime import datetime
+import os
 
 # Define the database model
 Base = declarative_base()
 
+MAX_SEARCH_HISTORY_PER_USER = 50  # Change as needed
+
+
 class DatabaseHandler:
 
     def __init__(self, data_directory, database_name):
-        self.database_directory = data_directory + '/' +database_name
-        self.create_conncetion()    
+        self.database_directory = os.path.join(data_directory, database_name)
+        self.create_conncetion()
 
     def create_conncetion(self):
         # Configure the database connection
@@ -77,18 +81,44 @@ class DatabaseHandler:
             session.commit()
         session.close()
 
-    def log_search(self, user_id, query, session=None):
-        if session is None:
-            session = self.Session()
+    def get_search_history(self, user_id):
+        session = self.Session()
+        history = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).order_by(
+            SearchHistory.timestamp.desc()).all()
+        session.close()
+        return history
+
+    def log_search(self, user_id, query, session):
+        session = self.Session()
         try:
+            # Check if max history count reached
+            current_history_count = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).count()
+            if current_history_count >= MAX_SEARCH_HISTORY_PER_USER:
+                # Delete the oldest entry
+                oldest_entry = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).order_by(
+                    SearchHistory.timestamp.asc()).first()
+                session.delete(oldest_entry)
+
+            # Add new search history
             new_search_history = SearchHistory(user_id=user_id, search_query=query)
             session.add(new_search_history)
             session.commit()
         except Exception as e:
             print(f"Error in log_search: {e}")
-        finally:
-            if session is None:
-                session.close()
+            session.rollback()
+    def test_user_settings(self):
+        # Ensure the database and tables are initialized
+        session = self.Session()
+        # Create a test user if they don't exist
+        user_id = 'test_user'
+        # add_user(user_id, 'Test User', 'testuser@example.com', False)
+        self.log_search('user_id', 'Human Genes 22', session)
+        history = self.get_search_history('user_id')
+        print(f"Search History for User:")
+        for record in history:
+            print(f"  {record.timestamp}: {record.search_query}")  # Delete a user
+
+        # history = get_search_history('123')
 
 
 
@@ -103,12 +133,18 @@ class User(Base):
     def __repr__(self):
         return f"<User(user_id={self.user_id}, name={self.name}, email={self.email}, is_admin={self.is_admin})>"
 
+
+
 class SearchHistory(Base):
     __tablename__ = 'SearchHistory'
-
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('Users.user_id'))
+    user_id = Column(String, ForeignKey('Users.user_id'))
     search_query = Column(String)
-
+    timestamp = Column(DateTime, default=datetime.utcnow)  # Timestamp for each search
     user = relationship("User")
-    
+
+if __name__ == "__main__":
+    data_directory = ""
+    database_name = "test.db"
+    db_handler = DatabaseHandler(data_directory, database_name)
+    db_handler.test_user_settings()
