@@ -94,6 +94,7 @@ class API:
         @self.router.put("/editDocumentName/{user_id}")
         async def edit_document_name(user_id, request: RenameFileModel):
             self.file_system_handler.edit_document_name(user_id, request.old_name, request.new_name)
+            self.qdClient.rename_doc(user_id, request.old_name, request.new_name)
             return True
         
         #edit document name
