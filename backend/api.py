@@ -15,7 +15,7 @@ import config
 class API:
 
     def __init__(self) -> None:
-        self.app = FastAPI()
+        self.app = FastAPI(root_path="/api")
         self.router = APIRouter()
         self.qdClient = Qdrant()
         self.DatabaseHandler = DatabaseHandler(config.data_directory, config.database_name)
