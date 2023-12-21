@@ -29,7 +29,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY ssl_certs/ /etc/nginx/ssl/
 
 # Expose the port that nginx will listen on (usually 80)
-EXPOSE 80 443
+EXPOSE 443
 
 # Define the command to start nginx (it will start automatically)
 CMD ["nginx", "-g", "daemon off;"]
