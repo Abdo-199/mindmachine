@@ -1,7 +1,8 @@
 import unittest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_orm import Base, User, SearchHistory, log_search
+# from database_orm import Base, User, UserSettings, log_search, get_search_history, get_user_settings, update_user_settings, MAX_SEARCH_HISTORY_PER_USER
+from databaseHandler import Base, User, SearchHistory, DatabaseHandler, MAX_SEARCH_HISTORY_PER_USER
 
 class TestUserCRUD(unittest.TestCase):
     @classmethod
@@ -9,8 +10,11 @@ class TestUserCRUD(unittest.TestCase):
         cls.engine = create_engine('sqlite:///:memory:')
         Base.metadata.create_all(cls.engine)
         cls.Session = sessionmaker(bind=cls.engine)
+        cls.db_handler = DatabaseHandler('', ':memory:')  # Pass the correct database URL
 
     def setUp(self):
+        Base.metadata.drop_all(self.engine)
+        Base.metadata.create_all(self.engine)
         self.session = self.Session()
 
     def tearDown(self):
@@ -58,19 +62,24 @@ class TestUserCRUD(unittest.TestCase):
         users = self.session.query(User).all()
         self.assertTrue(len(users) >= 2)
 
-    def test_log_search(self):
-        self.add_user('101', 'Test User', 'test@example.com', False)
+    def test_log_search_and_get_history(self):
+        user_id = 'unique_user_id_for_this_test'
+        self.add_user(user_id, 'Search User', 'searchuser@example.com', False)
 
-        # Verify user is added
-        user = self.session.query(User).filter_by(user_id='101').first()
-        self.assertIsNotNone(user)
+        # Log multiple search queries
+        for i in range(MAX_SEARCH_HISTORY_PER_USER + 2):  # Two more than the limit
+            self.db_handler.log_search(user_id, f'Search Query {i + 1}', self.session)
 
-        # Log a search query using the same session
-        log_search('101', 'test query', self.session)
+        # Retrieve the search history
+        history = self.db_handler.get_search_history(user_id)
 
-        # Retrieve and verify the logged search
-        logged_search = self.session.query(SearchHistory).filter_by(user_id='101').first()
-        self.assertIsNotNone(logged_search)
+        # Check if the search history size is correct (should be MAX_SEARCH_HISTORY_PER_USER)
+        self.assertEqual(len(history), MAX_SEARCH_HISTORY_PER_USER)
+
+        # Check the oldest entry in the history (which should be at the end of the list)
+        # This entry should be 'Search Query 3' if the first two entries were deleted
+        expected_oldest_query = 'Search Query 3'
+        self.assertEqual(history[-1].search_query, expected_oldest_query)
 
 
 if __name__ == '__main__':
