@@ -131,4 +131,8 @@ class API:
         #get search history of user
         @self.router.get("/searchhistory/{user_id}")
         async def get_search_history(user_id):
-            return True
+            raw_search_history = self.DatabaseHandler.get_search_history(user_id)
+            search_history = []
+            for search in raw_search_history:
+                search_history.append({'query': search.search_query, 'date': search.timestamp})
+            return search_history

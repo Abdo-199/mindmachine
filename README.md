@@ -1,92 +1,133 @@
-# MindMachine
+# 1. Projektbeschreibung: MindMachine - Projekt der HTW Berlin
+
+Die **MindMachine** ist ein innovatives Webanwendungsprojekt, das im Rahmen des Sommersemester 2023 gestarteten Masterstudiengangs "Informatik in den Ingenieurwissenschaften" an der Hochschule für Technik und Wirtschaft (HTW) Berlin entsteht. Dieses Projekt wird von Studierenden als Teil eines Moduls entwickelt, um fortgeschrittene Informatikkenntnisse in den Ingenieurwissenschaften zu fördern.
+
+## Überblick
+
+Die **MindMachine** bietet eine leistungsstarke Plattform für den sicheren Zugriff, die Verwaltung und die intelligente Suche von Dokumenten. Zielgruppen sind HTW-Anwender und gewählte -Administratoren, die von den entwickelten Funktionen für die Dateiverwaltung, kollaborative Forschung und datengesteuerte Entscheidungsfindung profitieren.
+
+## Funktionen
+
+- **Benutzerzugriff und Authentifizierung:**
+  - Öffnen der Website für HTW-Anwender und Administratoren.
+  - Sicheres Anmelden für HTW-Anwender mit personalisierten Startseiten.
+  - Manuelle Abmeldung und automatisches Ausloggen bei Inaktivität für erhöhte Privatsphäre und Sicherheit.
+
+- **Dateiverwaltung:**
+  - Privates Dateiverzeichnis für HTW-Anwender mit benutzerspezifischer Ansicht.
+  - Hochladen von Dateien mit Prüfung auf Gültigkeit (OCR-PDF).
+  - Öffnen, Löschen und Umbenennen von Dokumenten im privaten Verzeichnis.
+
+- **Intelligente Suchfunktion:**
+  - Text- und Sprachabfrage für ML-Integration.
+  - Anpassung und Bearbeitung von gestellten Fragen.
+  - Anzeige von Suchhistorie und erneutes Auslösen vergangener Suchanfragen.
+
+- **Administrationsfunktionen:**
+  - Anmeldung für HTW-Administratoren mit speziellen Privilegien.
+  - Globale Änderung der Speicherkapazität für alle Benutzer.
+  - Anzeige von Statistiken zu Fragen, Nutzerzahlen und Speicherkapazität.
+  - Einstellung des automatischen Log-Outs für Benutzer.
+  - Logging-Protokollverwaltung für umfassende Überwachung und Fehleranalyse.
+
+##   Hintergrund
+
+Die **MindMachine** ist ein Projekt im Masterstudiengang "Informatik in den Ingenieurwissenschaften" an der Hochschule für Technik und Wirtschaft (HTW) Berlin. In diesem praxisorientierten Modul können Studierende ihre Softwareentwicklungskompetenzen vertiefen und den modernen Softwareentwicklungsprozess in eigenen Projekten anwenden.
+
+Die Studierenden lernen verschiedene Rollen im agilen Prozess kennen und setzen moderne Tools für Requirements-Management, Konfigurations-Management, automatisiertes Testen und Projektmanagement ein. Besonderes Augenmerk liegt auf der Förderung von Teamarbeit in gemeinsamen Projekten, um die Studierenden optimal auf ihre zukünftige Berufswahl vorzubereiten.
+
+Die enge Zusammenarbeit zwischen der HTW Berlin und den Studierenden bei der Entwicklung der **MindMachine** spiegelt den kooperativen Ansatz des Moduls wider. Ziel ist es, innovative Lösungen für Herausforderungen in den Ingenieurwissenschaften zu schaffen und gleichzeitig sicherzustellen, dass die Studierenden bestmöglich auf ihre berufliche Zukunft vorbereitet werden.
+
+---
+# 2. Installation
+
+Da es sich um eine Webanwendung handelt, ist keine lokale Installation erforderlich. Sie können einfach die [MindMachine-Website](https://mindmachine.htw-berlin.de/) besuchen und auf die entsprechenden Funktionen zugreifen.
+
+Bitte beachten Sie, dass eine Internetverbindung erforderlich ist, um auf die Anwendung zuzugreifen. Zusätzlich ist ein HTW-Account erforderlich, um sich anzumelden. Die manuelle Registrierung ist nicht möglich; verwenden Sie bitte Ihre vorhandenen HTW-Anmeldeinformationen.
+
+**Hinweis: Die Nutzung der MindMachine erfordert eine Verbindung zum HTW-Netzwerk.**
+
+---
+# 3. Verweise auf detaillierte Dokumentation
+
+===Verweis auf detaillierte Dokumentation mit Direktlinks etc, wenn diese fertig gestellt ist=== #endsprint
+
+---
+# 4. Lizenz: 
+
+Die MindMachine-Anwendung verwendet Qdrant, eine Open-Source-Software, die unter der [Apache License 2.0](https://github.com/qdrant/qdrant/blob/master/LICENSE) veröffentlicht ist.
+
+**Anwendung der Lizenz in der MindMachine-Anwendung:**
+
+1. **Reproduktion und Distribution:** Die MindMachine-Anwendung reproduziert und verteilt Qdrant gemäß den Bedingungen der Apache License 2.0.
+
+2. **Erstellung abgeleiteter Werke:** Die MindMachine-Anwendung kann abgeleitete Werke von Qdrant erstellen und verteilen, solange diese Werke den Bedingungen der Apache License 2.0 entsprechen.
+
+3. **Öffentliche Anzeige und Aufführung:** Die MindMachine-Anwendung kann Qdrant öffentlich anzeigen und aufführen.
+
+4. **Patentlizenz:** Durch die Verwendung von Qdrant gemäß der Apache License 2.0 erhalten die Benutzer automatisch eine Patentlizenz für eventuell patentierte Teile von Qdrant.
+
+Stellen Sie sicher, dass Sie die vollständigen Bedingungen der Apache License 2.0 sorgfältig überprüfen und einhalten. Bei Fragen oder Unklarheiten ist es ratsam, rechtlichen Rat einzuholen.
+
+---
+# 5. Fehlersuche
+
+## Probleme bei der Anmeldung
+
+1. **HTW-Account erforderlich:** Stelle sicher, dass du einen aktiven HTW-Account besitzt. Unsere Anwendung erfordert eine Anmeldung mit den HTW-Anmeldedaten.
+
+2. **Richtige Anmeldedaten verwenden:** Überprüfe, ob du die korrekten Benutzername und das korrekte Passwort für deinen HTW-Account verwendest.
+
+3. **Internetverbindung überprüfen:** Stelle sicher, dass deine Internetverbindung stabil ist.
+
+## Technische Probleme
+
+1. **Browser-Kompatibilität:** Die Anwendung wurde erfolgreich in den neuesten Versionen von Chrome, Firefox und Safari getestet. Überprüfe, ob du einen dieser Browser verwendest und versuche es gegebenenfalls mit einem anderen.
+
+2. **Cache leeren:** Wenn unerklärliche Fehler auftreten, versuche, den Browser-Cache zu leeren, um sicherzustellen, dass du die neueste Version der Anwendung verwendest.
+
+3. **JavaScript aktiviert:** Stelle sicher, dass JavaScript in deinem Browser aktiviert ist.
+
+4. **Pop-up-Blocker:** Deaktiviere Pop-up-Blocker, da diese möglicherweise die Anmeldung oder andere Funktionen beeinträchtigen.
+
+## Weitere Unterstützung
+
+Wenn die oben genannten Schritte das Problem nicht lösen, zögere nicht, ===[unser Support-Team](mailto:support@example.com)=== #endsprint zu kontaktieren, um weitere Unterstützung zu erhalten.
+
+---
+ 6. Kontakt
+
+SOFTENG MemoryMachine
+memorymachine.softeng@gmail.com
+Hochschule für Technik und Wirtschaft
+Campus Wilhelminenhof
+Wilhelminenhofstraße 75A, 12459 Berlin
 
 
+---
+# 7. Badges
 
-## Getting started
+===**VIELLEICHT GANZ ZUM SCHLUSS MAL MACHEN***=== #endsprint 
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+[![Build Status](https://img.shields.io/travis/username/repo.svg)](https://travis-ci.org/username/repo)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/Version-1.0-green.svg)](https://github.com/username/repo/releases/tag/1.0)
+[![Code Coverage](https://img.shields.io/codecov/c/github/username/repo.svg)](https://codecov.io/gh/username/repo)
+[![Contributors](https://img.shields.io/github/contributors/username/repo.svg)](https://github.com/username/repo/graphs/contributors)
+[![Downloads](https://img.shields.io/github/downloads/username/repo/total.svg)](https://github.com/username/repo/releases)
 
-## Add your files
+---
+# 8. Beispiel
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following comand:
+===Ein einfaches Beispiel oder eine Schnellstartanleitung.===
 
-```
-cd existing_repo
-git remote add origin https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine.git
-git branch -M main
-git push -uf origin main
-```
+===**VIELLEICHT GANZ ZUM SCHLUSS MAL MACHEN***=== #endsprint 
 
-## Integrate with your tools
+---
+# 9. Lizenzierung und Urheberrecht
 
-- [ ] [Set up project integrations](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/settings/integrations)
+Die MindMachine-Webanwendung unterliegt der [Apache 2.0 Lizenz](https://www.apache.org/licenses/LICENSE-2.0).
 
-## Collaborate with your team
+===© 2023 MindMachine-Team. Alle Rechte vorbehalten.=== #endsprint 
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
