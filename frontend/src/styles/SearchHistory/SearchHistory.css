@@ -1,17 +1,18 @@
-/* TODO adjust colors */
-.searchHistoryContainer {
+.header-center {
+  text-align: center;
+}
+
+.outer-search-window {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 20px;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 50px;
-
+  
 }
 
-.header-center {
-  text-align: center;
+.search-window {
+  padding: 0px 10px 10px 10px;
+  margin: 10%;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 20px;
 }
