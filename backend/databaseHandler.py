@@ -80,6 +80,14 @@ class DatabaseHandler:
             session.commit()
         session.close()
 
+    def get_number_of_asked_questions(self, given_timestamp): 
+        session = self.Session()
+        number_of_asked_questions = session.query(SearchHistory).filter(
+            SearchHistory.timestamp <= datetime.utcnow(),
+            SearchHistory.timestamp >= given_timestamp).count()
+        session.close()
+        return number_of_asked_questions
+
     def get_search_history(self, user_id):
         session = self.Session()
         history = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).order_by(
