@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSearchResult } from "../SearchResult/SearchResultContext";
+import { useNavigate } from "react-router-dom";
 import SearchRow from "./SearchRow";
 import "../../styles/SearchHistory/SearchHistory.css";
 
@@ -11,12 +11,18 @@ interface SearchEntryProps {
 
 //Table for the history
 const SearchHistory = () => {
+
   const [searchEntries, setSearchEntries] = useState<SearchEntryProps[]>([]);
+
+  const { searchResult, setSearchResult } = useSearchResult();
+
+  const navigate = useNavigate();
 
   // request to backend to obtain Searchhistory of current user
   const API_GetSearchHistory = async () => {
-    const url = `${process.env.REACT_APP_production_address
-      }/searchhistory/${localStorage.getItem("userID")}`;
+    const url = `${
+      process.env.REACT_APP_production_address
+    }/searchhistory/${localStorage.getItem("userID")}`;
     return await fetch(url, {
       method: "GET",
       cache: "no-cache",
@@ -32,8 +38,29 @@ const SearchHistory = () => {
     API_GetSearchHistory();
   }, []);
 
-  const Search = (searchEntry: string) => {
+  // send search request to backend
+  const API_Search = async (searchEntryTest: string) => {
+    return await fetch(
+      `${
+        process.env.REACT_APP_production_address
+      }/search?user_id=${localStorage.getItem(
+        "userID"
+      )}&query=${searchEntryTest}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((response) => {
+        navigate(`/SearchResult/${searchEntryTest}`);
+      });
+  };
 
+  const Search = (searchEntry: string) => {
+    API_Search(searchEntry);
   };
 
   // TODO delete a search history entry
@@ -46,7 +73,9 @@ const SearchHistory = () => {
       <div className="outer-search-window">
         <h1 className="header-center">Search History</h1>
 
-        {searchEntries.length == 0 ? <div id="no-search-history">No search history available!</div> :
+        {searchEntries.length == 0 ? (
+          <div id="no-search-history">No search history available!</div>
+        ) : (
           <table className="search-window" cellSpacing={0} cellPadding={10}>
             {searchEntries.map((entry, index) => (
               <SearchRow
@@ -58,7 +87,7 @@ const SearchHistory = () => {
               ></SearchRow>
             ))}
           </table>
-          }
+        )}
       </div>
     </>
   );
