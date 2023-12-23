@@ -1,9 +1,8 @@
-import React from 'react'
 import '../../styles/Misc/Footer.css'
 import { useNavigate } from "react-router-dom";
 
+//Footer
 const Footer = () => {
-
   const navigate = useNavigate();
 
   return (

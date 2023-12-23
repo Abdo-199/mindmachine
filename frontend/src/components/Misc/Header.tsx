@@ -1,15 +1,15 @@
 import { useState } from "react";
 import "../../styles/Misc/Header.css";
 import { useNavigate } from "react-router-dom";
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import "react-confirm-alert/src/react-confirm-alert.css";
 import "../../styles/Misc/MainWindow.css";
 import LogoutConfirm from "../Logout/LogoutConfirm";
 
+//Header in the top of the screen
 const Header = () => {
   const navigate = useNavigate();
 
   const [isAdmin, setIsAdmin] = useState(true);
-
 
   return (
     <div id="header-container">

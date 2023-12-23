@@ -2,7 +2,9 @@ import { useEffect } from "react";
 import "../../styles/Others/Modal.css";
 import Modal from "./Modal";
 
+//if you want to delete a file and confirm, you see this modal window
 const DeleteFileConfirmModal = ({ closeModal }: { closeModal: any }) => {
+
   // let user cancel delete process with escape key
   const handleKeyDown = (event: any) => {
     // close delete confirm modal
