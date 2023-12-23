@@ -136,3 +136,7 @@ class API:
             for search in raw_search_history:
                 search_history.append({'query': search.search_query, 'date': search.timestamp})
             return search_history
+        
+        @self.router.get("/getnumberofaskedquestions/{given_timestamp}")
+        async def get_number_of_asked_questions(given_timestamp):
+            return self.DatabaseHandler.get_number_of_asked_questions(given_timestamp)
