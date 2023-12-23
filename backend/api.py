@@ -5,7 +5,7 @@ from statisticsHandler import StatisticsHandler
 from ldap3 import Server, Connection
 from Neural_Search.Qdrant import Qdrant
 from dataDefinitions import *
-
+from datetime import datetime
 from typing import List
 from databaseHandler import DatabaseHandler
 import config
@@ -137,6 +137,6 @@ class API:
                 search_history.append({'query': search.search_query, 'date': search.timestamp})
             return search_history
         
-        @self.router.get("/getnumberofaskedquestions/{given_timestamp}")
-        async def get_number_of_asked_questions(given_timestamp):
+        @self.router.get("/getnumberofaskedquestions")
+        async def get_number_of_asked_questions(given_timestamp:datetime = datetime(2000, 1, 1)):
             return self.DatabaseHandler.get_number_of_asked_questions(given_timestamp)

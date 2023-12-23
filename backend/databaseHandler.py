@@ -80,11 +80,11 @@ class DatabaseHandler:
             session.commit()
         session.close()
 
-    def get_number_of_asked_questions(self, given_timestamp = datetime(2000, 1, 1)): 
+    def get_number_of_asked_questions(self, given_timestamp): 
         session = self.Session()
         number_of_asked_questions = session.query(SearchHistory).filter(
-            SearchHistory.timestamp >= datetime.utcnow(),
-            SearchHistory.timestamp <= given_timestamp).count()
+            SearchHistory.timestamp <= datetime.utcnow(),
+            SearchHistory.timestamp >= given_timestamp).count()
         session.close()
         return number_of_asked_questions
 
