@@ -1,7 +1,6 @@
-import React from "react";
 import "../../styles/Others/Modal.css";
 
-// Modales Fenster
+//generic class for the modal window
 const Modal = ({
   header,
   closeModal,
@@ -20,7 +19,7 @@ const Modal = ({
               {header}
             </h1>
             <div>
-              {content} {/* An diese Stelle kommt der Inhalt hin */}
+              {content}
             </div>
           </div>
           <span className="close" onClick={closeModal}>

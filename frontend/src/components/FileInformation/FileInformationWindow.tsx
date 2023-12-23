@@ -6,8 +6,8 @@ import FileInfosCard from "./FileInfosCard";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteFileConfirmModal from "../Others/DeleteFileConfirmModal";
-import OpenFile from "../SearchResult/OpenFile";
 
+//Is a container for the furhter information of a file
 const FileInformationWindow = ({
   docRows,
   SetDocRows,
@@ -17,29 +17,31 @@ const FileInformationWindow = ({
 }) => {
   const { filenameParams, fileAlreadyOpen } = useParams() as { filenameParams: string, fileAlreadyOpen: string };
 
+  //Data that a file contains
   type FileObject = {
     file_name: string;
     file_size: string;
     file_date: string;
   };
 
+  const navigate = useNavigate();
+
+  //The showed file
   const [thisFile, SetThisFile] = useState<FileObject | null>();
 
   useEffect(() => {
     SearchAndSetObject();
   }, []);
 
+  //Modal for the delete confirmation
   const [modalHandlerDeleteConfirm, SetModalHandlerDeleteConfirm] =
     useState(false);
 
   const ModalHandlerDeleteConfirm = () => {
-    // Modalhandler zur Benachrichtigung des Löschvorgangs
     SetModalHandlerDeleteConfirm((current) => !current);
   };
 
-  const navigate = useNavigate();
-
-  // Funktion zum Suchen und Setzen des gefundenen Objekts
+  //Function for searching and setting the found object
   const SearchAndSetObject = () => {
     const foundItem = docRows.find((item) => item.file_name === filenameParams);
 

@@ -7,6 +7,7 @@ interface SearchRowProps {
   Delete: any;
 }
 
+//is one history item (one old search)
 const SearchRow = ({ name, createdOn, Search, Delete }: SearchRowProps) => {
   const date = new Date(createdOn).toLocaleDateString();
   

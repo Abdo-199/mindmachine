@@ -9,6 +9,7 @@ interface SearchEntryProps {
   date: string;
 }
 
+//Table for the history
 const SearchHistory = () => {
   const [searchEntries, setSearchEntries] = useState<SearchEntryProps[]>([]);
 

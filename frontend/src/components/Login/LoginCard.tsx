@@ -2,6 +2,7 @@ import "../../styles/Login/LoginStyles.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+//Login-Card in the middle of the screen
 const LoginCard = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +30,7 @@ const LoginCard = () => {
         if (!data.isAuthenticated) {
           alert("Error. Wrong Credentials");
         } else {
+          //sets the userID globally
           localStorage.setItem("userID", username);
           localStorage.setItem("isAdmin", data.isAdmin);
           sessionStorage.setItem(
@@ -36,7 +38,7 @@ const LoginCard = () => {
             new Date().getTime().toString()
           );
 
-          // navigate back to MainWindow
+          // navigate to MainWindow
           navigate("/MainWindow");
         }
       })

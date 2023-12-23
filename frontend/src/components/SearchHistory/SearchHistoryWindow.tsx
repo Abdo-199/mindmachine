@@ -1,5 +1,6 @@
 import SearchHistoryPage from "./SearchHistory";
 
+//Container for the Search History Table
 const SearchHistoryWindow = () => {
   return (
     <div>

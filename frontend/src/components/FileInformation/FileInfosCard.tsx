@@ -1,12 +1,8 @@
-import React, { useState } from "react";
 import "../../styles/FileInformation/FileInformation.css";
 
+//Shows the most important information for a file
 const FileInfosCard = ({file_name, file_size, file_date}: {file_name: string | undefined, file_size: string | undefined, file_date: string | undefined}) => {
     
-  const [size, setSize] = useState("5.3MB");
-  const [dateAdded, setDateAdded] = useState("05.11.2023");
-  const [description, setDescription] = useState("Blablabla");
-
   return (
     <>
       <div id="fileInfosCard">

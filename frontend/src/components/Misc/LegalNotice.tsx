@@ -1,5 +1,6 @@
 import React from 'react'
 
+//imprint
 const LegalNotice = () => {
   return (
     <div id="legalNotice-container">
