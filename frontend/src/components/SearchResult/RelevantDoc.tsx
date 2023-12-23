@@ -1,14 +1,12 @@
 import React from 'react'
-import { useSearchResult } from './SearchResultContext';
 import OpenFile from './OpenFile';
 
 interface RelevantDocProps {
-    docName: string; // Oder einen anderen passenden Typen
+    docName: string;
   }
   
+  //Other relevant docs, but NOT the most important one
   const RelevantDoc: React.FC<RelevantDocProps> = ({ docName }) => {
-    const { searchResult, setSearchResult } = useSearchResult();
-
     return (
         <div className="relevant-doc">
             <p className="docName-header">{docName}</p>

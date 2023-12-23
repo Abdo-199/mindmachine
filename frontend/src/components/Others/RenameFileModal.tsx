@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "../../styles/Others/Modal.css";
 import Modal from "../Others/Modal";
 
+//if you want to rename a file, you see this modal window
 const RenameFileModal = ({
   RenameFile,
   isConfirmed,
@@ -17,6 +18,7 @@ const RenameFileModal = ({
   SetNewFilename: any;
   closeModal: any;
 }) => {
+
   // let user cancel rename process with escape key
   const handleKeyDown = (event: any) => {
     // close all modals

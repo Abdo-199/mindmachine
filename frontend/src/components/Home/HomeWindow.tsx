@@ -9,6 +9,7 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
+//The main window (landing page)
 const HomeWindow = ({
   docRows,
   SetDocRows,
@@ -18,8 +19,11 @@ const HomeWindow = ({
   SetDocRows: any;
   GetFileStructure: () => void;
 }) => {
+
+  //modal for the OCR-Check
   const [modalOcrError, setModalOcrError] = useState(false);
   const [modalOcrErrorMessage, setModalOcrErrorMessage] = useState("");
+
   // display icons indicating status of uploaded file(s)
   const [showUploadIcons, setShowUploadIcons] = useState(false);
   // values indicating whether file is uploaded successfully or not
@@ -29,16 +33,17 @@ const HomeWindow = ({
     GetFileStructure();
   }, []);
 
+  //if new file(s) is/are uplaoded...
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
     const selectedFiles = event.target.files;
-
     let flag: boolean = false;
 
     if (selectedFiles) {
       const formData = new FormData();
 
+      //Check for forbidden characters
       for (let i = 0; i < selectedFiles.length; i++) {
         if (selectedFiles[i].name.includes("+")) {
           flag = true;
@@ -57,6 +62,7 @@ const HomeWindow = ({
     }
   };
 
+  //Uploads the file to the backend
   const API_UploadDocument = async (
     formData: FormData,
     selectedFiles: FileList
@@ -72,6 +78,7 @@ const HomeWindow = ({
       .then((res) => res.json())
       .then((response) => {
         let error: boolean = false;
+        
         // boolean values indicating success or failure of uploaded files
         let responses: boolean[] = [];
         for (let i = 0; i < response.length; i++) {

@@ -1,5 +1,6 @@
 import DocumentRow from "./DocumentRow";
 
+//Table that lists all files
 const DocumentList = ({ docRows }: { docRows: File[] }) => {
   return (
     <>

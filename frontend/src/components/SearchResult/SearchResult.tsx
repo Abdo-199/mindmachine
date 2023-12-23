@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import "../../styles/SearchResult/SearchResult.css";
 import SearchInput from "../Home/SearchInput";
 import { Alert, AlertTitle } from "@mui/material";
@@ -7,8 +7,9 @@ import MostRelevantDoc from "./MostRelevantDoc";
 import RelevantDoc from "./RelevantDoc";
 import { useParams } from "react-router-dom";
 
+//Displays all results of the search
 const SearchResult = () => {
-  const [fileBlob, setFileBlob] = useState("");
+
   const { searchResult, setSearchResult } = useSearchResult();
 
   const { query } = useParams() as { query: string };
@@ -17,7 +18,7 @@ const SearchResult = () => {
     <div id="searchResult-container">
       <SearchInput></SearchInput>
 
-      <p style={{fontWeight: "bold", fontSize: "1.1rem", marginBottom: "0"}}>Your Question:</p>
+      <p style={{ fontWeight: "bold", fontSize: "1.1rem", marginBottom: "0" }}>Your Question:</p>
       <p>"{query}"</p>
 
       <Alert id="Alert" severity="success">
@@ -25,12 +26,15 @@ const SearchResult = () => {
       </Alert>
 
       <MostRelevantDoc></MostRelevantDoc>
-      
+
       {searchResult.relevant_docs.map((item: string, index: number) => {
 
         if (index !== 0) {
           return <RelevantDoc docName={item}></RelevantDoc>;
-        }})}
+        }
+        else { return null; }
+      })}
+
     </div>
 
   );

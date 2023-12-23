@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+//One file in the DocumentList (component)
 const DocumentRow = ({file}: {file: any}) => {
   return (
     <tr>
@@ -7,7 +8,6 @@ const DocumentRow = ({file}: {file: any}) => {
       <td>{file.file_size}</td>
       <td>{file.file_date}</td>
       <td>
-        {/* weiterleiten zur File Information Page der jeweiligen Datei*/}
         <Link to={`/FileInformation/${file.file_name}/false`}>Details</Link>
       </td>
     </tr>

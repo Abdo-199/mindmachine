@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import "../../styles/SearchResult/SearchResult.css"
 
 interface RelevantDocProps {
-    docName: string; // Oder einen anderen passenden Typen
-  }
+  docName: string;
+}
 
+//Link to open the file
 const OpenFile: React.FC<RelevantDocProps> = ({ docName }) => {
-    
+
   return (
     <button className='button-openfile'>
-        <Link to={`/FileInformation/${docName}/true`} style={{textDecoration: "none", color:"black"}}>Open File</Link>
+      <Link to={`/FileInformation/${docName}/true`} style={{ textDecoration: "none", color: "black" }}>Open File</Link>
     </button>
   )
 }

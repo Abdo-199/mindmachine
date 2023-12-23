@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "../../styles/Others/Modal.css";
 import Modal from "../Others/Modal";
 
+//Logout confirmation modal window
 const LogoutModal = ({
   closeModal,
   Logout,
@@ -9,6 +10,7 @@ const LogoutModal = ({
   closeModal: any;
   Logout: any;
 }) => {
+  
   // let user cancel logout process with escape key
   const handleKeyDown = (event: any) => {
     // close logout confirm modal

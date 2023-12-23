@@ -1,6 +1,7 @@
-import React ,{ useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+//Timer to see how long you stay logged in
 const LogOutTimer = () => {
    
     const events = [
