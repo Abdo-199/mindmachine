@@ -14,12 +14,10 @@ const SearchHistory = () => {
 
   // request to backend to obtain Searchhistory of current user
   const API_GetSearchHistory = async () => {
-    const url = `${
-      process.env.REACT_APP_production_address
-    }/searchhistory/${localStorage.getItem("userID")}`;
+    const url = `${process.env.REACT_APP_production_address
+      }/searchhistory/${localStorage.getItem("userID")}`;
     return await fetch(url, {
       method: "GET",
-      mode: "cors",
       cache: "no-cache",
     })
       .then((res) => res.json())
@@ -32,7 +30,7 @@ const SearchHistory = () => {
   useEffect(() => {
     API_GetSearchHistory();
   }, []);
-  
+
   const Search = (searchEntry: string) => {
 
   };
@@ -46,18 +44,20 @@ const SearchHistory = () => {
     <>
       <div className="outer-search-window">
         <h1 className="header-center">Search History</h1>
-        {/* <table className="searchEntries-table"> */}
-        <table className="search-window">
-          {searchEntries.map((entry, index) => (
-            <SearchRow
-              key={index}
-              name={entry.query}
-              createdOn={entry.date}
-              Search={Search}
-              Delete={Delete}
-            ></SearchRow>
-          ))}
-        </table>
+
+        {searchEntries.length == 0 ? <div id="no-search-history">No search history available!</div> :
+          <table className="search-window" cellSpacing={0} cellPadding={10}>
+            {searchEntries.map((entry, index) => (
+              <SearchRow
+                key={index}
+                name={entry.query}
+                createdOn={entry.date}
+                Search={Search}
+                Delete={Delete}
+              ></SearchRow>
+            ))}
+          </table>
+          }
       </div>
     </>
   );
