@@ -1,57 +1,63 @@
-import React from "react";
-import Header from "../Misc/Header";
-import { useState } from "react";
-import "../../styles/SearchHistory/SearchHistory.css";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSearchResult } from "../SearchResult/SearchResultContext";
 import SearchRow from "./SearchRow";
+import "../../styles/SearchHistory/SearchHistory.css";
 
-// Dummy Daten für Such-Einträge
-let names = [
-  "search#001",
-  "search#002",
-  "search#003",
-  "search#004",
-  "search#005",
-];
-
-let dates = [
-  new Date("2023-11-20").toLocaleDateString(),
-  new Date("2023-11-21").toLocaleDateString(),
-  new Date("2023-11-22").toLocaleDateString(),
-  new Date("2023-11-23").toLocaleDateString(),
-  new Date("2023-11-24").toLocaleDateString(),
-];
-
-let searchEntries = [
-  { name: names[0], createdOn: dates[0] },
-  { name: names[1], createdOn: dates[1] },
-  { name: names[2], createdOn: dates[2] },
-  { name: names[3], createdOn: dates[3] },
-  { name: names[4], createdOn: dates[4] },
-];
+interface SearchEntryProps {
+  query: string;
+  date: string;
+}
 
 const SearchHistory = () => {
+  const [searchEntries, setSearchEntries] = useState<SearchEntryProps[]>([]);
 
-  const [data, setData] = useState(searchEntries);
+  // request to backend to obtain Searchhistory of current user
+  const API_GetSearchHistory = async () => {
+    const url = `${process.env.REACT_APP_production_address
+      }/searchhistory/${localStorage.getItem("userID")}`;
+    return await fetch(url, {
+      method: "GET",
+      cache: "no-cache",
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        console.log(response);
+        setSearchEntries(response);
+      });
+  };
 
-  // TODO trigger a search that leads to the SearchResultPage
-  const Search = (name: any) => {
-    alert("searching for " + name);
+  useEffect(() => {
+    API_GetSearchHistory();
+  }, []);
+
+  const Search = (searchEntry: string) => {
+
   };
 
   // TODO delete a search history entry
-  const Delete = (name: any) => {
-    setData(data.filter((entry) => entry.name !== name));
+  const Delete = (searchEntry: string) => {
+    // ...
   };
 
   return (
     <>
-      <h1 className="header-center">Search History</h1>
-      <div className="searchHistoryContainer">
-        <table>
-          {data.map((entry, index) => (
-            <SearchRow key={index} name={entry.name} createdOn={entry.createdOn} Search={Search} Delete={Delete}></SearchRow>
-          ))}
-        </table>
+      <div className="outer-search-window">
+        <h1 className="header-center">Search History</h1>
+
+        {searchEntries.length == 0 ? <div id="no-search-history">No search history available!</div> :
+          <table className="search-window" cellSpacing={0} cellPadding={10}>
+            {searchEntries.map((entry, index) => (
+              <SearchRow
+                key={index}
+                name={entry.query}
+                createdOn={entry.date}
+                Search={Search}
+                Delete={Delete}
+              ></SearchRow>
+            ))}
+          </table>
+          }
       </div>
     </>
   );

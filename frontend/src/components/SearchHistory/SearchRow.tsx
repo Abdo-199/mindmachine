@@ -8,10 +8,12 @@ interface SearchRowProps {
 }
 
 const SearchRow = ({ name, createdOn, Search, Delete }: SearchRowProps) => {
+  const date = new Date(createdOn).toLocaleDateString();
+  
   return (
     <tr>
       <td>{name}</td>
-      <td>{createdOn}</td>
+      <td>{date}</td>
       <td>
         <button onClick={() => Search(name)}>Search</button>
       </td>
