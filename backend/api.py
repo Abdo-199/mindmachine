@@ -10,8 +10,6 @@ from typing import List
 from databaseHandler import DatabaseHandler
 import config
 
-
-
 class API:
 
     def __init__(self) -> None:
@@ -103,7 +101,6 @@ class API:
             self.qdClient.revectorize_all()
             return True
         
-
         #get used disk space
         @self.router.get("/diskusage")
         async def get_disk_usage():
