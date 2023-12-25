@@ -20,3 +20,5 @@ date_time_format = '%d.%m.%Y'
 units = ['B', 'KB', 'MB', 'GB', 'TB']
 
 temp_pdf_directory = '/usr/src/app/data/temp_pdf/'
+
+max_search_history_per_user = 50  # Change as needed

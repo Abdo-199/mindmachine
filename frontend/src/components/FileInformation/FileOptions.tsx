@@ -3,6 +3,7 @@ import RenameFileModal from "../Others/RenameFileModal";
 import DeleteFileModal from "../Others/DeleteFileModal";
 import "../../styles/FileInformation/FileInformation.css";
 
+//Open, rename or delete Card for a file
 const FileOptions = ({
   filename,
   SetThisFile,
@@ -19,6 +20,7 @@ const FileOptions = ({
   ModalHandlerDeleteConfirm: any;
 }) => {
 
+  //checks, if a filename contains forbidden characters
   function checkFilename(
     inputString: string,
     forbiddenCharacters: RegExp
@@ -28,12 +30,9 @@ const FileOptions = ({
 
   const [newFilename, SetNewFilename] = useState("");
   const [isFileOpened, setIsFileOpened] = useState<boolean>(false);
-
   const [pdfURL, setPDFURL] = useState<string>("");
-
   const [modalHandlerDataChange, setModalHandlerDataChange] = useState(false);
   const [modalHandlerDataDelete, setModalHandlerDataDelete] = useState(false);
-
   const [isConfirmed, SetIsConfirmed] = useState(false);
 
   useEffect(() => {
@@ -159,6 +158,8 @@ const FileOptions = ({
             return item;
           }
         });
+
+        //refresh the docRows with the new named file
         SetDocRows(nextList);
       });
   };

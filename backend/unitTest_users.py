@@ -65,6 +65,9 @@ class TestUserCRUD(unittest.TestCase):
     def test_log_search_and_get_history(self):
         user_id = 'unique_user_id_for_this_test'
         self.add_user(user_id, 'Search User', 'searchuser@example.com', False)
+    def test_log_search_and_get_history(self):
+        user_id = 'unique_user_id_for_this_test'
+        self.add_user(user_id, 'Search User', 'searchuser@example.com', False)
 
         # Log multiple search queries
         for i in range(MAX_SEARCH_HISTORY_PER_USER + 2):  # Two more than the limit

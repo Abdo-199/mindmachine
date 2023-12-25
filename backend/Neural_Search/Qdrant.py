@@ -7,6 +7,8 @@ Creation Date: 11.11.2023
 from qdrant_client import QdrantClient, models
 from qdrant_client.http.models import Filter, FieldCondition, MatchValue
 from sentence_transformers import SentenceTransformer
+from fileSystemHandler import FileSystemHandler
+import os
 import config
 
 class Qdrant:
@@ -156,6 +158,16 @@ class Qdrant:
     return {"relevant_docs": relevant_docs[:4], "relevant_paragraphs": relevant_para[:4]}
   
   def delete_doc(self, collection_name, doc_name):
+    """
+      Delete a document from the Qdrant collection.
+
+      Parameters:
+      - collection_name (str): Name of the Qdrant collection.
+      - doc_name (str): Name of the document to be deleted.
+
+      Returns:
+      None
+    """
     self.qdrant_client.delete(
     collection_name=collection_name,
     points_selector=models.Filter(
@@ -171,3 +183,53 @@ class Qdrant:
       ],
     ),
     )
+
+  def revectorize_all(self):
+    fileHandler = FileSystemHandler(self)
+    all_users = [d for d in os.listdir(config.document_directory) if os.path.isdir(os.path.join(config.document_directory, d))]
+    for user in all_users:
+        print(f"deleting {user}")
+        self.qdrant_client.delete_collection(user)
+        files = fileHandler.get_fs_for_user(user)
+        for file in files:
+            print(os.path.join(config.document_directory, user, file['file_name']))
+            file_path = os.path.join(config.document_directory, user, file['file_name'])
+            try:
+              fileHandler.encode_and_upload(file_path, user)
+            except:
+               print(f"no text recognized in {file_path}")
+
+  def rename_doc(self, collection_name, doc_name, new_name):
+      """
+        Rename a document in the Qdrant collection.
+
+        Parameters:
+        - collection_name (str): Name of the Qdrant collection.
+        - doc_name (str): Current name of the document.
+        - new_name (str): New name for the document.
+
+        Returns:
+        bool: True if the renaming is successful, False otherwise.
+      """
+      self.rename_vec(collection_name, doc_name, new_name, "name")
+      self.rename_vec(collection_name, doc_name, new_name, "source_doc")
+
+  def rename_vec(self, collection_name, doc_name, new_name, key):
+      """
+        looks for all vectors with a specific key and changes the value of this key in the payload
+      """
+      self.qdrant_client.set_payload(
+      collection_name=collection_name,
+      payload={
+          key: new_name,
+      },
+      points=models.Filter(
+        must=[
+            models.FieldCondition(
+                key=key,
+                match=models.MatchValue(value=doc_name),
+            ),
+        ],
+      ),
+      )
+      return True

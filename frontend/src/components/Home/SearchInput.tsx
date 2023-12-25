@@ -1,6 +1,6 @@
-import React from 'react'
 import ConvertVoice from "../SearchFile/ConvertVoice";
 
+//Search-textinput in the upper HomeWindow
 const SearchInput = () => {
 
   return (

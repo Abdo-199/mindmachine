@@ -4,6 +4,7 @@ import OpenFile from './OpenFile';
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+//displays information about the most relevant document
 const MostRelevantDoc = () => {
 
     const { searchResult, setSearchResult } = useSearchResult();
@@ -15,6 +16,7 @@ const MostRelevantDoc = () => {
 
             <p className="doc-relevant-paragraphs">Relevant paragraphs:</p>
 
+            {/* list of all relevant paragraphs */}
             {searchResult.relevant_paragraphs.map((item: string, index: number) => {
                 return <div className='paragraphs'>
                     <div style={{display: "flex", alignItems: "center", columnGap: "15px"}}>

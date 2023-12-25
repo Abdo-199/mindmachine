@@ -5,7 +5,7 @@ from statisticsHandler import StatisticsHandler
 from ldap3 import Server, Connection
 from Neural_Search.Qdrant import Qdrant
 from dataDefinitions import *
-
+from datetime import datetime
 from typing import List
 from databaseHandler import DatabaseHandler
 import config
@@ -15,7 +15,7 @@ import config
 class API:
 
     def __init__(self) -> None:
-        self.app = FastAPI()
+        self.app = FastAPI(root_path="/api")
         self.router = APIRouter()
         self.qdClient = Qdrant()
         self.DatabaseHandler = DatabaseHandler(config.data_directory, config.database_name)
@@ -94,6 +94,13 @@ class API:
         @self.router.put("/editDocumentName/{user_id}")
         async def edit_document_name(user_id, request: RenameFileModel):
             self.file_system_handler.edit_document_name(user_id, request.old_name, request.new_name)
+            self.qdClient.rename_doc(user_id, request.old_name, request.new_name)
+            return True
+        
+        #edit document name
+        @self.router.head("/revectorize")
+        async def revectorize():
+            self.qdClient.revectorize_all()
             return True
         
 
@@ -124,4 +131,12 @@ class API:
         #get search history of user
         @self.router.get("/searchhistory/{user_id}")
         async def get_search_history(user_id):
-            return True
+            raw_search_history = self.DatabaseHandler.get_search_history(user_id)
+            search_history = []
+            for search in raw_search_history:
+                search_history.append({'query': search.search_query, 'date': search.timestamp})
+            return search_history
+        
+        @self.router.get("/getnumberofaskedquestions")
+        async def get_number_of_asked_questions(given_timestamp:datetime = datetime(2000, 1, 1)):
+            return self.DatabaseHandler.get_number_of_asked_questions(given_timestamp)

@@ -2,6 +2,7 @@ from sqlalchemy import create_engine, Column, DateTime, Float, Integer, String, 
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 from datetime import datetime
 import os
+import config
 
 # Define the database model
 Base = declarative_base()
@@ -82,6 +83,14 @@ class DatabaseHandler:
             session.commit()
         session.close()
 
+    def get_number_of_asked_questions(self, given_timestamp): 
+        session = self.Session()
+        number_of_asked_questions = session.query(SearchHistory).filter(
+            SearchHistory.timestamp <= datetime.utcnow(),
+            SearchHistory.timestamp >= given_timestamp).count()
+        session.close()
+        return number_of_asked_questions
+
     def get_search_history(self, user_id):
         session = self.Session()
         history = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).order_by(
@@ -89,12 +98,13 @@ class DatabaseHandler:
         session.close()
         return history
 
-    def log_search(self, user_id, query, session):
-        session = self.Session()
+    def log_search(self, user_id, query, session = None):
+        if session is None:
+            session = self.Session()
         try:
             # Check if max history count reached
             current_history_count = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).count()
-            if current_history_count >= MAX_SEARCH_HISTORY_PER_USER:
+            if current_history_count >= config.max_search_history_per_user:
                 # Delete the oldest entry
                 oldest_entry = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).order_by(
                     SearchHistory.timestamp.asc()).first()
@@ -174,7 +184,6 @@ class SearchHistory(Base):
     search_query = Column(String)
     timestamp = Column(DateTime, default=datetime.utcnow)  # Timestamp for each search
     user = relationship("User")
-
 class UserSettings(Base):
     __tablename__ = 'UserSettings'
     user_id = Column(String, ForeignKey('Users.user_id'), primary_key=True)

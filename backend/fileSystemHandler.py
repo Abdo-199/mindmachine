@@ -36,34 +36,8 @@ class FileSystemHandler:
             with open(file_path, "wb") as f:
                 # saves original file to user directory
                 f.write(file.file.read())
-                try:
-                    # saves ocr file to temp directory
-                    temp_file_path = config.temp_pdf_directory + file.filename
-                    os.makedirs(config.temp_pdf_directory, exist_ok=True)
-                    # open pdf with pikepdf and remove restrictions
-                    pdf = pikepdf.open(file_path, password='')
-                    pdf.save(temp_file_path)
-                    # recognize text with ocrmypdf
-                    ocrmypdf.ocr(
-                        temp_file_path,
-                        temp_file_path,
-                        output_type='pdf',
-                        skip_text=True,
-                        language=['deu', 'eng'],
-                        optimize=0,
-                        invalidate_digital_signatures=True
-                    )
-                    # encode pdf to vectors
-                    docVec = pdf_to_docVec(temp_file_path, self.qdClient.encoder)
-
-                    #check if there were paragraphs recognized
-                    if len(docVec.paras_vecs) <= 1 and docVec.paras_vecs[0]['paragraph'] == '':
-                        raise Exception("No paragraphs recognized")   
-                                     
-                    # save vectors to qdrant
-                    self.qdClient.add_docVec(user_id, docVec)
-                    if os.path.exists(temp_file_path):
-                        os.remove(temp_file_path)
+                try:              
+                    self.encode_and_upload(file_path, user_id)
                     status_return.append([file.filename, True])
                 except Exception as e:
                     print(e)
@@ -72,6 +46,39 @@ class FileSystemHandler:
                     continue
 
         return status_return
+    
+    def encode_and_upload(self, file_path, user):
+        # saves ocr file to temp directory
+        filename = os.path.basename(file_path)
+        temp_file_path = config.temp_pdf_directory + filename
+        os.makedirs(config.temp_pdf_directory, exist_ok=True)
+        # open pdf with pikepdf and remove restrictions
+        pdf = pikepdf.open(file_path, password='')
+        pdf.save(temp_file_path)
+        # recognize text with ocrmypdf
+        ocrmypdf.ocr(
+            temp_file_path,
+            temp_file_path,
+            output_type='pdf',
+            skip_text=True,
+            language=['deu', 'eng'],
+            optimize=0,
+            invalidate_digital_signatures=True
+        )
+
+        # encode pdf to vectors
+        docVec = pdf_to_docVec(file_path, self.qdClient.encoder)
+
+        #check if there were paragraphs recognized
+        if len(docVec.paras_vecs) <= 1 and docVec.paras_vecs[0]['paragraph'] == '':
+            raise Exception("No paragraphs recognized")  
+        
+        # save vectors to qdrant
+        self.qdClient.add_docVec(user, docVec)
+
+        # delete temp file
+        if os.path.exists(temp_file_path):
+            os.remove(temp_file_path)
 
     def get_fs_for_user(self, user_id):
 

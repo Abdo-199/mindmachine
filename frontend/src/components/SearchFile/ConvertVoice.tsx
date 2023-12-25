@@ -10,7 +10,15 @@ import SpeechRecognition, {
 const ConvertVoice = () => {
 
   const navigate = useNavigate();
+
+  //sets the context of the searchResults globally
   const { searchResult, setSearchResult } = useSearchResult();
+
+  const {
+    transcript,
+    resetTranscript,
+    listening,
+  } = useSpeechRecognition();
 
   useEffect(() => {
     const init = () => {
@@ -19,12 +27,7 @@ const ConvertVoice = () => {
     init()
   }, [])
 
-  const {
-    transcript,
-    resetTranscript,
-    listening,
-  } = useSpeechRecognition();
-
+  //the written or spoken text
   const [transcriptText, setTranscriptText] = useState(transcript)
   const startListening = () => {
     resetTranscript()
@@ -43,6 +46,7 @@ const ConvertVoice = () => {
     }
   };
 
+  //search with qdrant in the backend with the written text (transcript)
   const API_Search = async () => {
     return await fetch(
       `${process.env.REACT_APP_production_address}/search?user_id=${localStorage.getItem("userID")}&query=${transcriptText}`,
@@ -54,10 +58,12 @@ const ConvertVoice = () => {
       })
       .then((res) => res.json())
       .then((response) => {
+        //save the result and navigate to searchResult
         setSearchResult(response)
         navigate(`/SearchResult/${transcriptText}`)
       });
   };
+  
   return (
     <>
       <input onKeyDown={(e) => FastSearch(e)} id="searchInput" value={listening ? transcript : transcriptText} onChange={(e)=>{

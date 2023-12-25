@@ -1,4 +1,5 @@
-// SearchResultContext.tsx
+//context for the searchResults
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface SearchResultContextProps {
@@ -6,8 +7,8 @@ interface SearchResultContextProps {
 }
 
 interface SearchResultContextData {
-  searchResult: any; // Passe diesen Typen entsprechend an
-  setSearchResult: React.Dispatch<React.SetStateAction<any>>; // Passe diesen Typen entsprechend an
+  searchResult: any; 
+  setSearchResult: React.Dispatch<React.SetStateAction<any>>;
 }
 
 const SearchResultContext = createContext<SearchResultContextData | undefined>(undefined);

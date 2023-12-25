@@ -1,6 +1,5 @@
 import { Card } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
-
 import "../../styles/SearchResult/SearchResult.css";
 import React from "react"
 import Table from "@mui/material/Table";
@@ -12,7 +11,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import BasicPie from "./PieChart";
 import Button from "@mui/material/Button";
-
 import { Grid,TextField, Box } from "@mui/material";
 
 
