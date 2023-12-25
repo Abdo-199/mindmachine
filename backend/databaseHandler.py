@@ -15,7 +15,7 @@ class DatabaseHandler:
     def __init__(self, data_directory, database_name):
         self.database_directory = os.path.join(data_directory, database_name)
         self.create_conncetion()
-        User.settings = relationship("UserSettings", back_populates="user", uselist=False)
+        #User.settings = relationship("UserSettings", back_populates="user", uselist=False)
 
     def create_conncetion(self):
         # Configure the database connection
@@ -117,17 +117,18 @@ class DatabaseHandler:
         except Exception as e:
             print(f"Error in log_search: {e}")
             session.rollback()
-    def get_user_settings(self, user_id):
+
+    def get_admin_settings(self):
         session = self.Session()
-        settings = session.query(UserSettings).filter(UserSettings.user_id == user_id).first()
+        settings = session.query(AdminSettings).first()
         session.close()
         return settings
 
-    def update_user_settings(self, user_id, logout_timer=None, max_disk_space=None):
+    def update_admin_settings(self, logout_timer=None, max_disk_space=None):
         session = self.Session()
-        settings = session.query(UserSettings).filter(UserSettings.user_id == user_id).first()
+        settings = session.query(AdminSettings).first()
         if not settings:
-            settings = UserSettings(user_id=user_id)
+            settings = AdminSettings()
             session.add(settings)
         if logout_timer is not None:
             settings.logout_timer = logout_timer
@@ -136,7 +137,7 @@ class DatabaseHandler:
         session.commit()
         session.close()
 
-    def test_user_settings(self):
+    def test_admin_settings(self):
         # Ensure the database and tables are initialized
         session = self.Session()
         # Create a test user if they don't exist
@@ -162,8 +163,6 @@ class DatabaseHandler:
             print(f"No settings found for User ID {user_id}")
 
 
-
-
 class User(Base):
     __tablename__ = 'Users'
 
@@ -175,8 +174,6 @@ class User(Base):
     def __repr__(self):
         return f"<User(user_id={self.user_id}, name={self.name}, email={self.email}, is_admin={self.is_admin})>"
 
-
-
 class SearchHistory(Base):
     __tablename__ = 'SearchHistory'
     id = Column(Integer, primary_key=True)
@@ -184,12 +181,13 @@ class SearchHistory(Base):
     search_query = Column(String)
     timestamp = Column(DateTime, default=datetime.utcnow)  # Timestamp for each search
     user = relationship("User")
-class UserSettings(Base):
-    __tablename__ = 'UserSettings'
-    user_id = Column(String, ForeignKey('Users.user_id'), primary_key=True)
+
+class AdminSettings(Base):
+    __tablename__ = 'AdminSettings'
+    #user_id = Column(String, ForeignKey('Users.user_id'), primary_key=True)
     logout_timer = Column(Float)  # Logout timer in seconds or any other unit
     max_disk_space = Column(Float)  # Max disk space in MB or any other unit
-    user = relationship("User", back_populates="settings")
+    #user = relationship("User", back_populates="settings")
 
 if __name__ == "__main__":
     data_directory = ""
