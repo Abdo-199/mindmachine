@@ -104,11 +104,13 @@ class API:
         #get used disk space
         @self.router.get("/diskusage")
         async def get_disk_usage():
-            return True
+            disk = self.DatabaseHandler.get_admin_settings().max_disk_space
+            return disk
         
         #change disk space limit
         @self.router.put("/diskusage")
-        async def change_disk_usage():
+        async def change_disk_usage(diskusage: float):
+            self.DatabaseHandler.update_admin_settings(max_disk_space = diskusage)
             return True
         
         # get statistics
@@ -119,10 +121,12 @@ class API:
         # get and set auto-logout time
         @self.router.get("/autologout")
         async def get_auto_logout():
-            return True
+            settings = self.DatabaseHandler.get_admin_settings().logout_timer
+            return settings
         
         @self.router.put("/autologout")
-        async def set_auto_logout():
+        async def set_auto_logout(logout_timer: float):
+            self.DatabaseHandler.update_admin_settings(logout_timer = logout_timer)
             return True
         
         #get search history of user
