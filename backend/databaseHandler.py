@@ -15,7 +15,19 @@ class DatabaseHandler:
     def __init__(self, data_directory, database_name):
         self.database_directory = os.path.join(data_directory, database_name)
         self.create_conncetion()
+        self.inital_admin_settings()
         #User.settings = relationship("UserSettings", back_populates="user", uselist=False)
+
+    def inital_admin_settings(self):
+        
+        session = self.Session()
+        settings = self.get_admin_settings()
+        if settings is None:
+            settings = AdminSettings(logout_timer=config.logout_timer, max_disk_space=config.max_disk_space)
+            session.add(settings)
+            session.commit()
+            session.close()
+        
 
     def create_conncetion(self):
         # Configure the database connection
@@ -185,6 +197,7 @@ class SearchHistory(Base):
 class AdminSettings(Base):
     __tablename__ = 'AdminSettings'
     #user_id = Column(String, ForeignKey('Users.user_id'), primary_key=True)
+    id = Column(Integer, primary_key=True)
     logout_timer = Column(Float)  # Logout timer in seconds or any other unit
     max_disk_space = Column(Float)  # Max disk space in MB or any other unit
     #user = relationship("User", back_populates="settings")
