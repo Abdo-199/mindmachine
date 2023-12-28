@@ -1,9 +1,18 @@
+import logging
+# change this to logging.DEBUG to see more information.
+# change this to logging.INFO to see less information.
+# change this to logging.WARNING to see only warnings.
+min_log_level = logging.INFO
+
 #root_directory = "./user/"
 root_directory = "/usr/src/app/"
 
 document_directory =  root_directory + "mm_docs/user/"
 
 data_directory = root_directory + "data/"
+
+log_directory = data_directory + "logs/"
+log_file = log_directory + "log.txt"
 
 database_name = "userid_search_history_admin.db"
 

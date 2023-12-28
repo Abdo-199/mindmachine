@@ -12,3 +12,4 @@ sqlalchemy
 sentence-transformers
 PyPDF2
 ocrmypdf
+colorlog

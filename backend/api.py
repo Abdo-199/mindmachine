@@ -9,6 +9,7 @@ from datetime import datetime
 from typing import List
 from databaseHandler import DatabaseHandler
 import config
+import logHandler
 
 class API:
 
@@ -19,6 +20,7 @@ class API:
         self.DatabaseHandler = DatabaseHandler(config.data_directory, config.database_name)
         self.stats = StatisticsHandler(self.qdClient)
         self.file_system_handler = FileSystemHandler(self.qdClient)
+        self.logger = logHandler.LogHandler(name="API").get_logger()
         self.setup_routes()
         self.app.include_router(self.router)
 
@@ -43,10 +45,13 @@ class API:
             if conn.bind():
                 is_admin = self.DatabaseHandler.check_for_Admin(user)
                 if is_admin:
+                    self.logger.info(f"User {request.username} logged in as admin")
                     return LoginResponseModel(isAuthenticated=True, isAdmin=True)
                 else:
+                    self.logger.info(f"User {request.username} logged in as user")
                     return LoginResponseModel(isAuthenticated=True, isAdmin=False)
                        
+            self.logger.warn(f"User {request.username} failed to log in")       
             return LoginResponseModel(isAuthenticated=False, isAdmin=False)
         
         #search
@@ -58,15 +63,17 @@ class API:
                 results = self.qdClient.search(user_id, query)
 
                 self.DatabaseHandler.log_search(user_id, query) 
-
+                self.logger.info(f"User {user_id} searched for {query}")
                 return results
             except Exception as e:
+                self.logger.error(f"User {user_id} failed to search for {query}")
                 raise HTTPException(status_code=500, detail=str(e))
         
         #upload document for user id to the file system and qdrant
         @self.router.post("/upload/{user_id}")
         async def upload_document(user_id, files: list[UploadFile] = File(...)):
             status_return = self.file_system_handler.upload(user_id, files)
+            self.logger.info(f"User {user_id} uploaded {len(files)} files: {status_return}")
             return status_return
 
         #Sends a pdf file to the Website for the viewer
@@ -74,23 +81,28 @@ class API:
         async def get_document(user_id :str, document_name :str):  # (user_id: str, document_name: str):
             filepath = self.file_system_handler.get_document_path(user_id, document_name)
             if not filepath:
+                self.logger.error(f"User {user_id} failed to download {document_name}")
                 raise HTTPException(status_code=404, detail="File not found")
+            self.logger.info(f"User {user_id} downloaded {document_name}")
             return FileResponse(path=filepath, filename=document_name, media_type="application/pdf")
 
         #delete document
         @self.router.delete("/deleteDocument/{user_id}/{document_id}")
         async def delete_document(user_id, document_id):
             self.file_system_handler.delete_document(user_id, document_id)
+            self.logger.info(f"User {user_id} deleted {document_id}")
             return True
         
         #send file structure
         @self.router.get("/filestructure/{user_id}")
         async def get_file_structure(user_id):
+            self.logger.info(f"User {user_id} requested file structure")
             return self.file_system_handler.get_fs_for_user(user_id)
         
         #edit document name
         @self.router.put("/editDocumentName/{user_id}")
         async def edit_document_name(user_id, request: RenameFileModel):
+            self.logger.info(f"User {user_id} renamed {request.old_name} to {request.new_name}")
             self.file_system_handler.edit_document_name(user_id, request.old_name, request.new_name)
             self.qdClient.rename_doc(user_id, request.old_name, request.new_name)
             return True
@@ -99,6 +111,7 @@ class API:
         @self.router.head("/revectorize")
         async def revectorize():
             self.qdClient.revectorize_all()
+            self.logger.info(f"Revectorized all documents")
             return True
         
         #get used disk space
@@ -141,3 +154,11 @@ class API:
         @self.router.get("/getnumberofaskedquestions")
         async def get_number_of_asked_questions(given_timestamp:datetime = datetime(2000, 1, 1)):
             return self.DatabaseHandler.get_number_of_asked_questions(given_timestamp)
+        
+        @self.router.get("/logfile")
+        async def get_log_file():
+            return FileResponse(path=self.logger.get_log_file(), filename="log.txt", media_type="text/plain")
+        
+        @self.router.get("/logs")
+        async def get_log_json():
+            return self.logger.get_log_json()
