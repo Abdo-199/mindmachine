@@ -5,6 +5,7 @@ Author: Abdelrahman Elsharkawi
 Creation Date: 11.11.2023
 """
 import os
+import logHandler
 
 class DocVec:
   """
@@ -29,6 +30,7 @@ class DocVec:
     Returns:
     None
     """
+    self.logger = logHandler.LogHandler(name="DocVec").get_logger()
     self.path = path
     self.name = os.path.basename(path)
     self.vec = vec

@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker, relationship, declarative_base
 from datetime import datetime
 import os
 import config
+import logHandler
 
 # Define the database model
 Base = declarative_base()
@@ -13,13 +14,14 @@ MAX_SEARCH_HISTORY_PER_USER = 50  # Change as needed
 class DatabaseHandler:
 
     def __init__(self, data_directory, database_name):
+        self.logger = logHandler.LogHandler(name="DatabaseHandler").get_logger()
         self.database_directory = os.path.join(data_directory, database_name)
         self.create_conncetion()
         self.inital_admin_settings()
         #User.settings = relationship("UserSettings", back_populates="user", uselist=False)
 
     def inital_admin_settings(self):
-        
+        self.logger.debug("Initializing admin settings")
         session = self.Session()
         settings = self.get_admin_settings()
         if settings is None:
@@ -30,6 +32,7 @@ class DatabaseHandler:
         
 
     def create_conncetion(self):
+        self.logger.debug("Creating database connection")
         # Configure the database connection
         self.engine = create_engine(f'sqlite:///{self.database_directory}')
         Base.metadata.create_all(self.engine)
@@ -38,12 +41,14 @@ class DatabaseHandler:
     # CRUD operations using SQLAlchemy ORM
 
     def check_for_Admin(self, user):
+        self.logger.debug(f"Checking if user is admin: {user.user_id}")
         if user.is_admin:
             return True
         else:
             return False
 
     def check_for_user(self, user_id):
+        self.logger.debug(f"Checking if user exists: {user_id}")
         user = self.get_user(user_id)
         if user is None:
             return False
@@ -51,7 +56,7 @@ class DatabaseHandler:
             return True
 
     def add_user(self, user_id, name, email, is_admin):
-
+        self.logger.info(f"Adding new user: {user_id}")
         does_user_exist = self.check_for_user(user_id)
         if does_user_exist:
             return False
@@ -63,18 +68,21 @@ class DatabaseHandler:
         session.close()
 
     def get_user(self, user_id):
+        self.logger.debug(f"Getting user: {user_id}")
         session = self.Session()
         user = session.query(User).filter(User.user_id == user_id).first()
         session.close()
         return user
 
     def get_all_users(self):
+        self.logger.debug(f"Getting all users")
         session = self.Session()
         users = session.query(User).all()
         session.close()
         return users
 
     def update_user(self, user_id, name=None, email=None, is_admin=None):
+        self.logger.info(f"Updating user: {user_id}")
         session = self.Session()
         user = session.query(User).filter(User.user_id == user_id).first()
         if user:
@@ -88,6 +96,7 @@ class DatabaseHandler:
         session.close()
 
     def delete_user(self, user_id):
+        self.logger.info(f"Deleting user: {user_id}")
         session = self.Session()
         user = session.query(User).filter(User.user_id == user_id).first()
         if user:
@@ -96,6 +105,7 @@ class DatabaseHandler:
         session.close()
 
     def get_number_of_asked_questions(self, given_timestamp): 
+        self.logger.debug(f"Getting number of asked questions")
         session = self.Session()
         number_of_asked_questions = session.query(SearchHistory).filter(
             SearchHistory.timestamp <= datetime.utcnow(),
@@ -104,6 +114,7 @@ class DatabaseHandler:
         return number_of_asked_questions
 
     def get_search_history(self, user_id):
+        self.logger.debug(f"Getting search history for user: {user_id}")
         session = self.Session()
         history = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).order_by(
             SearchHistory.timestamp.desc()).all()
@@ -111,6 +122,7 @@ class DatabaseHandler:
         return history
 
     def log_search(self, user_id, query, session = None):
+        self.logger.debug(f"Saving search for user {user_id}: {query}")
         if session is None:
             session = self.Session()
         try:
@@ -127,16 +139,19 @@ class DatabaseHandler:
             session.add(new_search_history)
             session.commit()
         except Exception as e:
-            print(f"Error in log_search: {e}")
+            # print(f"Error in log_search: {e}")
+            self.logger.error(f"Error in log_search: {e}")
             session.rollback()
 
     def get_admin_settings(self):
+        self.logger.debug("Fetching admin settings")
         session = self.Session()
         settings = session.query(AdminSettings).first()
         session.close()
         return settings
 
     def update_admin_settings(self, logout_timer=None, max_disk_space=None):
+        self.logger.info("Updating admin settings")
         session = self.Session()
         settings = session.query(AdminSettings).first()
         if not settings:

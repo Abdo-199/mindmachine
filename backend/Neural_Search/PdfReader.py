@@ -7,6 +7,8 @@ Creation Date: 11.11.2023
 import PyPDF2
 from Neural_Search.DocVec import DocVec
 import re
+import logHandler
+logger = logHandler.LogHandler(name="PdfReader").get_logger()
 
 def exclude_special_characters(input_string):
     """
@@ -31,11 +33,13 @@ def pdf_to_text(path):
   Returns:
   dict: {'text':extracted_text, 'paragraphs':paragraphs}.
   """
+  logger.debug(f"Converting {path} to text")
   pdffileobj=open(path,'rb')
   pdfreader=PyPDF2.PdfReader(pdffileobj)
   extracted_text = ""
 
-  for page in pdfreader.pages:
+  for i, page in enumerate(pdfreader.pages):
+    logger.debug(f"Extracting text from page {i}")
     extracted_text += page.extract_text()
     paragraphs = [exclude_special_characters(p) for p in extracted_text.split(". \n")]
 
@@ -52,6 +56,7 @@ def pdf_to_docVec(path, encoder):
   Returns:
   DocVec: DocVec object containing document vectors and paragraph vectors.
   """
+  logger.debug(f"Converting {path} to DocVec")
   doc = pdf_to_text(path)
   vec = encoder.encode(doc['text']).tolist()
 
