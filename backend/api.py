@@ -113,6 +113,19 @@ class API:
             self.DatabaseHandler.update_admin_settings(max_disk_space = disk_usage)
             return True
         
+        #get storage
+        @self.router.get("/storage_usage")
+        async def get_storage_info():
+            total_size = self.file_system_handler.get_total_file_size_for_all_users()
+            return total_size
+        
+
+        #get storage per user
+        @self.router.get("/storage_usage/{user_id}")
+        async def get_storage_info(user_id):
+            total_size = self.file_system_handler.get_file_size_for_user(user_id)
+            return total_size
+
         # get statistics
         @self.router.get("/statistics")
         async def get_statistics():
