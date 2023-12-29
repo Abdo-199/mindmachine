@@ -110,6 +110,36 @@ class FileSystemHandler:
             file_name_size.append({'file_name':file_name,'file_size':file_size, 'file_date': file_upload_date})
         
         return file_name_size
+    
+    def get_file_size_for_user(self, user_id):
+        total_file_size = 0
+        files = [file for file in os.listdir(self.document_directory + user_id) if file.endswith(self.file_extension)]
+        for file in files:
+            file_path = os.path.join(self.document_directory + user_id, file)
+            file_size = os.path.getsize(file_path)
+            total_file_size +=  file_size
+
+        total_file_size = self.convert_bytes(total_file_size)
+
+
+        return {'user_id': user_id, 'total_size': total_file_size}
+    
+    def get_total_file_size_for_all_users(self):
+        total_file_size = 0
+        for user_folder in os.listdir(self.document_directory):
+            user_folder_path = os.path.join(self.document_directory, user_folder)
+            if os.path.isdir(user_folder_path):  # Check if it's a directory
+                files = [file for file in os.listdir(user_folder_path) if file.endswith(self.file_extension)]
+                for file in files:
+                    file_path = os.path.join(user_folder_path, file)
+                    file_size = os.path.getsize(file_path)
+                    total_file_size += file_size
+
+        total_file_size = self.convert_bytes(total_file_size)
+
+        return total_file_size
+
+    
                 
         
     def save_document(self, user_id):
