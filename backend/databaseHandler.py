@@ -25,7 +25,7 @@ class DatabaseHandler:
         session = self.Session()
         settings = self.get_admin_settings()
         if settings is None:
-            settings = AdminSettings(logout_timer=config.logout_timer, max_disk_space=config.max_disk_space)
+            settings = AdminSettings(logout_timer=config.logout_timer, max_disk_space=config.max_disk_space, user_max_disk_space=config.user_max_disk_space)
             session.add(settings)
             session.commit()
             session.close()
@@ -150,7 +150,7 @@ class DatabaseHandler:
         session.close()
         return settings
 
-    def update_admin_settings(self, logout_timer=None, max_disk_space=None):
+    def update_admin_settings(self, logout_timer=None, max_disk_space=None, user_max_disk_space = None):
         self.logger.info("Updating admin settings")
         session = self.Session()
         settings = session.query(AdminSettings).first()
@@ -161,6 +161,8 @@ class DatabaseHandler:
             settings.logout_timer = logout_timer
         if max_disk_space is not None:
             settings.max_disk_space = max_disk_space
+        if user_max_disk_space is not None:
+            settings.user_max_disk_space = user_max_disk_space
         session.commit()
         session.close()
 
@@ -215,6 +217,7 @@ class AdminSettings(Base):
     id = Column(Integer, primary_key=True)
     logout_timer = Column(Float)  # Logout timer in seconds or any other unit
     max_disk_space = Column(Float)  # Max disk space in MB or any other unit
+    user_max_disk_space = Column(Float)
     #user = relationship("User", back_populates="settings")
 
 if __name__ == "__main__":
