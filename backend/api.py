@@ -118,12 +118,25 @@ class API:
         @self.router.get("/diskusage")
         async def get_disk_usage():
             disk_usage = self.DatabaseHandler.get_admin_settings().max_disk_space
+            disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
             return disk_usage
         
         #change disk space limit
         @self.router.put("/diskusage")
         async def change_disk_usage(disk_usage: float):
             self.DatabaseHandler.update_admin_settings(max_disk_space = disk_usage)
+            return True
+        
+        @self.router.get("/diskusage/user")
+        async def get_disk_usage():
+            disk_usage = self.DatabaseHandler.get_admin_settings().user_max_disk_space
+            disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
+            return disk_usage
+        
+        #change disk space limit
+        @self.router.put("/diskusage/user")
+        async def change_disk_usage(disk_usage: float):
+            self.DatabaseHandler.update_admin_settings(user_max_disk_space = disk_usage)
             return True
         
         #get storage

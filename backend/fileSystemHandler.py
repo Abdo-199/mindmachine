@@ -193,8 +193,18 @@ class FileSystemHandler:
             byte_size /= 1024.0
             unit_index += 1
 
+    def convert_bytes_to_gigabyte(self, byte_size):
+    # Define the unit label
+        unit = 'GB'
+
+        # Convert bytes to gigabytes
+        gigabytes = byte_size / (1024.0 ** 3)
+
+        # Start with the smallest unit (bytes) and convert
+        self.logger.debug(f"Converting byte size: {byte_size}")
+
         # Format the result with up to two decimal places
-        return f"{byte_size:.2f} {units[unit_index]}"
+        return f"{gigabytes:.2f} {unit}"
 
     def get_last_modified_date(self, file_path):
         self.logger.debug(f"Getting last modified date for file: {file_path}")
