@@ -192,6 +192,8 @@ class FileSystemHandler:
         while byte_size >= 1024 and unit_index < len(units) - 1:
             byte_size /= 1024.0
             unit_index += 1
+        # Format the result with up to two decimal places
+        return f"{byte_size:.2f} {units[unit_index]}"
 
     def convert_bytes_to_gigabyte(self, byte_size):
     # Define the unit label
