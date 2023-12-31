@@ -23,7 +23,7 @@ const Header = () => {
 
       {isAdmin === true && (
         <div className="header-button" onClick={() => navigate("/AdminPanel")}>
-          <p>Admin-Panel</p>
+          <p>Admin Panel</p>
         </div>
       )}
       

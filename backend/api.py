@@ -30,9 +30,9 @@ class API:
         @self.router.post("/login")
         async def validate_credentials(request: LoginRequestModel) -> LoginResponseModel:
 
-            user = self.DatabaseHandler.get_user(request.username )
+            user = self.DatabaseHandler.get_user(request.username)
             if user is None:
-                self.DatabaseHandler.add_user(request.username, "Where to get name?", "Where to get E-Mail?", False)
+                self.DatabaseHandler.add_user(request.username, False)
                 user = self.DatabaseHandler.get_user(request.username)
             
             ldap_server = Server(config.ldap_server)
@@ -121,32 +121,33 @@ class API:
             disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
             return disk_usage
         
-        #change disk space limit
+        #change disk space limit globally DEPRECATED
         @self.router.put("/diskusage")
         async def change_disk_usage(disk_usage: float):
             self.DatabaseHandler.update_admin_settings(max_disk_space = disk_usage)
             return True
         
+        #gets the storage capacity of all users
         @self.router.get("/diskusage/user")
         async def get_disk_usage():
             disk_usage = self.DatabaseHandler.get_admin_settings().user_max_disk_space
             disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
             return disk_usage
         
-        #change disk space limit
+        #change disk space limit for user
         @self.router.put("/diskusage/user")
         async def change_disk_usage(disk_usage: float):
             self.DatabaseHandler.update_admin_settings(user_max_disk_space = disk_usage)
             return True
         
-        #get storage
+        #get storage for all users
         @self.router.get("/storage_usage")
         async def get_storage_info():
             total_size = self.file_system_handler.get_total_file_size_for_all_users()
             return total_size
         
 
-        #get storage per user
+        #get storage for one specific user
         @self.router.get("/storage_usage/{user_id}")
         async def get_storage_info(user_id):
             total_size = self.file_system_handler.get_file_size_for_user(user_id)
@@ -155,7 +156,12 @@ class API:
         # get statistics
         @self.router.get("/statistics")
         async def get_statistics():
-            return True
+            statistics = self.DatabaseHandler.get_all_users()
+
+            for user in statistics:
+                user.used_storage = self.file_system_handler.get_file_size_for_user(user.user_id)
+                
+            return statistics
         
         # get and set auto-logout time
         @self.router.get("/autologout")

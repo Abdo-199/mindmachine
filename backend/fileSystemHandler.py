@@ -120,9 +120,7 @@ class FileSystemHandler:
             total_file_size +=  file_size
 
         total_file_size = self.convert_bytes(total_file_size)
-
-
-        return {'user_id': user_id, 'total_size': total_file_size}
+        return total_file_size
     
     def get_total_file_size_for_all_users(self):
         total_file_size = 0

@@ -10,6 +10,7 @@ import AdminPanel from '../AdminPanel/AdminPanel';
 import FileInformationWindow from '../FileInformation/FileInformationWindow'
 import { useNavigate } from "react-router-dom";
 import { SearchResultProvider } from '../SearchResult/SearchResultContext';
+import LogWindow from '../AdminPanel/LogWindow'
 
 interface MainWindowProps {
   content: string;
@@ -31,13 +32,14 @@ const MainWindow: React.FC<MainWindowProps> = ({ content }) => {
 
   //gets from the backend all files
   const GetFileStructure = async () => {
-    return await fetch(`${process.env.REACT_APP_production_address}/filestructure/${localStorage.getItem("userID")}`, {
+    return await fetch(`${process.env.REACT_APP_localhost_address}/filestructure/${localStorage.getItem("userID")}`, {
       method: 'GET',
       mode: "cors",
       cache: "no-cache",
     })
       .then(res => res.json())
       .then(response => {
+        console.log(response)
         SetDocRows(response)
       })
   }
@@ -49,6 +51,7 @@ const MainWindow: React.FC<MainWindowProps> = ({ content }) => {
     "SearchHistory": <SearchHistory />,
     "SearchResult": <SearchResult />,
     "AdminPanel": <AdminPanel />,
+    "LogWindow": <LogWindow />,
     "FileInformation": <FileInformationWindow docRows={docRows} SetDocRows={SetDocRows} />,
   };
 
