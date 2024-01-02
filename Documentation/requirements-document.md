@@ -1,10 +1,41 @@
-# 1. Visionen und Ziele 
 
-  
+## guideline
+
+Das Scoping-Dokument konzentriert sich eher auf eine hochrangige Übersicht über den Projektumfang, die Ziele und die wesentlichen Rahmenbedingungen.
+
+Die User Stories und Epics sind eher Bestandteil des Anforderungsdokuments oder eines sogenannten "Requirements Document". Dieses Dokument enthält die funktionalen und nicht-funktionalen Anforderungen an das System im Detail, einschließlich der spezifischen Bedürfnisse der Benutzer. Es stellt sicher, dass die Entwickler und alle anderen Beteiligten ein klares Verständnis für die spezifischen Funktionen und Merkmale haben, die im Laufe des Projekts implementiert werden sollen.
+
+Das Requirements Document und das Scoping-Dokument können jedoch miteinander verknüpft sein. Das Scoping-Dokument bietet den Rahmen und Kontext, während das Requirements Document die Details liefert. Beide Dokumente sind entscheidend, um sicherzustellen, dass das Projekt effizient und zielgerichtet umgesetzt wird.
+
+Hier sind einige Themen, die normalerweise in einem Requirements-Dokument behandelt werden sollten:
+
+1. **Einleitung und Projektübersicht:** Eine kurze Einführung, die den Zweck des Dokuments erklärt und eine allgemeine Übersicht über das Projekt bietet.
+    
+2. **Projekthintergrund:** Eine Beschreibung des Kontexts und der Hintergrundinformationen des Projekts, um sicherzustellen, dass alle Leser ein grundlegendes Verständnis haben.
+    
+3. **Zielsetzung:** Die klare Definition der Ziele und des Umfangs des Projekts. Was soll mit dem Projekt erreicht werden?
+    
+4. **Funktionsanforderungen:** Eine Liste der funktionalen Anforderungen, die beschreiben, welche Funktionen und Features die Software bieten muss. Dies kann in Form von User Stories oder Use Cases erfolgen.
+    
+5. **Nichtfunktionale Anforderungen:** Dies umfasst Anforderungen, die nicht direkt mit den Funktionen der Software zusammenhängen, wie z.B. Leistung, Sicherheit, Skalierbarkeit, Benutzerfreundlichkeit, und Lizenzen.
+    
+6. **Benutzeranforderungen:** Beschreibung der Benutzerprofile und ihrer spezifischen Anforderungen an das System.
+    
+7. **Datenanforderungen:** Beschreibung der Daten, die vom System verwendet und gespeichert werden, sowie deren Verwaltung.
+    
+8. **Abhängigkeiten und Einschränkungen:** Alle externen Abhängigkeiten, die das Projekt beeinflussen könnten, sowie Einschränkungen wie Zeit- und Budgetbeschränkungen.
+    
+9. **Akzeptanzkriterien:** Klar formulierte Kriterien, anhand derer überprüft wird, ob die Anforderungen erfüllt sind.
+    
+10. **Änderungsverwaltung:** Ein Prozess zur Verwaltung von Änderungen an den Anforderungen während des Projektverlaufs.
+    
+11. **Referenzen:** Alle verwendeten Referenzen, wie z.B. externe Dokumente, Gesetze oder Standards.
+    
+12. **Anhänge:** Falls erforderlich, können zusätzliche Informationen, Diagramme, Mockups oder andere relevante Dokumente angehängt werden.
+# 1. Visionen und Ziele 
 
 Die Vision für das MindMachine-Projekt ist die Schaffung einer intuitiven und leistungsstarken Browseranwendung, die es HTW-Anwendern ermöglicht, ihre Dateien effizient zu verwalten und mithilfe von KI-gestützten Suchanfragen relevante Informationen aus den Dokumenten zu extrahieren. Das Hauptziel besteht darin, eine benutzerfreundliche Plattform zu entwickeln, die nahtlos in den Arbeitsalltag der HTW-Anwender integriert werden kann.
 
-  
 
 Die wesentlichen Ziele des Projekts sind:
 
@@ -36,7 +67,21 @@ Die erfolgreiche Umsetzung dieser Ziele wird dazu beitragen, den Workflow der HT
 
 # 2. Anforderungsanalyse
 
-  
+Abschnitt ergänzen in welchem darauf hingewiesen wird, dass: 
+
+Ziel der Einarbeitung dieses Abschnitts ist, dass wir unser Verständnis für die Anforderungen an nachhaltige und erfolgreiche Software-Entwicklungen kennen und im bedarfsrechten Maß einzusetzen wissen. Es geht ganz konkret **nicht** darum, dass wir die Analyse der nicht funktionalen Anforderungen als Zielsetzung  verstehen. 
+Dennoch bitte ich euch diesen Abschnitt einmal durchzulesen und Vorschläge für sinnvolle Ergänzungen mit Begründung zu notieren. Durch eure Ergänzungen bzw. Anmerkungen können wir diesen ersten Entwurf realitätsgetreuer und dezidiert für unser Projekt überarbeiten und ein besseres Verständnis der Materie beweisen. 
+## 2.1 Analyse der funktionalen Anforderungen
+
+**guideline von HTW
+
+Beschreiben Sie die wesentlichen funktionalen Anforderungen bzw. Use-Cases Ihres Systems. Dies können Sie als Use-Case-Diagramm (geeignet bei mehreren Typen von Anwendern der Software) oder als Tabelle mit funktionalen Anforderungen darstellen. 
+
+Legen Sie fest, welches Teammitglied für welchen Use-Case bzw. welche funktionale Anforderung verantwortlich ist. In diesem Abschnitt dreht sich alles um die Anforderungen aus Nutzersicht. Eine Definition von internen Abläufen ist hier nicht sinnvoll.  
+
+Alle funktionalen Anforderungen bzw. Use-Cases sollten nummeriert werden, damit man sich im Abschnitt 4 darauf beziehen kann. 
+
+---
 
 Im Rahmen eines kollaborativen Kundenworkshops wurde ein umfassendes Story Mapping durchgeführt, das als grundlegende Struktur für die Anforderungsanalyse der MindMachine-Anwendung dient. Dieser Workshop ermöglichte eine interaktive Zusammenarbeit zwischen den Stakeholdern und dem Entwicklungsteam, um die wesentlichen Funktionen und Anforderungen zu identifizieren. Das Story Mapping (s. Abbildung XX) diente dabei als Orientierungspunkt, um die verschiedenen Aspekte der Anwendung zu verstehen und zu strukturieren.
 
@@ -842,97 +887,113 @@ Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User 
  
 ---
 
-## 2.1 Funktionale Anforderungen / Use-Cases 
-
-  
-
-Beschreiben Sie die wesentlichen funktionalen Anforderungen bzw. Use-Cases Ihres Systems. Dies können Sie als Use-Case-Diagramm (geeignet bei mehreren Typen von Anwendern der Software) oder als Tabelle mit funktionalen Anforderungen darstellen. 
-
-Legen Sie fest, welches Teammitglied für welchen Use-Case bzw. welche funktionale Anforderung verantwortlich ist. In diesem Abschnitt dreht sich alles um die Anforderungen aus Nutzersicht. Eine Definition von internen Abläufen ist hier nicht sinnvoll.  
-
-  
-
-Alle funktionalen Anforderungen bzw. Use-Cases sollten nummeriert werden, damit man sich im Abschnitt 4 darauf beziehen kann. 
-
-  
 
 ## 2.2 Nicht-funktionale Anforderungen 
 
-  
-  
+**guideline von HTW
 
 Führen Sie an dieser Stelle alle nicht-funktionalen Anforderungen Ihres Systems auf. Zum Beispiel unter welchem Betriebssystem die Software laufen soll, oder welche Anforderungen an Antwort- oder Verarbeitungszeiten gestellt werden. 
 
+---
+### WIP
 
+Die nicht funktionalen Anforderungen für die MindMachine-Webanwendung umfassen verschiedene Aspekte, die sicherstellen sollen, dass die Anwendung den Anforderungen an Leistung, Sicherheit und Benutzerfreundlichkeit gerecht wird.
+
+### Leistung
+Die Software muss effizient arbeiten und schnelle Antwortzeiten bieten, um die Anforderungen einer großen Anzahl von Benutzern zu erfüllen.
+
+- **Reaktionsgeschwindigkeit**: Die MindMachine-Anwendung muss schnell auf Benutzeranfragen reagieren, um eine effiziente Nutzung zu ermöglichen.
+- **Skalierbarkeit**: Die Anwendung sollte in der Lage sein, mit steigender Benutzeranzahl und Datenmenge umzugehen, ohne die Leistung erheblich zu beeinträchtigen.
+- **Verfügbarkeit**: Die Anwendung muss eine hohe Verfügbarkeit aufweisen, um den Benutzern jederzeit und überall Zugang zu ermöglichen.
+
+### Sicherheit
+Die Sicherheit der Daten und Benutzerinformationen hat höchste Priorität. Es müssen Sicherheitsmaßnahmen implementiert werden, um unbefugten Zugriff und Datenlecks zu verhindern.
+- **Benutzerdatenschutz**: Die Datenschutzrichtlinien müssen strikt eingehalten werden, um die sensiblen Informationen der Benutzer zu schützen.
+- **Authentifizierung und Autorisierung**: Nur autorisierte Benutzer sollten auf bestimmte Funktionen und Daten zugreifen können.
+- **Schutz vor Angriffen**: Die Anwendung muss gegen Sicherheitsbedrohungen wie SQL-Injektionen und Cross-Site-Scripting (XSS) geschützt sein.
+- **Datensicherheit**: Die Daten müssen sicher gespeichert und übertragen werden, um die Integrität und Vertraulichkeit zu gewährleisten.
+
+### Benutzerfreundlichkeit
+Die Benutzeroberfläche sollte intuitiv und benutzerfreundlich gestaltet sein, um eine einfache Navigation und Interaktion zu ermöglichen.
+- **Barrierefreiheit**: Die Anwendung muss barrierefrei sein und den Zugang für Benutzer mit unterschiedlichen Fähigkeiten und Bedürfnissen erleichtern.
+- **Dokumentation**: Eine umfassende Dokumentation sollte verfügbar sein, um Benutzern bei der Verwendung der Anwendung zu helfen und Probleme zu beheben.
+
+Die nicht-funktionalen Anforderungen sind entscheidend für den Erfolg des Projekts, da sie sicherstellen, dass die entwickelte Software den Anforderungen der HTW Berlin und ihrer Benutzer gerecht wird. Durch die sorgfältige Planung, Umsetzung und Überprüfung dieser Anforderungen wird das Premierprojekt dazu beitragen, innovative Lösungen für die Herausforderungen in den Ingenieurwissenschaften zu entwickeln und gleichzeitig die höchsten Standards in Bezug auf Leistung, Sicherheit und Benutzerfreundlichkeit zu erfüllen.
+
+
+### Fragen an das Team bzgl der erfolgten Umsetzung für das Scoping Document
+
+
+
+1. **Leistung:**
+    
+    - Wie plant ihr, die Leistungsanforderungen der Software zu erfüllen? Gibt es spezielle Technologien oder Architekturen, die dafür verwendet werden?
+2. **Sicherheit:**
+    
+    - Welche Sicherheitsmechanismen sind geplant, um die Sicherheitsanforderungen der Software zu erfüllen? Werden Daten verschlüsselt oder Zugriffskontrollen implementiert?
+3. **Skalierbarkeit:**
+    
+    - Wie plant ihr, mit wachsenden Benutzerzahlen umzugehen? Werden Cloud-Ressourcen oder Lastenausgleichsmechanismen verwendet?
+4. **Benutzerfreundlichkeit:**
+    
+    - Welche Designrichtlinien oder Usability-Tests werden durchgeführt, um sicherzustellen, dass die Benutzeroberfläche benutzerfreundlich ist?
+5. **Zuverlässigkeit:**
+    
+    - Wie wird die Software auf Zuverlässigkeit getestet? Gibt es Testautomatisierung oder Überwachungstools?
+6. **Wartbarkeit:**
+    
+    - Wie wird der Quellcode organisiert und dokumentiert, um die Wartbarkeit sicherzustellen? Werden Best Practices in der Softwareentwicklung befolgt?
+7. **Dokumentation:**
+    
+    - Welche Arten von Dokumentation werden erstellt? Gibt es Pläne für Benutzerhandbücher, Entwicklerdokumentation oder Schulungsmaterialien?
+
+Diese Fragen können dem Team helfen, die Anforderungen genauer zu spezifizieren und zu überlegen, wie sie diese im Projekt umsetzen möchten.
+
+---
 
 ## 2.3. Risiken
 
- 
-  
 
 Beschreiben Sie mögliche Risiken für die erfolgreiche Umsetzung Ihres Projektes! Welche Maßnahmen können Sie ergreifen, um die Risiken zu reduzieren? Diese Darstellung sollte in einer Tabelle erfolgen. 
-
-  
 
 ## 2.4. GUI
 
   
-
-  
-
 Erstellen Sie einen Mockup Ihrer GUI. Dazu sollen für die wichtigen Anwendungsfälle die Oberflächen entworfen und ihre Funktion beschrieben werden. Das Mockup kann mit einem beliebigen Tool umgesetzt werden (Powerpoint, inkscape, Figma, Paint, WPF, egal!). 
 
-  
 
 # 3. Realisierung 
 
-  
-
 ## 3.1. Komponenten 
 
-  
 
 Legen Sie die für Ihr System zu erstellenden Komponenten fest. Ordnen Sie die Komponente dem verantwortlichen Teammitglied zu. Legen Sie fest, welche Use-Cases in welcher Komponente oder welchen Komponenten aus heutiger Sicht zu realisieren sind.  
 
-  
-
 Erstellen Sie ggfs. ein Komponenten-Diagramm des zu realisierenden Programms mit den dazu erforderlichen Komponenten und zeigen Sie die Abhängigkeiten zwischen den Komponenten auf. 
 
-  
+## 3.2 Interne Schnittstellen / Klassendiagramm 
 
-2. Interne Schnittstellen / Klassendiagramm 
-
-  
 
 Erstellen Sie ein Klassendiagramm, um die zu realisierenden Schnittstellen konkret zu spezifizieren. Überlegen Sie, welche Funktionen von welcher Klasse bereitgestellt werden müssen und achten Sie auf eine sinnvolle Softwarearchitektur und ggfs. passende Entwurfsmuster. 
 
-  
-
-3. Externe Schnittstellen 
-
-  
+## 3.3 Externe Schnittstellen 
 
 Beschreiben Sie die externen Schnittstellen Ihres Systems. Erstellen Sie dazu eine Tabelle, in der Sie den Namen der Schnittstelle, die Art der Schnittstelle (das könnte eine Datei, eine Serveranwendung, ein KI-Modell, eine Datenbank, eine Website etc. sein), den Typ der Schnittstellenimplementierung (Dateizugriff, http-Zugriff, COM-Zugriff o.ä.) und die Komponente oder Klasse, die für die Realisierung der externen Anbindung zuständig ist, auflisten. 
 
-  
-
-4. Datenbank-Schema 
+## 3.4 Datenbank-Schema 
 
   
 
 Wenn Sie eine Datenbank verwenden, erklären und skizzieren Sie hier Ihr Datenbank-Schema. 
 
-  
-
-5. Tests und Qualitätssicherung 
+## 3.5 Tests und Qualitätssicherung 
 
   
 
 Beschreiben Sie hier, welche Aspekte Ihrer Software Sie wie testen könnten. Aus Zeitgründen verzichten wir auf eine detaillierte Test-Strategie. Nutzen Sie diesen Abschnitt jedoch für Vorschläge, wie man (rein hypothetisch) essenzielle Funktionalitäten testen könnte. Sie müssen die hier gemachten Vorschläge nicht umsetzen. 
 
   
-
-# 3.6. Lizenz 
+## 3.6. Lizenz 
 
  ### Verwendete Lizenzen
 
