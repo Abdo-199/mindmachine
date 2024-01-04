@@ -1,0 +1,122 @@
+# Benutzeroberfläche (UI) Dokumentation
+
+## Einführung
+
+Dieses Dokument bietet einen Überblick über die Benutzeroberfläche (UI) des Projekts mindmachine. #endsprint (Einfügen eines direct links zur Projektbeschreibung im READ.ME oder so) Es beschreibt die wichtigsten Aspekte der Benutzeroberfläche und wie Benutzer damit interagieren können.
+
+## Benutzeranforderungen
+
+Eines der wesentlichen Projektziele ist die Benutzerfreundlichkeit: 
+Die Anwendung soll eine leicht verständliche Benutzeroberfläche bieten, die eine intuitive Navigation und Interaktion ermöglicht. Sowohl HTW-Anwender als auch Administratoren sollen sich mühelos auf der Plattform zurechtfinden können. #endsprint (direct link zum Abschnitt Visionen und Ziele im requirement-doc)
+
+Folgende Auflistung fasst die wichtigsten Anforderungen an die Benutzeroberfläche, die auf den Bedürfnissen und Erwartungen der Benutzer basieren, zusammen. 
+
+//Ich habe einige der Anforderungen an die Benutzeroberfläche aus den User Stories und dem generell dem requirement-document (https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/Documentation/requirements-document.md) hier aufgelistet. Du @Carrel kannst sie gerne noch ergänzen, wenn dir noch etwas einfällt)
+
+1. **Anmeldung**: Benutzer müssen sich mit ihren HTW-Anmeldeinformationen (Benutzername und Passwort) auf der Website anmelden können.
+    
+2. **Benutzerprofil**: Nach der Anmeldung müssen Benutzer auf ihr Benutzerprofil zugreifen können. Hier können sie ihr Profilbild hochladen, persönliche Informationen aktualisieren und ihre Einstellungen ändern.
+    
+3. **Datei-Upload**: Benutzer müssen die Möglichkeit haben, Dokumente im pdf-Format #endsprit (nur pdf?) auf die Plattform hochzuladen. 
+    
+4. **Suchfunktion**: Die Benutzeroberfläche muss eine Suchleiste bieten, über die Benutzer nach Fragen und Inhalten suchen können.
+    
+5. **Ergebnisliste**: Nach einer Suche werden die Suchergebnisse in einer übersichtlichen Liste dargestellt. Dabei sollen relevante Informationen wie Titel, Beschreibung und Autor angezeigt werden.
+    
+6. **Dateidownload**: Benutzer müssen die heruntergeladenen Dateien in ihrem persönlichen Profil verwalten können. Dies beinhaltet das Herunterladen von Dateien und das Löschen nicht mehr benötigter Dateien.
+    
+7. **Benachrichtigungen**: Die UI sollte Benutzer über wichtige Ereignisse wie erfolgreiches Hochladen von Dateien oder neue Antworten auf gestellte Fragen benachrichtigen.
+    
+8. **Benutzerfreundlichkeit**: Die Benutzeroberfläche muss intuitiv und benutzerfreundlich gestaltet sein, damit Benutzer ohne größere Schwierigkeiten navigieren und Aufgaben erledigen können.
+    
+9. **Barrierefreiheit**: Die UI muss barrierefrei sein und die relevanten Standards und Richtlinien für Webzugänglichkeit (z. B. WCAG) #endsprint erfüllen.
+    
+10. **Responsives Design**: Die Benutzeroberfläche muss auf verschiedenen Bildschirmgrößen und Geräten korrekt angezeigt werden und ein responsives Design aufweisen.
+
+## UI-Designkonzepte
+
+Beschreibung der Designentscheidungen, die bei der Gestaltung der Benutzeroberfläche getroffen wurden. Dies kann die Wahl von Farbschemata, Layouts, Schriften und Grafiken umfassen. @Carrel
+
+- **Farbschema**: [Beschreibung des verwendeten Farbschemas]
+- **Layout**: [Beschreibung des Layouts]
+- **Schriften**: [Beschreibung der verwendeten Schriften]
+- ...
+
+## Wireframes und Mockups
+
+Hier die Wireframes oder Mockups der wichtigsten Seiten in der Benutzeroberfläche zeigen, um den visuellen Entwurf zu verdeutlichen.
+![Startseite Wireframe](link_zum_bild1.png)
+*Abb. 1: Wireframe der Startseite*
+
+![Profilseite Mockup](link_zum_bild2.png)
+*Abb. 2: Mockup der Profilseite*
+
+## Interaktionsfluss
+
+[Beschreibung des Interaktionsflusses, wie Benutzer zwischen den Seiten navigieren können]
+
+## Grafische Elemente
+
+Erklärungen zu den grafischen Elementen in der Benutzeroberfläche, wie Schaltflächen, Icons und Formulare.
+
+- **Schaltflächen**: [Beschreibung der Schaltflächen]
+- **Icons**: [Beschreibung der Icons]
+- **Formulare**: [Beschreibung der Formulare]
+- ...
+
+## Benutzerfreundlichkeit
+
+[Bewertung der Benutzerfreundlichkeit und mögliche Verbesserungen]
+
+//Hier können wir am Ende vom #endsprit darauf eingehen, ob die mobile Ansicht umgesetzt werden konnte/ im Projektumfang aus Ressourcengründen nicht enthalten ist
+## Barrierefreiheit
+
+Die Barrierefreiheit ist ein wesentlicher Aspekt unseres Projekts MindMachine, da wir sicherstellen möchten, dass unsere Webanwendung für alle Benutzer zugänglich und nutzbar ist, unabhängig von ihren individuellen Fähigkeiten oder Beeinträchtigungen.
+
+1. **Text-Alternative**: Bilder, Grafiken und andere nicht-textuelle Inhalte sollten alternative Textbeschreibungen haben, damit Menschen mit Sehbehinderungen den Inhalt verstehen können. Screenreader können diese Textbeschreibungen vorlesen.
+    
+2. **Tastaturzugänglichkeit**: Alle Funktionen und Interaktionen in der Anwendung sollten auch über die Tastatur bedienbar sein, da einige Benutzer möglicherweise keine Maus verwenden können.
+    
+3. **Kontrast und Farbgestaltung**: Die Farben und der Kontrast in der Anwendung sollten so gestaltet sein, dass sie auch für Menschen mit Sehbehinderungen gut sichtbar sind.
+    
+4. **Strukturierte Semantik**: Die Verwendung von HTML-Elementen sollte semantisch korrekt sein, um die Informationen in einer logischen und verständlichen Reihenfolge darzustellen. Dies hilft Screenreadern und anderen Hilfsmitteln, den Inhalt richtig zu interpretieren.
+    
+5. **Testen mit assistiven Technologien**: Webentwickler sollten ihre Anwendungen mit verschiedenen assistiven Technologien testen, um sicherzustellen, dass sie von allen Benutzern effektiv genutzt werden können.
+#frontend Feedback zur Umsetzung, bzw. nicht im Projektumfang enthalten ergänzen
+## Technologiestack
+
+- **Frontend**: [Verwendete Technologien und Frameworks für das Frontend] #frontend Antwort ergänzen 
+- **Backend**: [Verwendete Technologien und Frameworks für das Backend] #backend Antwort ergänzen
+- ...
+
+## Test und Validierung
+
+[Beschreibung der verwendeten Testmethoden und -prozesse]
+
+siehe hierzu unter #A-Teammeeting Notizen. #endsprit 
+
+## Akzeptanzkriterien
+
+- Die Benutzeroberfläche muss auf den gängigsten Webbrowsern korrekt angezeigt werden.
+- Die Benutzeroberfläche muss auf verschiedenen Bildschirmgrößen und Geräten responsive sein.
+- Die Ladezeiten für Seiten oder Funktionen dürfen bestimmte Grenzwerte nicht überschreiten.
+
+## Bildschirmaufnahmen und Beispiele
+
+Bildschirmaufnahmen oder Beispiele der Benutzeroberfläche, um den Benutzern einen visuellen Eindruck zu vermitteln.
+
+![Beispielbild 1](link_zum_bild3.png)
+*Abb. 3: Beispielbild 1*
+
+![Beispielbild 2](link_zum_bild4.png)
+*Abb. 4: Beispielbild 2*
+
+
+//Ich würde dich bitten diese Beispiele auszuarbeiten @Carrel. Ich sortiere sie anschließend entweder der README oder dem UI Dokument zu 
+
+Einloggen 
+PDF-hochladen 
+Frage stellen 
+Suchhistorie 
+Admin Panel
+===Ein einfaches Beispiel oder eine Schnellstartanleitung.===
