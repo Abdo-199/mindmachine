@@ -253,8 +253,6 @@ class DatabaseHandler:
 class User(Base):
     __tablename__ = 'Users'
     user_id = Column(String, primary_key=True)
-    name = Column(String)
-    email = Column(String)
     is_admin = Column(Boolean)
     last_login = Column(DateTime, nullable=True)
 
