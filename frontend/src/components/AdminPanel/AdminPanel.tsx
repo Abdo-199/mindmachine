@@ -13,6 +13,7 @@ import BasicPie from "./PieChart";
 import Button from "@mui/material/Button";
 import { Grid, TextField, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import Modal from "../Others/Modal";
 
 function createData(
   Users: string,
@@ -34,15 +35,18 @@ const AdminPanel = () => {
 
   const navigate = useNavigate();
 
-  const [currentLogoutTime, setCurrentLogoutTime] = useState(10);
-  const [newLogoutTime, setNewLogoutTime] = useState(0);
+  const [currentLogoutTime, setCurrentLogoutTime] = useState("");
+  const [newLogoutTime, setNewLogoutTime] = useState("");
+  const [showErrorNewLogoutTime, setShowErrorNewLogoutTime] = useState(false);
 
   const [currentMaxUserStorage, setCurrentMaxUserStorage] = useState("");
   const [newMaxUserStorage, setNewMaxUserStorage] = useState("");
+  const [showErrorNewMaxUserStorage, setShowErrorNewMaxUserStorage] = useState(false);
 
   const [globalStorageUsage, setGlobalStorageUsage] = useState("");
 
   const [statistics, setStatistics] = useState([]);
+  const [activeUsers, setActiveUsers] = useState(0)
 
   useEffect(() => {
     API_GetLogoutTime();
@@ -80,19 +84,28 @@ const AdminPanel = () => {
   };
 
   const API_SetLogoutTime = async () => {
-    return await fetch(
-      `${process.env.REACT_APP_localhost_address}/autologout?logout_timer=${newLogoutTime}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((response) => {
-        setCurrentLogoutTime(newLogoutTime)
-      });
+
+    if (newLogoutTime != "") {
+      return await fetch(
+        `${process.env.REACT_APP_localhost_address}/autologout?logout_timer=${newLogoutTime}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((response) => {
+          setCurrentLogoutTime(newLogoutTime)
+          ModalHandlerChangeLogoutTime()
+          setNewLogoutTime("")
+          setShowErrorNewLogoutTime(false)
+        });
+    }
+    else {
+      setShowErrorNewLogoutTime(true)
+    }
   };
 
   //Gets the maximum stroage capacity for every user
@@ -122,11 +135,22 @@ const AdminPanel = () => {
     }
   };
 
+  const [modalHandlerChangeMaxUserStorage, setModalHandlerChangeMaxUserStorage] = useState(false);
+  const ModalHandlerChangeMaxUserStorage = () => {
+    setModalHandlerChangeMaxUserStorage((current) => !current);
+  };
+
+  const [modalHandlerChangeLogoutTime, setModalHandlerChangeLogoutTime] = useState(false);
+  const ModalHandlerChangeLogoutTime = () => {
+    setModalHandlerChangeLogoutTime((current) => !current);
+  };
+
   const API_ChangeMaxUserStorage = async () => {
 
     let bytes = convertToBytes();
 
     if (bytes == null) {
+      setShowErrorNewMaxUserStorage(true)
       return;
     }
 
@@ -142,6 +166,9 @@ const AdminPanel = () => {
       .then((res) => res.json())
       .then((response) => {
         setCurrentMaxUserStorage(newMaxUserStorage + " GB")
+        ModalHandlerChangeMaxUserStorage()
+        setNewMaxUserStorage("")
+        setShowErrorNewMaxUserStorage(false)
       });
   };
 
@@ -157,7 +184,6 @@ const AdminPanel = () => {
     )
       .then((res) => res.json())
       .then((response) => {
-        console.log(response)
         setGlobalStorageUsage(response)
       });
   };
@@ -185,16 +211,14 @@ const AdminPanel = () => {
       <h4 style={{ marginLeft: "100px" }}>Storage</h4>
       <Card style={{ marginLeft: 100, marginRight: 100 }} variant="elevation">
         <CardContent>
-          <Grid container>
+          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", marginRight: "50px"}}>
 
-            <Grid item xs={12} sm={5}>
-              <CardContent>
-                <BasicPie></BasicPie>
-              </CardContent>
-            </Grid>
-
-            <Grid item xs={12} sm={7}>
-              <Grid container style={{display: "flex", columnGap: "8px", alignItems: "center"}}>
+            <div style={{marginLeft: "-120px"}}>
+              <BasicPie></BasicPie>
+            </div>
+            
+            <Grid>
+              <Grid container style={{ display: "flex", columnGap: "8px", alignItems: "center" }}>
 
                 Limit storage usage for every user:
                 <Box component="span" display="inline-block">
@@ -204,6 +228,8 @@ const AdminPanel = () => {
                     type="number"
                     onChange={handleChangeUserStorage}
                     placeholder="1"
+                    error={newMaxUserStorage === "" && showErrorNewMaxUserStorage}
+                    value={newMaxUserStorage}
                     sx={{ width: "70px" }} style={{ height: "0px", maxHeight: "20px", marginBottom: "30px" }}
                   />
                 </Box>
@@ -211,16 +237,14 @@ const AdminPanel = () => {
               </Grid>
 
               Current: {currentMaxUserStorage}
-              <Grid container>
-                <Grid item xs={12}></Grid>
-
-                <Box >
+              <Grid>
+                <Box>
                   <Button onClick={() => API_ChangeMaxUserStorage()} style={{ color: "black", backgroundColor: "#83b600", marginLeft: "120px", marginBottom: "15px", marginTop: "50px" }}>Change storage</Button>
                 </Box>
               </Grid>
 
             </Grid>
-          </Grid>
+          </div>
         </CardContent>
       </Card>
 
@@ -242,7 +266,7 @@ const AdminPanel = () => {
         <div style={{ display: "flex", alignItems: "center", columnGap: "10px" }}>
           Set auto logout after{""}
           <Box component="span" display="inline-block" style={{ justifySelf: "flex-start" }}>
-            <TextField onChange={handleChangeLogoutTime} sx={{ width: "70px", marginBottom: "35px" }} style={{ height: "0px", maxHeight: "20px" }} variant="outlined" size="small" placeholder="60" type="number" />
+            <TextField error={newLogoutTime === "" && showErrorNewLogoutTime} value={newLogoutTime} onChange={handleChangeLogoutTime} sx={{ width: "70px", marginBottom: "35px" }} style={{ height: "0px", maxHeight: "20px" }} variant="outlined" size="small" placeholder="60" type="number" />
           </Box>{" "}
           minutes. Current is {currentLogoutTime} minutes.
         </div>
@@ -262,13 +286,15 @@ const AdminPanel = () => {
           minWidth: "500px",
           marginTop: "20px"
         }}>
-          
+
         <Button style={{ color: "black", backgroundColor: "#83b600" }} onClick={() => navigate("/LogWindow")}>Go to log files</Button>
       </Card>
 
 
 
       <h4 style={{ marginLeft: "100px", marginTop: "30px" }}>Statistics</h4>
+
+      <p style={{ marginLeft: "100px" }}>Active users: {activeUsers}</p>
       <Card style={{ minWidth: "650px", marginLeft: "100px", marginRight: "100px", marginTop: "20px" }}>
         <TableContainer component={Paper}>
           <Table
@@ -280,7 +306,7 @@ const AdminPanel = () => {
                 <TableCell sx={{ width: '80px' }} align="left" >User</TableCell>
                 <TableCell sx={{ width: '100px' }} align="left">Email</TableCell>
                 <TableCell sx={{ width: '30px' }} align="left">Used storage</TableCell>
-                {/* <TableCell sx={{ width: '30px' }} align="left">Last access</TableCell> */}
+                <TableCell sx={{ width: '30px' }} align="left">Last access</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -289,7 +315,7 @@ const AdminPanel = () => {
                   <TableCell align="left">{row.user_id}</TableCell>
                   <TableCell align="left">{row.user_id.startsWith("s0") ? row.user_id + "@htw-berlin.de" : null}</TableCell>
                   <TableCell align="left">{row.used_storage}</TableCell>
-                  {/* <TableCell align="left">{row.Last_access.toLocaleDateString()}</TableCell> */}
+                  {/* <TableCell align="left">{row.last_login.toLocaleDateString()}</TableCell> */}
                 </TableRow>
               ))}
             </TableBody>
@@ -298,6 +324,20 @@ const AdminPanel = () => {
           </Table>
         </TableContainer>
       </Card>
+
+      {modalHandlerChangeMaxUserStorage ? <Modal header="Success" closeModal={() => ModalHandlerChangeMaxUserStorage()} content={
+        <div>
+          <p>You changed the maximum storage capacity!</p>
+          <button className="fileOption-button" onClick={() => ModalHandlerChangeMaxUserStorage()}>Close</button>
+        </div>
+      }></Modal> : null}
+
+      {modalHandlerChangeLogoutTime == true ? <Modal header="Success" closeModal={() => ModalHandlerChangeLogoutTime()} content={
+        <div>
+          <p>You changed the auto-logout timer!</p>
+          <button className="fileOption-button" onClick={() => ModalHandlerChangeLogoutTime()}>Close</button>
+        </div>
+      }></Modal> : null}
     </div>
   );
 };

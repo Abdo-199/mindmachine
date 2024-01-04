@@ -45,9 +45,11 @@ class API:
             if conn.bind():
                 is_admin = self.DatabaseHandler.check_for_Admin(user)
                 if is_admin:
+                    self.DatabaseHandler.update_last_login(username)
                     self.logger.info(f"User {request.username} logged in as admin")
                     return LoginResponseModel(isAuthenticated=True, isAdmin=True)
                 else:
+                    self.DatabaseHandler.update_last_login(username)
                     self.logger.info(f"User {request.username} logged in as user")
                     return LoginResponseModel(isAuthenticated=True, isAdmin=False)
                        
@@ -156,12 +158,13 @@ class API:
         # get statistics
         @self.router.get("/statistics")
         async def get_statistics():
+            activeUsers = self.DatabaseHandler.get_active_users()
             statistics = self.DatabaseHandler.get_all_users()
 
             for user in statistics:
                 user.used_storage = self.file_system_handler.get_file_size_for_user(user.user_id)
                 
-            return statistics
+            return {"statistics": statistics, "activeUsers": activeUsers}
         
         # get and set auto-logout time
         @self.router.get("/autologout")
