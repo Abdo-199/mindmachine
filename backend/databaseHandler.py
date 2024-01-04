@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, Column, DateTime, Float, Integer, String, Boolean, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationship, declarative_base
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import config
 import logHandler
@@ -166,11 +166,57 @@ class DatabaseHandler:
         session.commit()
         session.close()
 
+    def update_last_login(self, user_id):
+        """
+        Update the last login time for a user.
+
+        :param user_id: ID of the user who logged in
+        """
+        session = self.Session()
+        user = session.query(User).filter(User.user_id == user_id).first()
+        if user:
+            user.last_login = datetime.now()
+            session.commit()
+        session.close()
+
+    def get_active_users(self):
+        """
+        Retrieve a list of active users.
+
+        :return: List of active users
+        """
+        thirty_days_ago = datetime.now() - timedelta(days=30)
+        session = self.Session()
+        active_users = session.query(User).filter(User.last_login >= thirty_days_ago).all()
+        session.close()
+        return active_users
+
+    def get_inactive_users(self):
+        """
+        Retrieve a list of inactive users.
+
+        :return: List of inactive users
+        """
+        thirty_days_ago = datetime.now() - timedelta(days=30)
+        session = self.Session()
+        inactive_users = session.query(User).filter(User.last_login < thirty_days_ago).all()
+        session.close()
+        return inactive_users
+    
+
+
+
+
+
+
+
+
     def test_admin_settings(self):
         # Ensure the database and tables are initialized
         session = self.Session()
-        # Create a test user if they don't exist
-        user_id = 'test_user'
+        user_id = 'test_user 1'
+        # self.add_user(user_id, 'Test User 1', 'testuser@example.com', False)
+        self.update_last_login('test_user 1')
         # add_user(user_id, 'Test User', 'testuser@example.com', False)
         self.log_search('user_id', 'Human Genes 22', session)
         history = self.get_search_history('user_id')
@@ -190,15 +236,25 @@ class DatabaseHandler:
             print(f"  Max Disk Space: {settings.max_disk_space} MB")
         else:
             print(f"No settings found for User ID {user_id}")
+                # Test getting active users
+            
+        active_users = self.get_active_users()
+        print("Active Users:")
+        for user in active_users:
+            print(f"  User ID: {user.user_id}, Last Login: {user.last_login}")
+
+        # Test getting inactive users
+        inactive_users = self.get_inactive_users()
+        print("\nInactive Users:")
+        for user in inactive_users:
+            print(f"  User ID: {user.user_id}, Last Login: {user.last_login}")
 
 
 class User(Base):
     __tablename__ = 'Users'
-
     user_id = Column(String, primary_key=True)
-    name = Column(String)
-    email = Column(String)
     is_admin = Column(Boolean)
+    last_login = Column(DateTime, nullable=True)
 
     def __repr__(self):
         return f"<User(user_id={self.user_id}, name={self.name}, email={self.email}, is_admin={self.is_admin})>"
