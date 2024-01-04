@@ -55,14 +55,14 @@ class DatabaseHandler:
         else:
             return True
 
-    def add_user(self, user_id, name, email, is_admin):
+    def add_user(self, user_id, is_admin):
         self.logger.info(f"Adding new user: {user_id}")
         does_user_exist = self.check_for_user(user_id)
         if does_user_exist:
             return False
 
         session = self.Session()
-        new_user = User(user_id=user_id, name=name, email=email, is_admin=is_admin)
+        new_user = User(user_id=user_id, is_admin=is_admin)
         session.add(new_user)
         session.commit()
         session.close()
@@ -81,15 +81,11 @@ class DatabaseHandler:
         session.close()
         return users
 
-    def update_user(self, user_id, name=None, email=None, is_admin=None):
+    def update_user(self, user_id, is_admin=None):
         self.logger.info(f"Updating user: {user_id}")
         session = self.Session()
         user = session.query(User).filter(User.user_id == user_id).first()
         if user:
-            if name:
-                user.name = name
-            if email:
-                user.email = email
             if is_admin is not None:
                 user.is_admin = is_admin
             session.commit()
@@ -257,7 +253,7 @@ class User(Base):
     last_login = Column(DateTime, nullable=True)
 
     def __repr__(self):
-        return f"<User(user_id={self.user_id}, name={self.name}, email={self.email}, is_admin={self.is_admin})>"
+        return f"<User(user_id={self.user_id}, is_admin={self.is_admin})>"
 
 class SearchHistory(Base):
     __tablename__ = 'SearchHistory'
