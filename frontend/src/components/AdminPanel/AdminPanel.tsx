@@ -29,6 +29,7 @@ interface Statistics {
   user_id: string;
   is_admin: boolean;
   used_storage: string;
+  last_login: Date;
 }
 
 const AdminPanel = () => {
@@ -61,7 +62,7 @@ const AdminPanel = () => {
 
   const API_GetLogoutTime = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/autologout`,
+      `${process.env.REACT_APP_production_address}/autologout`,
       {
         method: "GET",
         headers: {
@@ -87,7 +88,7 @@ const AdminPanel = () => {
 
     if (newLogoutTime != "") {
       return await fetch(
-        `${process.env.REACT_APP_localhost_address}/autologout?logout_timer=${newLogoutTime}`,
+        `${process.env.REACT_APP_production_address}/autologout?logout_timer=${newLogoutTime}`,
         {
           method: "PUT",
           headers: {
@@ -111,7 +112,7 @@ const AdminPanel = () => {
   //Gets the maximum stroage capacity for every user
   const API_GetMaxUserStorage = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/diskusage/user`,
+      `${process.env.REACT_APP_production_address}/diskusage/user`,
       {
         method: "GET",
         headers: {
@@ -155,7 +156,7 @@ const AdminPanel = () => {
     }
 
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/diskusage/user?disk_usage=${bytes}`,
+      `${process.env.REACT_APP_production_address}/diskusage/user?disk_usage=${bytes}`,
       {
         method: "PUT",
         headers: {
@@ -174,7 +175,7 @@ const AdminPanel = () => {
 
   const API_GetGlobalStorageUsage = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/storage_usage`,
+      `${process.env.REACT_APP_production_address}/storage_usage`,
       {
         method: "GET",
         headers: {
@@ -190,7 +191,7 @@ const AdminPanel = () => {
 
   const API_GetStatistics = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/statistics`,
+      `${process.env.REACT_APP_production_address}/statistics`,
       {
         method: "GET",
         headers: {
@@ -201,9 +202,16 @@ const AdminPanel = () => {
       .then((res) => res.json())
       .then((response) => {
         console.log(response)
-        setStatistics(response)
+        setStatistics(response.statistics)
+        setActiveUsers(response.activeUsers)
       });
   };
+
+  function RenderDate(last_login: Date) {
+    const dateObject = new Date(last_login);
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    return dateObject.toLocaleString('de-DE');
+  }
 
   return (
     <div>
@@ -310,14 +318,14 @@ const AdminPanel = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {statistics.map((row: Statistics) => (
+              {statistics.length != 0 ? statistics.map((row: Statistics) => (
                 <TableRow>
                   <TableCell align="left">{row.user_id}</TableCell>
                   <TableCell align="left">{row.user_id.startsWith("s0") ? row.user_id + "@htw-berlin.de" : null}</TableCell>
                   <TableCell align="left">{row.used_storage}</TableCell>
-                  {/* <TableCell align="left">{row.last_login.toLocaleDateString()}</TableCell> */}
+                  <TableCell align="left">{RenderDate(row.last_login)}</TableCell>
                 </TableRow>
-              ))}
+              )) : null}
             </TableBody>
 
 
