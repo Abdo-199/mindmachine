@@ -29,6 +29,7 @@ interface Statistics {
   user_id: string;
   is_admin: boolean;
   used_storage: string;
+  last_login: Date;
 }
 
 const AdminPanel = () => {
@@ -201,9 +202,16 @@ const AdminPanel = () => {
       .then((res) => res.json())
       .then((response) => {
         console.log(response)
-        setStatistics(response)
+        setStatistics(response.statistics)
+        setActiveUsers(response.activeUsers)
       });
   };
+
+  function RenderDate(last_login: Date) {
+    const dateObject = new Date(last_login);
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    return dateObject.toLocaleString('de-DE');
+  }
 
   return (
     <div>
@@ -310,14 +318,14 @@ const AdminPanel = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {statistics.map((row: Statistics) => (
+              {statistics.length != 0 ? statistics.map((row: Statistics) => (
                 <TableRow>
                   <TableCell align="left">{row.user_id}</TableCell>
                   <TableCell align="left">{row.user_id.startsWith("s0") ? row.user_id + "@htw-berlin.de" : null}</TableCell>
                   <TableCell align="left">{row.used_storage}</TableCell>
-                  {/* <TableCell align="left">{row.last_login.toLocaleDateString()}</TableCell> */}
+                  <TableCell align="left">{RenderDate(row.last_login)}</TableCell>
                 </TableRow>
-              ))}
+              )) : null}
             </TableBody>
 
 

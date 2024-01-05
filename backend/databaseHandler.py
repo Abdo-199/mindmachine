@@ -171,7 +171,11 @@ class DatabaseHandler:
         session = self.Session()
         user = session.query(User).filter(User.user_id == user_id).first()
         if user:
-            user.last_login = datetime.now()
+            current_datetime  = datetime.now()
+            # Eine Stunde hinzufügen
+            updated_last_login = current_datetime + timedelta(hours=1)
+
+            user.last_login = updated_last_login
             session.commit()
         session.close()
 
@@ -183,9 +187,9 @@ class DatabaseHandler:
         """
         thirty_days_ago = datetime.now() - timedelta(days=30)
         session = self.Session()
-        active_users = session.query(User).filter(User.last_login >= thirty_days_ago).all()
+        active_users_count = session.query(User).filter(User.last_login >= thirty_days_ago).count()
         session.close()
-        return active_users
+        return active_users_count
 
     def get_inactive_users(self):
         """
@@ -195,9 +199,9 @@ class DatabaseHandler:
         """
         thirty_days_ago = datetime.now() - timedelta(days=30)
         session = self.Session()
-        inactive_users = session.query(User).filter(User.last_login < thirty_days_ago).all()
+        inactive_users_count = session.query(User).filter(User.last_login < thirty_days_ago).count()
         session.close()
-        return inactive_users
+        return inactive_users_count
     
 
 
