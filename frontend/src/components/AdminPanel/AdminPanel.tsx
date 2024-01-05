@@ -62,7 +62,7 @@ const AdminPanel = () => {
 
   const API_GetLogoutTime = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/autologout`,
+      `${process.env.REACT_APP_production_address}/autologout`,
       {
         method: "GET",
         headers: {
@@ -88,7 +88,7 @@ const AdminPanel = () => {
 
     if (newLogoutTime != "") {
       return await fetch(
-        `${process.env.REACT_APP_localhost_address}/autologout?logout_timer=${newLogoutTime}`,
+        `${process.env.REACT_APP_production_address}/autologout?logout_timer=${newLogoutTime}`,
         {
           method: "PUT",
           headers: {
@@ -112,7 +112,7 @@ const AdminPanel = () => {
   //Gets the maximum stroage capacity for every user
   const API_GetMaxUserStorage = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/diskusage/user`,
+      `${process.env.REACT_APP_production_address}/diskusage/user`,
       {
         method: "GET",
         headers: {
@@ -156,7 +156,7 @@ const AdminPanel = () => {
     }
 
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/diskusage/user?disk_usage=${bytes}`,
+      `${process.env.REACT_APP_production_address}/diskusage/user?disk_usage=${bytes}`,
       {
         method: "PUT",
         headers: {
@@ -175,7 +175,7 @@ const AdminPanel = () => {
 
   const API_GetGlobalStorageUsage = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/storage_usage`,
+      `${process.env.REACT_APP_production_address}/storage_usage`,
       {
         method: "GET",
         headers: {
@@ -191,7 +191,7 @@ const AdminPanel = () => {
 
   const API_GetStatistics = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/statistics`,
+      `${process.env.REACT_APP_production_address}/statistics`,
       {
         method: "GET",
         headers: {

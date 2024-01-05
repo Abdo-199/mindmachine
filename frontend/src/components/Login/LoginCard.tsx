@@ -21,7 +21,7 @@ const LoginCard = () => {
       },
     };
 
-    const url = `${process.env.REACT_APP_localhost_address}/login`;
+    const url = `${process.env.REACT_APP_production_address}/login`;
     const response = await fetch(url, fetchData)
       .then((response) => {
         return response.json();
