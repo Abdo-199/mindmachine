@@ -16,6 +16,7 @@ log_file = log_directory + "log.txt"
 
 database_name = "userid_search_history_admin.db"
 
+
 #'/home/mindmachine/user/'
 file_extension = '.pdf'
 

@@ -13,3 +13,4 @@ sentence-transformers
 PyPDF2
 ocrmypdf
 colorlog
+python-docx
