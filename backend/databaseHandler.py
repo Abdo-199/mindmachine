@@ -38,6 +38,11 @@ class DatabaseHandler:
         Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine)
 
+    def reset_database(self):
+        if os.path.exists(self.database_directory):
+            os.remove(self.database_directory)
+        self.create_conncetion()  # This will create a new database file and initialize the schema
+
     # CRUD operations using SQLAlchemy ORM
 
     def check_for_Admin(self, user):

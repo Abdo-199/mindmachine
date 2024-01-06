@@ -197,3 +197,13 @@ class API:
         @self.router.get("/logs")
         async def get_log_json():
             return self.logger.get_log_json()
+
+        @self.router.post("/reset-db")
+        async def reset_database():
+            try:
+                db_handler = DatabaseHandler(config.database_direcotry, config.database_name) # the first argument is database directory and second argument is database name
+                db_handler.reset_database()
+                return {"message": "Database reset successfully"}
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=str(e))
+

@@ -15,6 +15,7 @@ log_directory = data_directory + "logs/"
 log_file = log_directory + "log.txt"
 
 database_name = "userid_search_history_admin.db"
+database_direcotry = ""
 
 
 #'/home/mindmachine/user/'
