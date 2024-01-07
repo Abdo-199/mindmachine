@@ -7,6 +7,8 @@ class LoginRequestModel(BaseModel):
 class LoginResponseModel(BaseModel):
     isAuthenticated: bool
     isAdmin: bool
+    access_token: str = None
+    token_type: str = None
 
 
 class RenameFileModel(BaseModel):
