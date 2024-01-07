@@ -5,8 +5,8 @@ const DocumentList = ({ docRows }: { docRows: File[] }) => {
   return (
     <>
       <table id="documentList-table">
-        <tr id="document-headerRow">
-          <th>Name</th>
+        <tr>
+          <th style={{paddingBottom: "10px"}}>Name</th>
           <th>Size</th>
           <th>Date</th>
           <th>More</th>

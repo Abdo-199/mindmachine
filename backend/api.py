@@ -131,9 +131,10 @@ class API:
         
         #gets the storage capacity of all users
         @self.router.get("/diskusage/user")
-        async def get_disk_usage():
+        async def get_disk_usage(inBytes: str):
             disk_usage = self.DatabaseHandler.get_admin_settings().user_max_disk_space
-            disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
+            if inBytes == "false":
+                disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
             return disk_usage
         
         #change disk space limit for user
@@ -148,13 +149,12 @@ class API:
             total_size = self.file_system_handler.get_total_file_size_for_all_users()
             return total_size
         
-
-        #get storage for one specific user
+        #get storage for one specific user in bytes
         @self.router.get("/storage_usage/{user_id}")
         async def get_storage_info(user_id):
-            total_size = self.file_system_handler.get_file_size_for_user(user_id)
+            total_size = self.file_system_handler.get_file_size_for_user(user_id, True)
             return total_size
-
+        
         # get statistics
         @self.router.get("/statistics")
         async def get_statistics():
