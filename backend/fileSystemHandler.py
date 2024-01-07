@@ -111,7 +111,7 @@ class FileSystemHandler:
         
         return file_name_size
     
-    def get_file_size_for_user(self, user_id):
+    def get_file_size_for_user(self, user_id, inBytes = False):
         total_file_size = 0
         files = [file for file in os.listdir(self.document_directory + user_id) if file.endswith(self.file_extension)]
         for file in files:
@@ -119,7 +119,9 @@ class FileSystemHandler:
             file_size = os.path.getsize(file_path)
             total_file_size +=  file_size
 
-        total_file_size = self.convert_bytes(total_file_size)
+        if inBytes == False:
+            total_file_size = self.convert_bytes(total_file_size)
+
         return total_file_size
     
     def get_total_file_size_for_all_users(self):

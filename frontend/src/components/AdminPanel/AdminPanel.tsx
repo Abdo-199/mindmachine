@@ -112,7 +112,7 @@ const AdminPanel = () => {
   //Gets the maximum stroage capacity for every user
   const API_GetMaxUserStorage = async () => {
     return await fetch(
-      `${process.env.REACT_APP_production_address}/diskusage/user`,
+      `${process.env.REACT_APP_production_address}/diskusage/user?inBytes=false`,
       {
         method: "GET",
         headers: {
