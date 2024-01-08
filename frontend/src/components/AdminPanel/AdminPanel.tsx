@@ -88,34 +88,22 @@ const AdminPanel = () => {
   const API_SetLogoutTime = async () => {
 
     if (newLogoutTime !== "") {
-
-      let duration = parseInt(newLogoutTime)
-
-      if(duration <= 60 && duration > 0){
-
-        return await fetch(
-          `${process.env.REACT_APP_production_address}/autologout?logout_timer=${newLogoutTime}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-          .then((res) => res.json())
-          .then((response) => {
-            setCurrentLogoutTime(newLogoutTime)
-            window.sessionStorage.setItem("logoutTime", newLogoutTime)
-            ModalHandlerChangeLogoutTime()
-            setNewLogoutTime("")
-            setShowErrorNewLogoutTime(false)
-          });
-
-      }
-      else {
-        setShowErrorNewLogoutTime(true)
-      }
-     
+      return await fetch(
+        `${process.env.REACT_APP_production_address}/autologout?logout_timer=${newLogoutTime}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((response) => {
+          setCurrentLogoutTime(newLogoutTime)
+          ModalHandlerChangeLogoutTime()
+          setNewLogoutTime("")
+          setShowErrorNewLogoutTime(false)
+        });
     }
     else {
       setShowErrorNewLogoutTime(true)
@@ -232,12 +220,12 @@ const AdminPanel = () => {
       <h4 style={{ marginLeft: "100px" }}>Storage</h4>
       <Card style={{ marginLeft: 100, marginRight: 100 }} variant="elevation">
         <CardContent>
-          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", marginRight: "50px"}}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginRight: "50px" }}>
 
-            <div style={{marginLeft: "-120px"}}>
+            <div style={{ marginLeft: "-120px" }}>
               <BasicPie></BasicPie>
             </div>
-            
+
             <Grid>
               <Grid container style={{ display: "flex", columnGap: "8px", alignItems: "center" }}>
 

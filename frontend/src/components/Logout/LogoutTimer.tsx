@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 //Timer to see how long you stay logged in
 const LogOutTimer = () => {
-   
+
     const events = [
         "load",
         "mousemove",
@@ -11,29 +11,51 @@ const LogOutTimer = () => {
         "click",
         "scroll",
         "keypress",
-      ];
+    ];
 
     const navigate = useNavigate();
 
     const [chrono, setChrono] = useState("")
 
-    const  parseMillisecondsIntoReadableTime = (milliseconds : any) =>{
+    const parseMillisecondsIntoReadableTime = (milliseconds: any) => {
         //Get hours from milliseconds
-        var hours = milliseconds / (1000*60*60);
+        var hours = milliseconds / (1000 * 60 * 60);
         var absoluteHours = Math.floor(hours);
-      
+
         //Get remainder from hours and convert to minutes
         var minutes = (hours - absoluteHours) * 60;
         var absoluteMinutes = Math.floor(minutes);
-        var m = absoluteMinutes > 9 ? absoluteMinutes : '0' +  absoluteMinutes;
-      
+        var m = absoluteMinutes > 9 ? absoluteMinutes : '0' + absoluteMinutes;
+
         //Get remainder from minutes and convert to seconds
         var seconds = (minutes - absoluteMinutes) * 60;
         var absoluteSeconds = Math.floor(seconds);
         var s = absoluteSeconds > 9 ? absoluteSeconds : '0' + absoluteSeconds;
-    
-        return  m + ':' + s;
+
+        return m + ':' + s;
     }
+
+    useEffect(() => {
+        API_GetLogoutTime();
+    }, [])
+
+    const [logoutTimeFromBackend, setLogoutTimeFromBackend] = useState(10)
+
+    const API_GetLogoutTime = async () => {
+        return await fetch(
+            `${process.env.REACT_APP_production_address}/autologout`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        )
+            .then((res) => res.json())
+            .then((response) => {
+                setLogoutTimeFromBackend(response)
+            });
+    };
 
     useEffect(() => {
 
@@ -46,39 +68,38 @@ const LogOutTimer = () => {
         //Implementing the setInterval method
         const interval = setInterval(() => {
 
-            if(sessionStorage.getItem("login_datum") !== null){
+            if (sessionStorage.getItem("login_datum") !== null) {
                 let loginDatumString = sessionStorage.getItem("login_datum")
-                let loginTimerDuration = JSON.parse (sessionStorage.getItem("logoutTime") || "60")
+                // let loginTimerDuration = JSON.parse(sessionStorage.getItem("logoutTime") || "60")
 
-                let loginDatum = new Date(parseInt(loginDatumString|| "0"))
-                console.log(loginDatum)
-                let loginEndeDatumString  = loginDatum.setMinutes(loginDatum.getMinutes() + loginTimerDuration)
-                let loginEndeDatum = new Date(parseInt(loginEndeDatumString.toString()|| "0"))
+                let loginDatum = new Date(parseInt(loginDatumString || "0"))
+                console.log(logoutTimeFromBackend)
+                let loginEndeDatumString = loginDatum.setMinutes(loginDatum.getMinutes() + logoutTimeFromBackend)
+                let loginEndeDatum = new Date(parseInt(loginEndeDatumString.toString() || "0"))
                 console.log(loginEndeDatum)
 
                 let aktuelleZeit = new Date()
 
-                if(loginEndeDatum < aktuelleZeit){
+                if (loginEndeDatum < aktuelleZeit) {
                     localStorage.removeItem("userID")
                     localStorage.removeItem("isAdmin")
                     sessionStorage.removeItem("login_datum")
                     navigate("/")
-                }  
+                }
                 else {
 
                     //Calculate time difference
                     let differentInTime = loginEndeDatum.getTime() - aktuelleZeit.getTime()
                     let time = parseMillisecondsIntoReadableTime(differentInTime)
-                    setChrono( time)
-                }            
-            } 
+                    setChrono(time)
+                }
+            }
         }, 1000);
         //Clearing the interval
         return () => clearInterval(interval);
-    }, [])
+    }, [logoutTimeFromBackend])
 
-    return <span style={{color:"red", fontSize:20}}> {chrono}
-    </span>
+    return <div></div>
 }
 
 export default LogOutTimer
