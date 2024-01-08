@@ -8,6 +8,7 @@ import {
   faCircleCheck,
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import LogOutTimer from "../Logout/LogoutTimer";
 
 //The main window (landing page)
 const HomeWindow = ({
@@ -224,6 +225,7 @@ const HomeWindow = ({
 
 
       <DocumentList docRows={docRows}></DocumentList>
+      <LogOutTimer></LogOutTimer>
 
       {modalOcrError ? (
         <Modal

@@ -219,12 +219,12 @@ const AdminPanel = () => {
       <h4 style={{ marginLeft: "100px" }}>Storage</h4>
       <Card style={{ marginLeft: 100, marginRight: 100 }} variant="elevation">
         <CardContent>
-          <div style={{display: "flex", alignItems: "center", justifyContent: "space-between", marginRight: "50px"}}>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginRight: "50px" }}>
 
-            <div style={{marginLeft: "-120px"}}>
+            <div style={{ marginLeft: "-120px" }}>
               <BasicPie></BasicPie>
             </div>
-            
+
             <Grid>
               <Grid container style={{ display: "flex", columnGap: "8px", alignItems: "center" }}>
 
