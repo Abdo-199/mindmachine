@@ -48,9 +48,11 @@ const LogOutTimer = () => {
 
             if(sessionStorage.getItem("login_datum") !== null){
                 let loginDatumString = sessionStorage.getItem("login_datum")
+                let loginTimerDuration = JSON.parse (sessionStorage.getItem("logoutTime") || "60")
+
                 let loginDatum = new Date(parseInt(loginDatumString|| "0"))
                 console.log(loginDatum)
-                let loginEndeDatumString  = loginDatum.setHours(loginDatum.getHours() + 1)
+                let loginEndeDatumString  = loginDatum.setMinutes(loginDatum.getMinutes() + loginTimerDuration)
                 let loginEndeDatum = new Date(parseInt(loginEndeDatumString.toString()|| "0"))
                 console.log(loginEndeDatum)
 

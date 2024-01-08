@@ -73,6 +73,7 @@ const AdminPanel = () => {
       .then((res) => res.json())
       .then((response) => {
         setCurrentLogoutTime(response)
+        window.sessionStorage.setItem("logoutTime", response)
       });
   };
 
@@ -86,23 +87,35 @@ const AdminPanel = () => {
 
   const API_SetLogoutTime = async () => {
 
-    if (newLogoutTime != "") {
-      return await fetch(
-        `${process.env.REACT_APP_production_address}/autologout?logout_timer=${newLogoutTime}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((response) => {
-          setCurrentLogoutTime(newLogoutTime)
-          ModalHandlerChangeLogoutTime()
-          setNewLogoutTime("")
-          setShowErrorNewLogoutTime(false)
-        });
+    if (newLogoutTime !== "") {
+
+      let duration = parseInt(newLogoutTime)
+
+      if(duration <= 60 && duration > 0){
+
+        return await fetch(
+          `${process.env.REACT_APP_production_address}/autologout?logout_timer=${newLogoutTime}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((response) => {
+            setCurrentLogoutTime(newLogoutTime)
+            window.sessionStorage.setItem("logoutTime", newLogoutTime)
+            ModalHandlerChangeLogoutTime()
+            setNewLogoutTime("")
+            setShowErrorNewLogoutTime(false)
+          });
+
+      }
+      else {
+        setShowErrorNewLogoutTime(true)
+      }
+     
     }
     else {
       setShowErrorNewLogoutTime(true)
