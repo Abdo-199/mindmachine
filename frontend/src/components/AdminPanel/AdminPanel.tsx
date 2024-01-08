@@ -73,7 +73,6 @@ const AdminPanel = () => {
       .then((res) => res.json())
       .then((response) => {
         setCurrentLogoutTime(response)
-        window.sessionStorage.setItem("logoutTime", response)
       });
   };
 
@@ -87,7 +86,7 @@ const AdminPanel = () => {
 
   const API_SetLogoutTime = async () => {
 
-    if (newLogoutTime !== "") {
+    if (newLogoutTime != "") {
       return await fetch(
         `${process.env.REACT_APP_production_address}/autologout?logout_timer=${newLogoutTime}`,
         {
