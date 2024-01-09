@@ -44,12 +44,11 @@ class API:
 
             if conn.bind():
                 is_admin = self.DatabaseHandler.check_for_Admin(user)
+                self.DatabaseHandler.update_last_login(request.username)
                 if is_admin:
-                    self.DatabaseHandler.update_last_login(request.username)
                     self.logger.info(f"User {request.username} logged in as admin")
                     return LoginResponseModel(isAuthenticated=True, isAdmin=True)
                 else:
-                    self.DatabaseHandler.update_last_login(request.username)
                     self.logger.info(f"User {request.username} logged in as user")
                     return LoginResponseModel(isAuthenticated=True, isAdmin=False)
                        
