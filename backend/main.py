@@ -1,9 +1,30 @@
 from api import API
 from fastapi.middleware.cors import CORSMiddleware
 import logHandler
+from databaseHandler import DatabaseHandler
+import config
+from Neural_Search.Qdrant import Qdrant
+from fileSystemHandler import FileSystemHandler
+from routes.users import UserAPI, user_router
+from routes.admin import AdminAPI, admin_router
+from routes.auth import AuthAPI,auth_router
 
-api = API()
-app = api.app
+# api = API()
+# app = api.app
+from fastapi import FastAPI
+
+app = FastAPI(root_path="/api")
+qdClient = Qdrant()
+databaseHandler = DatabaseHandler(config.data_directory, config.database_name)
+file_system_handler = FileSystemHandler(qdClient)
+api_logger = logHandler.LogHandler(name="API").get_logger()
+
+auth_mng = AuthAPI(databaseHandler)
+user_mng = UserAPI(qdClient,file_system_handler, databaseHandler)
+admin_mng = AdminAPI(file_system_handler, databaseHandler)
+app.include_router(auth_router)
+app.include_router(user_router)
+app.include_router(admin_router)
 
 origins = ["*"]
 app.add_middleware(
