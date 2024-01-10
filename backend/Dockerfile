@@ -28,4 +28,4 @@ EXPOSE 8000
 ENV NAME World
 
 # Run the Python script to start the app
-CMD ["python", "main.py"]
+CMD python generate_secret.py && python main.py

@@ -17,8 +17,6 @@ app = FastAPI(root_path="/api")
 qdClient = Qdrant()
 databaseHandler = DatabaseHandler(config.data_directory, config.database_name)
 file_system_handler = FileSystemHandler(qdClient)
-api_logger = logHandler.LogHandler(name="API").get_logger()
-
 auth_mng = AuthAPI(databaseHandler)
 user_mng = UserAPI(qdClient,file_system_handler, databaseHandler)
 admin_mng = AdminAPI(file_system_handler, databaseHandler)

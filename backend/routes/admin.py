@@ -8,7 +8,7 @@ from statisticsHandler import StatisticsHandler
 from starlette import status
 from datetime import datetime
 
-admin_router = APIRouter(prefix='/admin', tags=['admin'])
+admin_router = APIRouter(tags=['admin'])
 
 class AdminAPI():
     def __init__(self, file_system_handler: FileSystemHandler, databaseHandler: DatabaseHandler):
@@ -38,7 +38,8 @@ class AdminAPI():
 
         #get used disk space
         @admin_router.get("/diskusage", status_code=status.HTTP_200_OK)
-        async def get_disk_usage():
+        async def get_disk_usage(admin: UserAPI.user_dependency):
+            self.check_admin_authorization(admin)
             disk_usage = self.DatabaseHandler.get_admin_settings().max_disk_space
             disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
             return disk_usage

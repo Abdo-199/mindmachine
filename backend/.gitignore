@@ -53,6 +53,7 @@ docs/_build/
 /user
 /idea
 /.idea
+.env
 
 # Binary files
 *.DS_Store

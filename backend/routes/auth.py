@@ -7,7 +7,7 @@ from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 import config
 from ldap3 import Server, Connection
 from databaseHandler import DatabaseHandler
-
+import os
 
 
 class Token(BaseModel):
@@ -21,7 +21,7 @@ class AuthAPI:
         self.databaseHandler = databaseHandler
         self.setup_routes()
     
-    __SECRET_KEY = 'M/DMRk2MTErpMl6PQayoya7KrGKcks2yytzXeDOvJ8rEGUDKwf9qimZ1+j5w831DKZaew0WoZP76ol8lvJjAvQ=='
+    __SECRET_KEY = os.getenv("JWT_SECRET_KEY", "fallback_secret")
     __ALGORITHM = 'HS256'
     __oath2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')
 
