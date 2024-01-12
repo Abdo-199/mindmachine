@@ -55,7 +55,7 @@ def pdf_to_docVec(path, encoder, chunk_length = 0, remove_stop_words=False, over
   """
   if chunk_length == 0:
     chunk_length = encoder.max_seq_length
-  doc = pdf_to_text(path, chunk_length, remove_stop_words, overlap)
+  doc = pdf_to_text(path, chunk_length, overlap)
   paras_vecs = []
   for idp, para in enumerate(doc['paragraphs']):
     paras_vecs.append({"paragraph":para,"vec":encoder.encode(para).tolist()})
