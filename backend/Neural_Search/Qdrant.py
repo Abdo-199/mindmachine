@@ -53,9 +53,9 @@ class Qdrant:
     """
     try:
       vectors_count = self.qdrant_client.get_collection(userName).vectors_count
-      print(f"user: {userName} exists, and has {vectors_count} vectors")
+      self.logger.debug(f"user: {userName} exists, and has {vectors_count} vectors")
     except:
-      print(f"user doesn't exist, creating a new collection with the user name: {userName}")
+      self.logger.debug(f"user doesn't exist, creating a new collection with the user name: {userName}")
       self.qdrant_client.create_collection(
         collection_name=userName,
         vectors_config=models.VectorParams(
@@ -80,6 +80,7 @@ class Qdrant:
     vectors_count = self.check_user(userName)
 
     for para in docVec.paras_vecs:
+      self.logger.debug(f"Vector Count: {vectors_count} Paragraph: {para['paragraph']}")
       self.qdrant_client.upload_records(
       collection_name=userName,
       records=[
@@ -100,6 +101,7 @@ class Qdrant:
     Returns:
     list: List of search hits.
     """
+    self.logger.debug(f"Searching for {search_text} in {collection_name}")
     return self.qdrant_client.search(
       collection_name= collection_name,
       query_vector= self.encoder.encode(search_text).tolist(),
@@ -116,11 +118,12 @@ class Qdrant:
     Returns:
     str: Name of the vector with the highest score.
     """
+    self.logger.debug(f"Getting scores from search hits")
     max_score_value = -1
     max_score_value_indoc = None
     score_values_indoc = []
     for hit in hits:
-        # print(hit.payload, "score:", hit.score)
+        self.logger.debug(f"Payload: {hit.payload} Score: {hit.score}")
         score_values_indoc.append(hit.payload)
         if hit.score > max_score_value:
             max_score_value = hit.score
@@ -129,7 +132,7 @@ class Qdrant:
     if max_score_value_indoc is not None:
         return score_values_indoc
     else:
-        print("No vector")
+        self.logger.debug(f"No vector")
         return "none"
 
   def search(self, collection_name, search_text):
@@ -142,9 +145,9 @@ class Qdrant:
 
     Returns:
     a list of the most relevant 4 docs. And the most 4 relevant paragraphs by the most relevant doc.
-    dict: {"relevant_docs": relevant_doc, "relevant_paragraph": relevant_para}.
+    dict: {"doc_name": relevant_doc, "passage": relevant_para, "sentence": the most relevant sentence in the passage}.
     """
-
+    self.logger.debug(f"Searching for {search_text} in {collection_name}")
     docs_hits = self.get_hits(collection_name, search_text)
     relevant_pasages = self.get_scores(docs_hits)
     for ans in relevant_pasages:
@@ -154,36 +157,82 @@ class Qdrant:
     return relevant_pasages[:4]
   
   def delete_doc(self, collection_name, doc_name):
+    """
+      Delete a document from the Qdrant collection.
+
+      Parameters:
+      - collection_name (str): Name of the Qdrant collection.
+      - doc_name (str): Name of the document to be deleted.
+
+      Returns:
+      None
+    """
+    self.logger.debug(f"Deleting {doc_name} from {collection_name}")
     self.qdrant_client.delete(
     collection_name=collection_name,
     points_selector=models.Filter(
       should=[
           models.FieldCondition(
-              key="name",
+              key="doc_name",
               match=models.MatchValue(value=doc_name),
-          ),
-          models.FieldCondition(
-              key="source_doc",
-              match=models.MatchValue(value=doc_name),
-          ),
+          )
       ],
     ),
     )
 
   def revectorize_all(self):
+    """
+    deletes all the collections and revectorizes all the available pdsf in the local file system
+    """
+    self.logger.debug(f"Revectorizing all documents")
     fileHandler = FileSystemHandler(self)
     all_users = [d for d in os.listdir(config.document_directory) if os.path.isdir(os.path.join(config.document_directory, d))]
     for user in all_users:
-        print(f"deleting {user}")
+        self.logger.debug(f"Deleting {user}")
         self.qdrant_client.delete_collection(user)
         files = fileHandler.get_fs_for_user(user)
         for file in files:
-            print(os.path.join(config.document_directory, user, file['file_name']))
+            self.logger.debug(f"Encoding and uploading {os.path.join(config.document_directory, user, file['file_name'])}")
             file_path = os.path.join(config.document_directory, user, file['file_name'])
             try:
               fileHandler.encode_and_upload(file_path, user)
             except:
-               print(f"no text recognized in {file_path}")
+               self.logger.debug(f"No text recognized in {file_path}")
+
+  def rename_doc(self, collection_name, doc_name, new_name):
+      """
+        Rename a document in the Qdrant collection.
+
+        Parameters:
+        - collection_name (str): Name of the Qdrant collection.
+        - doc_name (str): Current name of the document.
+        - new_name (str): New name for the document.
+
+        Returns:
+        bool: True if the renaming is successful, False otherwise.
+      """
+      self.logger.debug(f"Renaming {doc_name} to {new_name} in {collection_name}")
+      self.rename_vec(collection_name, doc_name, new_name, "doc_name")
+
+  def rename_vec(self, collection_name, doc_name, new_name, key):
+      """
+        looks for all vectors with a specific key and changes the value of this key in the payload
+      """
+      self.qdrant_client.set_payload(
+      collection_name=collection_name,
+      payload={
+          key: new_name,
+      },
+      points=models.Filter(
+        must=[
+            models.FieldCondition(
+                key=key,
+                match=models.MatchValue(value=doc_name),
+            ),
+        ],
+      ),
+      )
+      return True
 
   def get_full_sentence(self, input_string, start_index, end_index):
     
