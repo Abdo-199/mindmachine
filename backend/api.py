@@ -20,7 +20,8 @@ class API:
         self.DatabaseHandler = DatabaseHandler(config.data_directory, config.database_name)
         self.stats = StatisticsHandler(self.qdClient)
         self.file_system_handler = FileSystemHandler(self.qdClient)
-        self.logger = logHandler.LogHandler(name="API").get_logger()
+        self.api_logging_handler = logHandler.LogHandler(name="API")
+        self.logger = self.api_logging_handler.get_logger()
         self.setup_routes()
         self.app.include_router(self.router)
 
@@ -45,11 +46,11 @@ class API:
             if conn.bind():
                 is_admin = self.DatabaseHandler.check_for_Admin(user)
                 if is_admin:
-                    self.DatabaseHandler.update_last_login(username)
+                    self.DatabaseHandler.update_last_login(request.username)
                     self.logger.info(f"User {request.username} logged in as admin")
                     return LoginResponseModel(isAuthenticated=True, isAdmin=True)
                 else:
-                    self.DatabaseHandler.update_last_login(username)
+                    self.DatabaseHandler.update_last_login(request.username)
                     self.logger.info(f"User {request.username} logged in as user")
                     return LoginResponseModel(isAuthenticated=True, isAdmin=False)
                        
@@ -131,9 +132,10 @@ class API:
         
         #gets the storage capacity of all users
         @self.router.get("/diskusage/user")
-        async def get_disk_usage():
+        async def get_disk_usage(inBytes: str):
             disk_usage = self.DatabaseHandler.get_admin_settings().user_max_disk_space
-            disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
+            if inBytes == "false":
+                disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
             return disk_usage
         
         #change disk space limit for user
@@ -148,13 +150,12 @@ class API:
             total_size = self.file_system_handler.get_total_file_size_for_all_users()
             return total_size
         
-
-        #get storage for one specific user
+        #get storage for one specific user in bytes
         @self.router.get("/storage_usage/{user_id}")
         async def get_storage_info(user_id):
-            total_size = self.file_system_handler.get_file_size_for_user(user_id)
+            total_size = self.file_system_handler.get_file_size_for_user(user_id, True)
             return total_size
-
+        
         # get statistics
         @self.router.get("/statistics")
         async def get_statistics():
@@ -192,8 +193,8 @@ class API:
         
         @self.router.get("/logfile")
         async def get_log_file():
-            return FileResponse(path=self.logger.get_log_file(), filename="log.txt", media_type="text/plain")
+            return FileResponse(path=self.api_logging_handler.get_log_file(), filename="log.txt", media_type="text/plain")
         
         @self.router.get("/logs")
         async def get_log_json():
-            return self.logger.get_log_json()
+            return self.api_logging_handler.get_log_json()
