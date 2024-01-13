@@ -10,17 +10,6 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-
-// test log lines because api route .../logs does not work :'(
-const logs_raw = [
-  "2024-01-05 15:50:33,715 - INFO - main - [<module>] - Application invoked",
-  "2024-01-05 15:50:33,716 - INFO - main - [<module>] - Starting FastAPI server",
-  "2024-01-05 15:50:59,135 - INFO - main - [<module>] - Application invoked",
-  "2024-01-05 15:50:59,136 - INFO - main - [<module>] - Starting FastAPI server",
-];
-
-let logs: LogProps[] = [];
-
 interface LogProps {
   date: string;
   name: string;
@@ -29,37 +18,25 @@ interface LogProps {
   message: string;
 }
 
-logs_raw.map((line) => {
-  const splittedLine = line.split(" - ");
-  logs.push({
-    date: splittedLine[0],
-    name: splittedLine[1],
-    level: splittedLine[2],
-    function: splittedLine[3],
-    message: splittedLine[4],
-  });
-});
-
 const LogWindow = () => {
   // list of all logs
   const [logsList, SetLogsList] = useState<LogProps[]>([]);
 
-  // gets all the logs from backend -- does not work now
+  // get all logs from backend
   const API_GetLogs = async () => {
-    const url = `${process.env.REACT_APP_localhost_address}/logs/`;
+    const url = `${process.env.REACT_APP_production_address}/logs`;
     console.log(url);
     return await fetch(url, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((response) => {
-        console.log(response);
+        SetLogsList(response);
       });
   };
 
   useEffect(() => {
-    // API_GetLogs();
-    SetLogsList(logs);
+    API_GetLogs();
   }, []);
 
   return (
