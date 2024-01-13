@@ -47,7 +47,8 @@ const LogWindow = () => {
           minWidth: "650px",
           marginLeft: "100px",
           marginRight: "100px",
-          marginTop: "20px",
+          marginTop: "60px",
+          marginBottom: "60px"
         }}
       >
         <TableContainer component={Paper}>
@@ -57,16 +58,16 @@ const LogWindow = () => {
                 <TableCell sx={{ width: "20%" }} align="left">
                   date
                 </TableCell>
-                <TableCell align="left">name</TableCell>
-                <TableCell align="left">level</TableCell>
-                <TableCell align="left">function</TableCell>
-                <TableCell align="left">message</TableCell>
+                <TableCell align="left">Name</TableCell>
+                <TableCell align="left">Level</TableCell>
+                <TableCell align="left">Function</TableCell>
+                <TableCell align="left">Message</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {logsList.map((line: LogProps) => (
                 <TableRow>
-                  <TableCell align="left">{line.date}</TableCell>
+                  <TableCell align="left">{line.date.slice(0, -4)}</TableCell>
                   <TableCell align="left">{line.name}</TableCell>
                   <TableCell align="left">{line.level}</TableCell>
                   <TableCell align="left">{line.function}</TableCell>
