@@ -3,7 +3,7 @@ from fastapi.responses import FileResponse
 from Neural_Search.Qdrant import Qdrant
 from databaseHandler import DatabaseHandler
 from fileSystemHandler import FileSystemHandler
-from logHandler import LogHandler
+import logHandler
 from routes.users import UserAPI
 from statisticsHandler import StatisticsHandler
 from starlette import status
@@ -15,7 +15,8 @@ class AdminAPI():
     def __init__(self, file_system_handler: FileSystemHandler, databaseHandler: DatabaseHandler):
         self.DatabaseHandler = databaseHandler
         self.file_system_handler = file_system_handler
-        self.logger = LogHandler(name="API").get_logger()
+        self.api_logging_handler = logHandler.LogHandler(name="API")
+        self.logger = self.api_logging_handler.get_logger()
         self.setup_admin_routes()
         
 
@@ -104,12 +105,12 @@ class AdminAPI():
         @admin_router.get("/logfile", status_code=status.HTTP_200_OK)
         async def get_log_file(admin: UserAPI.user_dependency):
             self.check_admin_authorization(admin)
-            return FileResponse(path=self.logger.get_log_file(), filename="log.txt", media_type="text/plain")
+            return FileResponse(path=self.api_logging_handler.get_log_file(), filename="log.txt", media_type="text/plain")
         
         @admin_router.get("/logs", status_code=status.HTTP_200_OK)
         async def get_log_json(admin: UserAPI.user_dependency):
             self.check_admin_authorization(admin)
-            return self.logger.get_log_json()
+            return self.api_logging_handler.get_log_json()
 
         
 

@@ -29,9 +29,13 @@ const LogWindow = () => {
 
   // get all logs from backend
   const API_GetLogs = async () => {
-    const url = `${process.env.REACT_APP_production_address}/logs`;
+    const url = `${process.env.REACT_APP_localhost_address}/logs`;
     return await fetch(url, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      },
     })
       .then((res) => res.json())
       .then((response) => {
@@ -44,9 +48,13 @@ const LogWindow = () => {
 
   // get logfile from backend
   const API_GetLogFile = async () => {
-    const url = `${process.env.REACT_APP_production_address}/logfile`;
+    const url = `${process.env.REACT_APP_localhost_address}/logfile`;
     return await fetch(url, {
-      method: "GET"
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      },
     }).then(async (res) => {
       const blob = await res.blob();
       const downloadUrl = URL.createObjectURL(blob);
