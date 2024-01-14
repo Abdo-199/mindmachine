@@ -52,13 +52,7 @@ class AdminAPI():
             self.DatabaseHandler.update_admin_settings(max_disk_space = disk_usage)
         
           
-        #gets the storage capacity of all users
-        @admin_router.get("/diskusage/user", status_code=status.HTTP_200_OK)
-        async def get_disk_usage(admin: UserAPI.user_dependency):
-            self.check_admin_authorization(admin)
-            disk_usage = self.DatabaseHandler.get_admin_settings().user_max_disk_space
-            disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
-            return disk_usage
+        
         
         #change disk space limit for user
         @admin_router.put("/diskusage/user", status_code=status.HTTP_204_NO_CONTENT)
@@ -101,15 +95,6 @@ class AdminAPI():
             self.DatabaseHandler.update_admin_settings(logout_timer = logout_timer)
             return True
         
-        #get search history of user
-        @admin_router.get("/searchhistory/{user_id}", status_code=status.HTTP_200_OK)
-        async def get_search_history(admin: UserAPI.user_dependency, user_id):
-            self.check_admin_authorization(admin)
-            raw_search_history = self.DatabaseHandler.get_search_history(user_id)
-            search_history = []
-            for search in raw_search_history:
-                search_history.append({'query': search.search_query, 'date': search.timestamp})
-            return search_history
         
         @admin_router.get("/getnumberofaskedquestions", status_code=status.HTTP_200_OK)
         async def get_number_of_asked_questions(admin: UserAPI.user_dependency, given_timestamp:datetime = datetime(2000, 1, 1)):
