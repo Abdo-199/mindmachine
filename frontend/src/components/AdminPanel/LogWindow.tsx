@@ -1,5 +1,6 @@
 import {
   Card,
+  Input,
   Paper,
   Table,
   TableBody,
@@ -19,8 +20,11 @@ interface LogProps {
 }
 
 const LogWindow = () => {
-  // list of all logs
+  // list of all logs that can be filtered
   const [logsList, SetLogsList] = useState<LogProps[]>([]);
+
+  // list of original data
+  const [originalLogsList, SetOriginalLogsList] = useState<LogProps[]>([]);
 
   // get all logs from backend
   const API_GetLogs = async () => {
@@ -31,6 +35,9 @@ const LogWindow = () => {
     })
       .then((res) => res.json())
       .then((response) => {
+        // list that will not be changed when filterd
+        SetOriginalLogsList(response);
+        // list that can be filtered
         SetLogsList(response);
       });
   };
@@ -38,6 +45,18 @@ const LogWindow = () => {
   useEffect(() => {
     API_GetLogs();
   }, []);
+
+  // filter the log table in Date, Event Type and User Action
+  const requestSearch = (searched: string) => {
+    const displayData = originalLogsList.filter((row) => {
+      return (
+        row.date.toLowerCase().includes(searched.toLowerCase()) ||
+        row.name.toLowerCase().includes(searched.toLowerCase()) ||
+        row.message.toLowerCase().includes(searched.toLowerCase())
+      );
+    });
+    SetLogsList(displayData);
+  };
 
   return (
     <div>
@@ -48,15 +67,25 @@ const LogWindow = () => {
           marginLeft: "100px",
           marginRight: "100px",
           marginTop: "60px",
-          marginBottom: "60px"
+          marginBottom: "60px",
         }}
       >
+
+        <div style={{ display: "flex" }}>
+          <Input
+            style={{ padding: "10px" }}
+            placeholder="search Date, Event Type and User Action"
+            onChange={(e) => requestSearch(e.target.value)}
+            fullWidth
+          ></Input>
+        </div>
+
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: "100%" }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell sx={{ width: "20%" }} align="left">
-                  date
+                  Date
                 </TableCell>
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="left">Level</TableCell>
