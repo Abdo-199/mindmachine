@@ -9,6 +9,8 @@ from ldap3 import Server, Connection
 from databaseHandler import DatabaseHandler
 import os
 
+from logHandler import LogHandler
+
 
 class Token(BaseModel):
     access_token: str
@@ -20,6 +22,7 @@ class AuthAPI:
     def __init__(self, databaseHandler: DatabaseHandler):
         self.databaseHandler = databaseHandler
         self.setup_routes()
+        self.logger = LogHandler(name="API").get_logger()
     
     __SECRET_KEY = os.getenv("JWT_SECRET_KEY", "fallback_secret")
     __ALGORITHM = 'HS256'
@@ -40,6 +43,13 @@ class AuthAPI:
         if user is None:
             self.databaseHandler.add_user(user_id, False)
             user = self.databaseHandler.get_user(user_id)
+        is_admin = self.databaseHandler.check_for_Admin(user)
+        if is_admin:
+            self.databaseHandler.update_last_login(user_id)
+            self.logger.info(f"User {user_id} logged in as admin")
+        else:
+            self.databaseHandler.update_last_login(user_id)
+            self.logger.info(f"User {user_id} logged in as user")
         return user
 
     def create_access_token(self, user_id: str, is_admin: bool, expires_delta: timedelta):

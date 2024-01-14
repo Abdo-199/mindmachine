@@ -3,6 +3,7 @@ from fastapi.responses import FileResponse
 from Neural_Search.Qdrant import Qdrant
 from databaseHandler import DatabaseHandler
 from fileSystemHandler import FileSystemHandler
+from logHandler import LogHandler
 from routes.users import UserAPI
 from statisticsHandler import StatisticsHandler
 from starlette import status
@@ -14,7 +15,7 @@ class AdminAPI():
     def __init__(self, file_system_handler: FileSystemHandler, databaseHandler: DatabaseHandler):
         self.DatabaseHandler = databaseHandler
         self.file_system_handler = file_system_handler
-        
+        self.logger = LogHandler(name="API").get_logger()
         self.setup_admin_routes()
         
 
