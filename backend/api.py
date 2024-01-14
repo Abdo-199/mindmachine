@@ -20,7 +20,8 @@ class API:
         self.DatabaseHandler = DatabaseHandler(config.data_directory, config.database_name)
         self.stats = StatisticsHandler(self.qdClient)
         self.file_system_handler = FileSystemHandler(self.qdClient)
-        self.logger = logHandler.LogHandler(name="API").get_logger()
+        self.api_logging_handler = logHandler.LogHandler(name="API")
+        self.logger = self.api_logging_handler.get_logger()
         self.setup_routes()
         self.app.include_router(self.router)
 
@@ -192,8 +193,8 @@ class API:
         
         @self.router.get("/logfile")
         async def get_log_file():
-            return FileResponse(path=self.logger.get_log_file(), filename="log.txt", media_type="text/plain")
+            return FileResponse(path=self.api_logging_handler.get_log_file(), filename="log.txt", media_type="text/plain")
         
         @self.router.get("/logs")
         async def get_log_json():
-            return self.logger.get_log_json()
+            return self.api_logging_handler.get_log_json()
