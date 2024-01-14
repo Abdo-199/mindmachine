@@ -1,4 +1,5 @@
 import {
+  Button,
   Card,
   Input,
   Paper,
@@ -29,7 +30,6 @@ const LogWindow = () => {
   // get all logs from backend
   const API_GetLogs = async () => {
     const url = `${process.env.REACT_APP_production_address}/logs`;
-    console.log(url);
     return await fetch(url, {
       method: "GET",
     })
@@ -40,6 +40,22 @@ const LogWindow = () => {
         // list that can be filtered
         SetLogsList(response);
       });
+  };
+
+  // get logfile from backend
+  const API_GetLogFile = async () => {
+    const url = `${process.env.REACT_APP_production_address}/logfile`;
+    return await fetch(url, {
+      method: "GET"
+    }).then(async (res) => {
+      const blob = await res.blob();
+      const downloadUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = downloadUrl;
+      link.setAttribute("download", "log.txt");
+      document.body.appendChild(link);
+      link.click();
+    });
   };
 
   useEffect(() => {
@@ -61,24 +77,44 @@ const LogWindow = () => {
   return (
     <div>
       <h1 className="header-center">Log Files</h1>
+      <h4 style={{ marginLeft: "100px", marginTop: "30px" }}>Downloads</h4>
+      <Card
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          columnGap: "10px",
+          marginLeft: "100px",
+          marginRight: "100px",
+          padding: "15px",
+          minWidth: "500px",
+        }}
+      >
+        <Button
+          style={{ color: "black", backgroundColor: "#83b600" }}
+          onClick={() => API_GetLogFile()}
+        >
+          Download Log File
+        </Button>
+      </Card>
+
+      <h4 style={{ marginLeft: "100px", marginTop: "30px" }}>Filter Options</h4>
+
       <Card
         style={{
           minWidth: "650px",
           marginLeft: "100px",
           marginRight: "100px",
-          marginTop: "60px",
+          marginTop: "10px",
           marginBottom: "60px",
         }}
       >
-
-        <div style={{ display: "flex" }}>
-          <Input
-            style={{ padding: "10px" }}
-            placeholder="search Date, Event Type and User Action"
-            onChange={(e) => requestSearch(e.target.value)}
-            fullWidth
-          ></Input>
-        </div>
+        <Input
+          style={{ padding: "10px" }}
+          placeholder="search Date, Event Type and User Action"
+          onChange={(e) => requestSearch(e.target.value)}
+          fullWidth
+        ></Input>
 
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: "100%" }} aria-label="simple table">
