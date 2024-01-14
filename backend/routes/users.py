@@ -106,6 +106,21 @@ class UserAPI:
             self.logger.info(f"Revectorized all documents")
             return True
         
+        #get storage for one specific user
+        @user_router.get("/current_storage_usage", status_code=status.HTTP_200_OK)
+        async def get_storage_info(user: UserAPI.user_dependency):
+            self.check_user_authentication(user)
+            total_size = self.file_system_handler.get_file_size_for_user(user.get('user_id'))
+            return total_size
+        
+        #gets the storage capacity of all users
+        @user_router.get("/diskusage/user", status_code=status.HTTP_200_OK)
+        async def get_disk_usage(user: UserAPI.user_dependency):
+            self.check_user_authentication(user)
+            disk_usage = self.DatabaseHandler.get_admin_settings().user_max_disk_space
+            disk_usage = self.file_system_handler.convert_bytes_to_gigabyte(disk_usage)
+            return disk_usage
+
         # get and set auto-logout time
         @user_router.get("/autologout", status_code=status.HTTP_200_OK)
         async def get_auto_logout(user: UserAPI.user_dependency):
