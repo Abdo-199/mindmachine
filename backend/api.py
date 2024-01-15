@@ -1,7 +1,6 @@
 from fastapi import FastAPI, APIRouter, File, UploadFile, Form, HTTPException
 from fastapi.responses import FileResponse
 from fileSystemHandler import FileSystemHandler
-from statisticsHandler import StatisticsHandler
 from ldap3 import Server, Connection
 from Neural_Search.Qdrant import Qdrant
 from dataDefinitions import *
@@ -12,13 +11,42 @@ import config
 import logHandler
 
 class API:
+    """
+    Represents the API class.
+
+    This class sets up the FastAPI instance, routers, database handler, statistics handler,
+    file system handler, logging handler, and routes for the API.
+
+    Attributes:
+        app (FastAPI): The FastAPI instance.
+        router (APIRouter): The APIRouter instance.
+        qdClient (Qdrant): The Qdrant client.
+        DatabaseHandler (DatabaseHandler): The database handler.
+        file_system_handler (FileSystemHandler): The file system handler.
+        api_logging_handler (logHandler.LogHandler): The logging handler.
+        logger (Logger): The logger instance.
+
+    Methods:
+        setup_routes: Sets up the routes for the API.
+    """
 
     def __init__(self) -> None:
+        """
+        Initializes the API class.
+
+        This method sets up the FastAPI instance, routers, database handler, statistics handler,
+        file system handler, logging handler, and routes for the API.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.app = FastAPI(root_path="/api")
         self.router = APIRouter()
         self.qdClient = Qdrant()
         self.DatabaseHandler = DatabaseHandler(config.data_directory, config.database_name)
-        self.stats = StatisticsHandler(self.qdClient)
         self.file_system_handler = FileSystemHandler(self.qdClient)
         self.api_logging_handler = logHandler.LogHandler(name="API")
         self.logger = self.api_logging_handler.get_logger()
@@ -26,6 +54,15 @@ class API:
         self.app.include_router(self.router)
 
     def setup_routes(self):
+        """
+        Sets up the routes for the API.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
 
         #validate HTW Credentials
         @self.router.post("/login")

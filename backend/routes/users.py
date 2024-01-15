@@ -13,7 +13,25 @@ from logHandler import LogHandler
 user_router = APIRouter(tags=['user'])
 
 class UserAPI:
+    """
+    Represents the User API class.
+
+    This class handles the routes and functionality related to user operations.
+
+    Attributes:
+        qdClient (Qdrant): The Qdrant client.
+        file_system_handler (FileSystemHandler): The file system handler.
+        databaseHandler (DatabaseHandler): The database handler.
+    """
     def __init__(self, qdClient: Qdrant, file_system_handler: FileSystemHandler ,databaseHandler: DatabaseHandler):
+        """
+        Initializes the Users API class.
+
+        Args:
+            qdClient (Qdrant): The Qdrant client.
+            file_system_handler (FileSystemHandler): The file system handler.
+            databaseHandler (DatabaseHandler): The database handler.
+        """
         self.qdClient = qdClient
         self.DatabaseHandler = databaseHandler
         self.logger = LogHandler(name="API").get_logger()
@@ -40,6 +58,18 @@ class UserAPI:
             )
 
     def setup_routes(self):
+        """
+        Sets up the routes for the User API.
+
+        This method defines various routes for handling user-related operations such as searching, uploading documents,
+        downloading documents, deleting documents, retrieving file structure, editing document names, revectorizing documents,
+        retrieving storage information, retrieving search history, retrieving disk usage, and retrieving auto-logout settings.
+
+        Each route is defined as an asynchronous function using the FastAPI framework's decorator syntax.
+
+        Returns:
+            None
+        """
         @user_router.get("/search", status_code=status.HTTP_200_OK)
         async def search(user: UserAPI.user_dependency, query: str):
             self.check_user_authentication(user)

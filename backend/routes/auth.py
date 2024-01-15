@@ -11,8 +11,10 @@ import os
 
 from logHandler import LogHandler
 
-
 class Token(BaseModel):
+    """
+    Represents an access token.
+    """
     access_token: str
     token_type: str
     is_admin: bool
@@ -20,7 +22,19 @@ class Token(BaseModel):
 auth_router = APIRouter(prefix='/auth',tags=['auth'])
 
 class AuthAPI:
+    """
+    Represents the authentication API.
+    """
     def __init__(self, databaseHandler: DatabaseHandler):
+        """
+        Initializes an instance of AuthAPI.
+
+        Parameters:
+        - databaseHandler (DatabaseHandler): The database handler object.
+
+        Returns:
+        - None
+        """
         self.databaseHandler = databaseHandler
         self.setup_routes()
         self.logger = LogHandler(name="API").get_logger()
@@ -30,6 +44,16 @@ class AuthAPI:
     __oath2_bearer = OAuth2PasswordBearer(tokenUrl='auth/token')
 
     def authenticate_user(self, user_id: str, password: str):
+        """
+        Authenticates a user by connecting to an LDAP server and checking the provided credentials.
+
+        Args:
+            user_id (str): The user ID or username.
+            password (str): The user's password.
+
+        Returns:
+            User: The authenticated user object if the credentials are valid, else False.
+        """
         
         ldap_server = Server(config.ldap_server)
         base_dn = config.base_dn
@@ -48,12 +72,35 @@ class AuthAPI:
         return user
 
     def create_access_token(self, user_id: str, is_admin: bool, expires_delta: timedelta):
+        """
+        Creates an access token for the given user.
+
+        Args:
+            user_id (str): The ID of the user.
+            is_admin (bool): Indicates whether the user is an admin or not.
+            expires_delta (timedelta): The expiration time for the access token.
+
+        Returns:
+            str: The generated access token.
+        """
         encode = {'sub': user_id, 'is_admin': is_admin}
         expires = datetime.utcnow() + expires_delta
         encode.update({'exp': expires})
         return jwt.encode(encode, AuthAPI.__SECRET_KEY, AuthAPI.__ALGORITHM)
 
     async def get_current_user(token: Annotated[str, Depends(__oath2_bearer)]):
+        """
+        Retrieves the current user based on the provided token.
+
+        Args:
+            token (str): The JWT token used for authentication.
+
+        Returns:
+            dict: A dictionary containing the user_id and is_admin status of the current user.
+
+        Raises:
+            HTTPException: If the token is invalid or the credentials cannot be validated.
+        """
         try:
             payload = jwt.decode(token, AuthAPI.__SECRET_KEY, algorithms=[AuthAPI.__ALGORITHM])
             user_id: int = payload.get('sub')
@@ -68,6 +115,16 @@ class AuthAPI:
                                 detail='Could not validate credentials')
         
     def setup_routes(self):
+        """
+        Sets up the routes for authentication.
+
+        This method defines the route for generating access tokens
+        based on the provided credentials. It also logs the user's
+        login activity and updates the last login timestamp in the database.
+
+        Returns:
+            None
+        """
         @auth_router.post("/token", response_model=Token)
         async def get_access_token(form_data : Annotated[OAuth2PasswordRequestForm, Depends()]):
             user = self.authenticate_user(form_data.username, form_data.password)
