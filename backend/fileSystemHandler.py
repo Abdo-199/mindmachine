@@ -7,8 +7,23 @@ from datetime import datetime
 from Neural_Search.PdfReader import pdf_to_docVec
 
 class FileSystemHandler:
-    
+    """
+    A class that handles the file system operations.
+
+    Attributes:
+        document_directory (str): The directory where the documents are stored.
+        file_extension (str): The file extension of the documents.
+        qdClient (qdClient): The qdClient object used for interacting with the QD system.
+        logger (Logger): The logger object used for logging.
+    """
+
     def __init__(self, qdClient):
+        """
+        Initializes a new instance of the FileSystemHandler class.
+
+        Args:
+            qdClient (qdClient): The qdClient object used for interacting with the QD system.
+        """
         self.document_directory = config.document_directory
         self.file_extension = config.file_extension
         self.qdClient = qdClient
@@ -51,6 +66,19 @@ class FileSystemHandler:
         return status_return
     
     def encode_and_upload(self, file_path, user):
+        """
+        Encodes a PDF file to vectors and uploads them to a Qdrant index.
+
+        Args:
+            file_path (str): The path to the PDF file.
+            user (str): The user performing the operation.
+
+        Raises:
+            Exception: If no paragraphs are recognized in the PDF.
+
+        Returns:
+            None
+        """
         # saves ocr file to temp directory
         filename = os.path.basename(file_path)
         temp_file_path = config.temp_pdf_directory + filename
@@ -88,7 +116,15 @@ class FileSystemHandler:
             os.remove(temp_file_path)
 
     def get_fs_for_user(self, user_id):
+        """
+        Retrieves the file system information for a given user.
 
+        Args:
+            user_id (str): The ID of the user.
+
+        Returns:
+            list: A list of dictionaries containing file information, including file name, file size, and file upload date.
+        """
         file_name_size = []
         self.file_system_exist(user_id=user_id)
 
@@ -96,7 +132,6 @@ class FileSystemHandler:
         files = [file for file in os.listdir(self.document_directory + user_id) if file.endswith(self.file_extension)]
 
         for file_name in files:
-
             file_path = os.path.join(self.document_directory + user_id, file_name)
             file_size = os.path.getsize(file_path)
 
@@ -110,20 +145,36 @@ class FileSystemHandler:
         
         return file_name_size
     
-    def get_file_size_for_user(self, user_id, inBytes = False):
+    def get_file_size_for_user(self, user_id, inBytes=False):
+        """
+        Calculate the total file size for a given user.
+
+        Args:
+            user_id (str): The ID of the user.
+            inBytes (bool, optional): Specifies whether to return the file size in bytes or convert it to a human-readable format. Defaults to False.
+
+        Returns:
+            int or str: The total file size in bytes or a human-readable format, depending on the value of `inBytes`.
+        """
         total_file_size = 0
         files = [file for file in os.listdir(self.document_directory + user_id) if file.endswith(self.file_extension)]
         for file in files:
             file_path = os.path.join(self.document_directory + user_id, file)
             file_size = os.path.getsize(file_path)
-            total_file_size +=  file_size
+            total_file_size += file_size
 
-        if inBytes == False:
+        if not inBytes:
             total_file_size = self.convert_bytes(total_file_size)
 
         return total_file_size
     
     def get_total_file_size_for_all_users(self):
+        """
+        Calculates the total file size for all users in the document directory.
+
+        Returns:
+            str: The total file size in a human-readable format.
+        """
         total_file_size = 0
         for user_folder in os.listdir(self.document_directory):
             user_folder_path = os.path.join(self.document_directory, user_folder)
@@ -138,13 +189,18 @@ class FileSystemHandler:
 
         return total_file_size
 
-    
-                
-        
-    def save_document(self, user_id):
-        pass
 
     def delete_document(self, user_id, document_id):
+        """
+        Deletes a document for a specific user.
+
+        Args:
+            user_id (str): The ID of the user.
+            document_id (str): The ID of the document to be deleted.
+
+        Returns:
+            None
+        """
         self.logger.debug(f"Attempting to delete document {document_id} for user {user_id}")
         if os.path.exists(self.document_directory + user_id + "/" + document_id):
             os.remove(self.document_directory + user_id + "/" + document_id)
@@ -154,6 +210,17 @@ class FileSystemHandler:
             self.logger.warning(f"Document {document_id} not found for user {user_id}")
 
     def edit_document_name(self, user_id, old_name, new_name):
+        """
+        Renames a document for a specific user.
+
+        Args:
+            user_id (str): The ID of the user.
+            old_name (str): The current name of the document.
+            new_name (str): The new name to assign to the document.
+
+        Returns:
+            None
+        """
         self.logger.debug(f"Attempting to rename document from {old_name} to {new_name} for user {user_id}")
         old_file_full_path = self.document_directory + user_id + "/" + old_name
         new_file_full_path = self.document_directory + user_id + "/" + new_name
@@ -165,6 +232,16 @@ class FileSystemHandler:
             self.logger.warning(f"Document {old_name} not found for user {user_id}")
 
     def get_document_path(self, user_id, document_name):
+        """
+        Retrieves the path of a document for a given user.
+
+        Args:
+            user_id (str): The ID of the user.
+            document_name (str): The name of the document.
+
+        Returns:
+            str: The path of the document if it exists, False otherwise.
+        """
         self.logger.debug(f"Fetching document path for {document_name} for user {user_id}")
         path = self.document_directory + user_id + "/" + document_name
         if os.path.exists(path):
@@ -175,6 +252,15 @@ class FileSystemHandler:
             return False
 
     def file_system_exist(self, user_id):
+        """
+        Check if the file system exists for the given user ID.
+        
+        Args:
+            user_id (str): The ID of the user.
+        
+        Returns:
+            None
+        """
         self.logger.debug(f"Checking if file system exists for user {user_id}")
         path = self.document_directory + user_id
         if not os.path.exists(path):
@@ -182,6 +268,16 @@ class FileSystemHandler:
             self.logger.info(f"File system created for user {user_id}")
 
     def convert_bytes(self, byte_size):
+        """
+        Converts the given byte size into a human-readable format.
+
+        Args:
+            byte_size (int): The size in bytes to be converted.
+
+        Returns:
+            str: The converted size with the appropriate unit label.
+
+        """
         # Define the units and their respective labels
         units = config.units
 
@@ -195,7 +291,20 @@ class FileSystemHandler:
         return f"{byte_size:.2f} {units[unit_index]}"
 
     def convert_bytes_to_gigabyte(self, byte_size):
-    # Define the unit label
+        """
+        Converts the given byte size to gigabytes.
+
+        Args:
+            byte_size (int): The size in bytes to be converted.
+
+        Returns:
+            str: The converted size in gigabytes, formatted with up to two decimal places.
+
+        Example:
+            >>> convert_bytes_to_gigabyte(1073741824)
+            '1.00 GB'
+        """
+        # Define the unit label
         unit = 'GB'
 
         # Convert bytes to gigabytes
@@ -208,10 +317,19 @@ class FileSystemHandler:
         return f"{gigabytes:.2f} {unit}"
 
     def get_last_modified_date(self, file_path):
+        """
+        Get the last modified date of a file.
+
+        Args:
+            file_path (str): The path of the file.
+
+        Returns:
+            str: The formatted last modified date of the file.
+        """
         self.logger.debug(f"Getting last modified date for file: {file_path}")
         stat = os.stat(file_path)
         file_last_date =  datetime.fromtimestamp(stat.st_mtime)
         formatted_date = file_last_date.strftime(config.date_time_format)
 
         return formatted_date
-        
+    

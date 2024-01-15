@@ -12,15 +12,66 @@ MAX_SEARCH_HISTORY_PER_USER = 50  # Change as needed
 
 
 class DatabaseHandler:
+    """
+    A class that handles the database operations for the application.
+
+    Attributes:
+        logger: The logger object for logging messages.
+        database_directory: The directory where the database is stored.
+        engine: The database engine for connecting to the database.
+        Session: The session object for interacting with the database.
+
+    Methods:
+        __init__: Initializes the DatabaseHandler object.
+        inital_admin_settings: Initializes the admin settings.
+        create_connection: Creates a connection to the database.
+        check_for_Admin: Checks if a user is an admin.
+        check_for_user: Checks if a user exists.
+        add_user: Adds a new user to the database.
+        get_user: Retrieves a user from the database.
+        get_all_users: Retrieves all users from the database.
+        update_user: Updates a user in the database.
+        delete_user: Deletes a user from the database.
+        get_number_of_asked_questions: Retrieves the number of asked questions.
+        get_search_history: Retrieves the search history for a user.
+        log_search: Logs a search for a user.
+        get_admin_settings: Retrieves the admin settings.
+        update_admin_settings: Updates the admin settings.
+        update_last_login: Updates the last login time for a user.
+        get_active_users: Retrieves the number of active users.
+        get_inactive_users: Retrieves the number of inactive users.
+        test_admin_settings: Tests the admin settings functionality.
+    """
 
     def __init__(self, data_directory, database_name):
+        """
+        Initializes the DatabaseHandler object.
+
+        Args:
+            data_directory (str): The directory where the database will be stored.
+            database_name (str): The name of the database.
+
+        Returns:
+            None
+        """
         self.logger = logHandler.LogHandler(name="DatabaseHandler").get_logger()
         self.database_directory = os.path.join(data_directory, database_name)
-        self.create_conncetion()
+        self.create_connection()
         self.inital_admin_settings()
         #User.settings = relationship("UserSettings", back_populates="user", uselist=False)
 
     def inital_admin_settings(self):
+        """
+        Initializes the admin settings.
+
+        This method checks if the admin settings exist in the database. If not, it creates a new entry with default values.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+        """
         self.logger.debug("Initializing admin settings")
         session = self.Session()
         settings = self.get_admin_settings()
@@ -31,7 +82,15 @@ class DatabaseHandler:
             session.close()
         
 
-    def create_conncetion(self):
+    def create_connection(self):
+        """
+        Creates a database connection.
+
+        This method configures the database connection and creates the necessary tables if they don't exist.
+
+        Returns:
+            None
+        """
         self.logger.debug("Creating database connection")
         # Configure the database connection
         self.engine = create_engine(f'sqlite:///{self.database_directory}')
@@ -41,6 +100,15 @@ class DatabaseHandler:
     # CRUD operations using SQLAlchemy ORM
 
     def check_for_Admin(self, user):
+        """
+        Checks if the user is an admin.
+
+        Args:
+            user (User): The user object to check.
+
+        Returns:
+            bool: True if the user is an admin, False otherwise.
+        """
         self.logger.debug(f"Checking if user is admin: {user.user_id}")
         if user.is_admin:
             return True
@@ -48,6 +116,15 @@ class DatabaseHandler:
             return False
 
     def check_for_user(self, user_id):
+        """
+        Check if a user exists in the database.
+
+        Args:
+            user_id (int): The ID of the user to check.
+
+        Returns:
+            bool: True if the user exists, False otherwise.
+        """
         self.logger.debug(f"Checking if user exists: {user_id}")
         user = self.get_user(user_id)
         if user is None:
@@ -56,6 +133,16 @@ class DatabaseHandler:
             return True
 
     def add_user(self, user_id, is_admin):
+        """
+        Adds a new user to the database.
+
+        Args:
+            user_id (str): The ID of the user.
+            is_admin (bool): Indicates whether the user is an admin or not.
+
+        Returns:
+            bool: True if the user was successfully added, False if the user already exists.
+        """
         self.logger.info(f"Adding new user: {user_id}")
         does_user_exist = self.check_for_user(user_id)
         if does_user_exist:
@@ -68,6 +155,15 @@ class DatabaseHandler:
         session.close()
 
     def get_user(self, user_id):
+        """
+        Retrieve a user from the database based on the provided user ID.
+
+        Args:
+            user_id (int): The ID of the user to retrieve.
+
+        Returns:
+            User: The user object corresponding to the provided user ID, or None if no user is found.
+        """
         self.logger.debug(f"Getting user: {user_id}")
         session = self.Session()
         user = session.query(User).filter(User.user_id == user_id).first()
@@ -75,6 +171,12 @@ class DatabaseHandler:
         return user
 
     def get_all_users(self):
+        """
+        Retrieve all users from the database.
+
+        Returns:
+            list: A list of User objects representing all the users in the database.
+        """
         self.logger.debug(f"Getting all users")
         session = self.Session()
         users = session.query(User).all()
@@ -82,6 +184,16 @@ class DatabaseHandler:
         return users
 
     def update_user(self, user_id, is_admin=None):
+        """
+        Update the user's admin status.
+
+        Args:
+            user_id (int): The ID of the user to update.
+            is_admin (bool, optional): The new admin status of the user. Defaults to None.
+
+        Returns:
+            None
+        """
         self.logger.info(f"Updating user: {user_id}")
         session = self.Session()
         user = session.query(User).filter(User.user_id == user_id).first()
@@ -92,6 +204,15 @@ class DatabaseHandler:
         session.close()
 
     def delete_user(self, user_id):
+        """
+        Deletes a user from the database.
+
+        Args:
+            user_id (int): The ID of the user to be deleted.
+
+        Returns:
+            None
+        """
         self.logger.info(f"Deleting user: {user_id}")
         session = self.Session()
         user = session.query(User).filter(User.user_id == user_id).first()
@@ -101,6 +222,16 @@ class DatabaseHandler:
         session.close()
 
     def get_number_of_asked_questions(self, given_timestamp): 
+        """
+        Get the number of asked questions from the database.
+
+        Args:
+            given_timestamp (datetime): The timestamp to filter the search history.
+
+        Returns:
+            int: The number of asked questions.
+
+        """
         self.logger.debug(f"Getting number of asked questions")
         session = self.Session()
         number_of_asked_questions = session.query(SearchHistory).filter(
@@ -110,6 +241,15 @@ class DatabaseHandler:
         return number_of_asked_questions
 
     def get_search_history(self, user_id):
+        """
+        Retrieves the search history for a given user.
+
+        Args:
+            user_id (int): The ID of the user.
+
+        Returns:
+            list: A list of SearchHistory objects representing the search history.
+        """
         self.logger.debug(f"Getting search history for user: {user_id}")
         session = self.Session()
         history = session.query(SearchHistory).filter(SearchHistory.user_id == user_id).order_by(
@@ -118,6 +258,17 @@ class DatabaseHandler:
         return history
 
     def log_search(self, user_id, query, session = None):
+        """
+        Logs a search query for a user in the database.
+
+        Args:
+            user_id (int): The ID of the user performing the search.
+            query (str): The search query.
+            session (Session, optional): The database session. If not provided, a new session will be created.
+
+        Returns:
+            None
+        """
         self.logger.debug(f"Saving search for user {user_id}: {query}")
         if session is None:
             session = self.Session()
@@ -140,13 +291,27 @@ class DatabaseHandler:
             session.rollback()
 
     def get_admin_settings(self):
+        """
+        Retrieve the admin settings from the database.
+
+        Returns:
+            AdminSettings: The admin settings object.
+        """
         self.logger.debug("Fetching admin settings")
         session = self.Session()
         settings = session.query(AdminSettings).first()
         session.close()
         return settings
 
-    def update_admin_settings(self, logout_timer=None, max_disk_space=None, user_max_disk_space = None):
+    def update_admin_settings(self, logout_timer=None, max_disk_space=None, user_max_disk_space=None):
+        """
+        Update the admin settings in the database.
+
+        Args:
+            logout_timer (int, optional): The logout timer value in seconds. Defaults to None.
+            max_disk_space (int, optional): The maximum disk space value in bytes. Defaults to None.
+            user_max_disk_space (int, optional): The maximum disk space value per user in bytes. Defaults to None.
+        """
         self.logger.info("Updating admin settings")
         session = self.Session()
         settings = session.query(AdminSettings).first()
@@ -206,12 +371,20 @@ class DatabaseHandler:
 
 
 
-
-
-
-
-
     def test_admin_settings(self):
+        """
+        Test the admin settings functionality.
+
+        This method performs various tests related to admin settings, including:
+        - Initializing the database and tables
+        - Updating the last login for a user
+        - Logging a search query and retrieving search history
+        - Updating user settings
+        - Retrieving and displaying user settings
+        - Getting active and inactive users
+
+        The test results are printed to the console.
+        """
         # Ensure the database and tables are initialized
         session = self.Session()
         user_id = 'test_user 1'
@@ -236,8 +409,8 @@ class DatabaseHandler:
             print(f"  Max Disk Space: {settings.max_disk_space} MB")
         else:
             print(f"No settings found for User ID {user_id}")
-                # Test getting active users
-            
+            # Test getting active users
+
         active_users = self.get_active_users()
         print("Active Users:")
         for user in active_users:
@@ -251,6 +424,14 @@ class DatabaseHandler:
 
 
 class User(Base):
+    """
+    Represents a user in the system.
+
+    Attributes:
+        user_id (str): The unique identifier of the user.
+        is_admin (bool): Indicates whether the user is an admin or not.
+        last_login (datetime): The timestamp of the user's last login.
+    """
     __tablename__ = 'Users'
     user_id = Column(String, primary_key=True)
     is_admin = Column(Boolean)
@@ -260,6 +441,16 @@ class User(Base):
         return f"<User(user_id={self.user_id}, is_admin={self.is_admin})>"
 
 class SearchHistory(Base):
+    """
+    Represents a search history entry in the database.
+
+    Attributes:
+        id (int): The unique identifier of the search history entry.
+        user_id (str): The foreign key referencing the user who made the search.
+        search_query (str): The search query made by the user.
+        timestamp (datetime): The timestamp of the search.
+        user (User): The user who made the search.
+    """
     __tablename__ = 'SearchHistory'
     id = Column(Integer, primary_key=True)
     user_id = Column(String, ForeignKey('Users.user_id'))
@@ -268,6 +459,15 @@ class SearchHistory(Base):
     user = relationship("User")
 
 class AdminSettings(Base):
+    """
+    Represents the admin settings in the database.
+
+    Attributes:
+        id (int): The primary key for the admin settings.
+        logout_timer (float): The logout timer in seconds or any other unit.
+        max_disk_space (float): The maximum disk space in MB or any other unit.
+        user_max_disk_space (float): The maximum disk space for each user in MB or any other unit.
+    """
     __tablename__ = 'AdminSettings'
     #user_id = Column(String, ForeignKey('Users.user_id'), primary_key=True)
     id = Column(Integer, primary_key=True)
