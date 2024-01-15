@@ -74,7 +74,7 @@ class FileSystemHandler:
         self.logger.debug(f"User {user} is encoding {filename}")
         # encode pdf to vectors
         docVec = pdf_to_docVec(file_path, self.qdClient.encoder)
-
+        
         #check if there were paragraphs recognized
         if len(docVec.paras_vecs) <= 1 and docVec.paras_vecs[0]['paragraph'] == '':
             self.logger.error(f"User {user} failed to upload {filename}: No paragraphs recognized")

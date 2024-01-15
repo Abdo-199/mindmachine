@@ -18,7 +18,7 @@ class DocVec:
   - paras_vecs: List of dictionaries containing paragraph vectors and corresponding text
   [{"paragraph":"","vec":""}].
   """
-  def __init__(self, path, vec, paras_vecs):
+  def __init__(self, path, text, paras_vecs):
     """
     Initialize the DocVec class.
 
@@ -33,5 +33,5 @@ class DocVec:
     self.logger = logHandler.LogHandler(name="DocVec").get_logger()
     self.path = path
     self.name = os.path.basename(path)
-    self.vec = vec
+    self.text = text
     self.paras_vecs = paras_vecs

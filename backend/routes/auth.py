@@ -83,4 +83,4 @@ class AuthAPI:
 
             timeout = self.databaseHandler.get_admin_settings().logout_timer
             token = self.create_access_token(user.user_id, user.is_admin, timedelta(minutes=timeout))
-            return {'access_token': token, 'token_type': 'bearer'}
+            return {'access_token': token, 'token_type': 'bearer', 'isAdmin': user.is_admin}

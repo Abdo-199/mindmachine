@@ -98,11 +98,12 @@ const HomeWindow = ({
   //Gets the maximum stroage capacity for every user
   const API_GetMaxUserStorageBytes = async () => {
     return await fetch(
-      `${process.env.REACT_APP_production_address}/diskusage/user?inBytes=true`,
+      `${process.env.REACT_APP_localhost_address}/diskusage/user?inBytes=true`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
@@ -114,11 +115,12 @@ const HomeWindow = ({
 
   const API_GetStorageUsed = async () => {
     return await fetch(
-      `${process.env.REACT_APP_production_address}/storage_usage/${localStorage.getItem("userID")}`,
+      `${process.env.REACT_APP_localhost_address}/current_storage_usage`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
@@ -142,9 +144,12 @@ const HomeWindow = ({
     setShowUploadIcons(false);
 
     return await fetch(
-      `${process.env.REACT_APP_production_address}/upload/${localStorage.getItem("userID")}`,
+      `${process.env.REACT_APP_localhost_address}/upload`,
       {
         method: "POST",
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        },
         mode: "cors",
         body: formData,
       }

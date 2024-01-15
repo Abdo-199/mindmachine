@@ -16,10 +16,7 @@ const SearchRow = ({ name, createdOn, Search, Delete }: SearchRowProps) => {
       <td>{name}</td>
       <td>{date}</td>
       <td>
-        <button onClick={() => Search(name)}>Search</button>
-      </td>
-      <td>
-        <button onClick={() => Delete(name)}>Delete</button>
+        <button style={{float: "right", marginRight: "20px"}} onClick={() => Search(name)}>Search</button>
       </td>
     </tr>
   );
