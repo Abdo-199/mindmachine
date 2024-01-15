@@ -2,7 +2,7 @@ import logging
 # change this to logging.DEBUG to see more information.
 # change this to logging.INFO to see less information.
 # change this to logging.WARNING to see only warnings.
-min_log_level = logging.INFO
+min_log_level = logging.DEBUG
 
 #root_directory = "./user/"
 root_directory = "/usr/src/app/"
