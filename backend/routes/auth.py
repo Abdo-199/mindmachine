@@ -43,13 +43,7 @@ class AuthAPI:
         if user is None:
             self.databaseHandler.add_user(user_id, False)
             user = self.databaseHandler.get_user(user_id)
-        is_admin = self.databaseHandler.check_for_Admin(user)
-        if is_admin:
-            self.databaseHandler.update_last_login(user_id)
-            self.logger.info(f"User {user_id} logged in as admin")
-        else:
-            self.databaseHandler.update_last_login(user_id)
-            self.logger.info(f"User {user_id} logged in as user")
+        
         return user
 
     def create_access_token(self, user_id: str, is_admin: bool, expires_delta: timedelta):
@@ -79,6 +73,14 @@ class AuthAPI:
             if not user:
                 raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, 
                                         detail='Could not validate credentials')
+            if user.is_admin:
+                self.databaseHandler.update_last_login(user.user_id)
+                self.logger.info(f"User {user.user_id} logged in as admin")
+            else:
+                self.databaseHandler.update_last_login(user.user_id)
+                self.logger.info(f"User {user.user_id} logged in as user")
+            
+
             timeout = self.databaseHandler.get_admin_settings().logout_timer
             token = self.create_access_token(user.user_id, user.is_admin, timedelta(minutes=timeout))
             return {'access_token': token, 'token_type': 'bearer'}
