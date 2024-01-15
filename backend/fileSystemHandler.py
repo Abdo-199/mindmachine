@@ -43,7 +43,6 @@ class FileSystemHandler:
                     self.logger.debug(f"User {user_id} uploaded {file.filename}")
                     status_return.append([file.filename, True])
                 except Exception as e:
-                    # print(e)
                     self.logger.error(f"User {user_id} failed to upload {file.filename}: {e}")
                     status_return.append([file.filename, False])
                     self.delete_document(user_id, file.filename)

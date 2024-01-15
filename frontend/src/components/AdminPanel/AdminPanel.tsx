@@ -54,9 +54,9 @@ const AdminPanel = () => {
     API_GetGlobalStorageUsage();
     API_GetStatistics();
 
-    // if (localStorage.getItem("isAdmin") == "false") { //TODO
-    //   navigate("/")
-    // }
+    if (localStorage.getItem("isAdmin") == "false") {
+      navigate("/")
+    }
   }, []);
 
   const API_GetLogoutTime = async () => {
@@ -66,6 +66,7 @@ const AdminPanel = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
@@ -92,6 +93,7 @@ const AdminPanel = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem("token")}`,
           },
         }
       )
@@ -116,6 +118,7 @@ const AdminPanel = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
@@ -160,6 +163,7 @@ const AdminPanel = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
@@ -179,6 +183,7 @@ const AdminPanel = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
@@ -195,12 +200,12 @@ const AdminPanel = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
       .then((res) => res.json())
       .then((response) => {
-        console.log(response)
         setStatistics(response.statistics)
         setActiveUsers(response.activeUsers)
       });

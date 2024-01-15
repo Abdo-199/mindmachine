@@ -32,14 +32,17 @@ const MainWindow: React.FC<MainWindowProps> = ({ content }) => {
 
   //gets from the backend all files
   const GetFileStructure = async () => {
-    return await fetch(`${process.env.REACT_APP_production_address}/filestructure/${localStorage.getItem("userID")}`, {
+    return await fetch(`${process.env.REACT_APP_production_address}/filestructure`, {
       method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      },
       mode: "cors",
       cache: "no-cache",
     })
       .then(res => res.json())
       .then(response => {
-        console.log(response)
         SetDocRows(response)
       })
   }

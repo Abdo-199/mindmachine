@@ -1,3 +1,4 @@
+import { resolveSoa } from "dns";
 import "../../styles/Login/LoginStyles.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,44 +7,52 @@ import { useNavigate } from "react-router-dom";
 const LoginCard = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  
+
   const navigate = useNavigate();
 
   // send login requst to backend and inform user of success or error
   const Login = async (username: string, password: string) => {
-    let bodyData = { username: username, password: password };
 
-    let fetchData = {
-      method: "POST",
-      body: JSON.stringify(bodyData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    const url = `${process.env.REACT_APP_production_address}/login`;
-    const response = await fetch(url, fetchData)
+      return await fetch(
+        `${process.env.REACT_APP_production_address}/auth/token`,
+        {
+          method: "POST",
+          body: new URLSearchParams({
+            grant_type: 'password',
+            username: username,
+            password: password,
+            client_id: 'your-client-id',
+            client_secret: 'your-client-secret',
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        }
+      )
       .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        if (!data.isAuthenticated) {
+        if (response.status === 401) {
           alert("Error. Wrong Credentials");
-        } else {
-          //sets the userID globally
-          localStorage.setItem("userID", username);
-          localStorage.setItem("isAdmin", data.isAdmin);
-          sessionStorage.setItem(
-            "login_datum",
-            new Date().getTime().toString()
-          );
-
-          // navigate to MainWindow
-          navigate("/MainWindow");
+        }
+        else {
+          return response.json();
         }
       })
+      .then((data) => {
+        //sets the userID globally
+        localStorage.setItem("userID", username);
+        localStorage.setItem("isAdmin", data.is_admin);
+        localStorage.setItem("token", data.access_token)
+        sessionStorage.setItem(
+          "login_datum",
+          new Date().getTime().toString()
+        );
+
+        // navigate to MainWindow
+        navigate("/MainWindow");
+
+      })
       .catch(function (error) {
-        console.log(error);
+
       });
   };
 

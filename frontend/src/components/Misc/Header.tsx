@@ -9,8 +9,6 @@ import LogoutConfirm from "../Logout/LogoutConfirm";
 const Header = () => {
   const navigate = useNavigate();
 
-  const [isAdmin, setIsAdmin] = useState(true);
-
   return (
     <div id="header-container">
       <div className="header-button" onClick={() => navigate("/MainWindow")}>
@@ -21,7 +19,7 @@ const Header = () => {
         <p>Search History</p>
       </div>
 
-      {isAdmin === true && (
+      {localStorage.getItem("isAdmin") === "true" && (
         <div className="header-button" onClick={() => navigate("/AdminPanel")}>
           <p>Admin Panel</p>
         </div>

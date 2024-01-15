@@ -22,14 +22,17 @@ const SearchHistory = () => {
   const API_GetSearchHistory = async () => {
     const url = `${
       process.env.REACT_APP_production_address
-    }/searchhistory/${localStorage.getItem("userID")}`;
+    }/searchhistory`;
     return await fetch(url, {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      },
       cache: "no-cache",
     })
       .then((res) => res.json())
       .then((response) => {
-        console.log(response);
         setSearchEntries(response);
       });
   };
@@ -43,18 +46,18 @@ const SearchHistory = () => {
     return await fetch(
       `${
         process.env.REACT_APP_production_address
-      }/search?user_id=${localStorage.getItem(
-        "userID"
-      )}&query=${searchEntryTest}`,
+      }/search?query=${searchEntryTest}`,
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${localStorage.getItem("token")}`,
         },
       }
     )
       .then((res) => res.json())
       .then((response) => {
+        setSearchResult(response)
         navigate(`/SearchResult/${searchEntryTest}`);
       });
   };

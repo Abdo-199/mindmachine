@@ -48,7 +48,8 @@ const LogOutTimer = () => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                },
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                  },
             }
         )
             .then((res) => res.json())
@@ -73,10 +74,8 @@ const LogOutTimer = () => {
                 // let loginTimerDuration = JSON.parse(sessionStorage.getItem("logoutTime") || "60")
 
                 let loginDatum = new Date(parseInt(loginDatumString || "0"))
-                console.log(logoutTimeFromBackend)
                 let loginEndeDatumString = loginDatum.setMinutes(loginDatum.getMinutes() + logoutTimeFromBackend)
                 let loginEndeDatum = new Date(parseInt(loginEndeDatumString.toString() || "0"))
-                console.log(loginEndeDatum)
 
                 let aktuelleZeit = new Date()
 
