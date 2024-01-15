@@ -98,7 +98,7 @@ const HomeWindow = ({
   //Gets the maximum stroage capacity for every user
   const API_GetMaxUserStorageBytes = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/diskusage/user?inBytes=true`,
+      `${process.env.REACT_APP_production_address}/diskusage/user?inBytes=true`,
       {
         method: "GET",
         headers: {
@@ -115,7 +115,7 @@ const HomeWindow = ({
 
   const API_GetStorageUsed = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/current_storage_usage`,
+      `${process.env.REACT_APP_production_address}/current_storage_usage`,
       {
         method: "GET",
         headers: {
@@ -144,7 +144,7 @@ const HomeWindow = ({
     setShowUploadIcons(false);
 
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/upload`,
+      `${process.env.REACT_APP_production_address}/upload`,
       {
         method: "POST",
         headers: {

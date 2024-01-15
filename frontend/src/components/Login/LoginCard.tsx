@@ -14,7 +14,7 @@ const LoginCard = () => {
   const Login = async (username: string, password: string) => {
 
       return await fetch(
-        `${process.env.REACT_APP_localhost_address}/auth/token`,
+        `${process.env.REACT_APP_production_address}/auth/token`,
         {
           method: "POST",
           body: new URLSearchParams({
@@ -39,9 +39,8 @@ const LoginCard = () => {
       })
       .then((data) => {
         //sets the userID globally
-        console.log(data)
         localStorage.setItem("userID", username);
-        localStorage.setItem("isAdmin", data.isAdmin);
+        localStorage.setItem("isAdmin", data.is_admin);
         localStorage.setItem("token", data.access_token)
         sessionStorage.setItem(
           "login_datum",

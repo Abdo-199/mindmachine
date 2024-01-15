@@ -43,7 +43,7 @@ const LogOutTimer = () => {
 
     const API_GetLogoutTime = async () => {
         return await fetch(
-            `${process.env.REACT_APP_localhost_address}/autologout`,
+            `${process.env.REACT_APP_production_address}/autologout`,
             {
                 method: "GET",
                 headers: {

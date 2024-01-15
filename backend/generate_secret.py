@@ -18,7 +18,3 @@ if not env_path.is_file():
         env_file.write(f'JWT_SECRET_KEY={encoded_key}\n')
         # Add other necessary environment variables here
         # env_file.write('ANOTHER_VARIABLE=value\n')
-
-    print('.env file generated with a new secret key.')
-else:
-    print('.env file already exists.')

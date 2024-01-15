@@ -101,7 +101,7 @@ const FileOptions = ({
 
   // retrieve document from backend
   const API_GetDocument = async () => {
-    const fetchString = `${process.env.REACT_APP_localhost_address}/document?document_name=${filename}`;
+    const fetchString = `${process.env.REACT_APP_production_address}/document?document_name=${filename}`;
     return await fetch(fetchString, {
       method: "GET",
       headers: {
@@ -118,7 +118,7 @@ const FileOptions = ({
   // send delete request to backend
   const API_DeleteDocument = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/deleteDocument/${filename}`,
+      `${process.env.REACT_APP_production_address}/deleteDocument/${filename}`,
       {
         method: "DELETE",
         headers: {
@@ -135,7 +135,7 @@ const FileOptions = ({
   // send rename request to backend
   const API_EditDocumentName = async () => {
     return await fetch(
-      `${process.env.REACT_APP_localhost_address}/editDocumentName`,
+      `${process.env.REACT_APP_production_address}/editDocumentName`,
       {
         method: "PUT",
         headers: {

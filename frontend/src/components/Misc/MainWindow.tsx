@@ -32,7 +32,7 @@ const MainWindow: React.FC<MainWindowProps> = ({ content }) => {
 
   //gets from the backend all files
   const GetFileStructure = async () => {
-    return await fetch(`${process.env.REACT_APP_localhost_address}/filestructure`, {
+    return await fetch(`${process.env.REACT_APP_production_address}/filestructure`, {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",

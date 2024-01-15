@@ -21,7 +21,7 @@ const SearchHistory = () => {
   // request to backend to obtain Searchhistory of current user
   const API_GetSearchHistory = async () => {
     const url = `${
-      process.env.REACT_APP_localhost_address
+      process.env.REACT_APP_production_address
     }/searchhistory`;
     return await fetch(url, {
       method: "GET",
@@ -45,7 +45,7 @@ const SearchHistory = () => {
   const API_Search = async (searchEntryTest: string) => {
     return await fetch(
       `${
-        process.env.REACT_APP_localhost_address
+        process.env.REACT_APP_production_address
       }/search?query=${searchEntryTest}`,
       {
         method: "GET",

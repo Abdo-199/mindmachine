@@ -29,7 +29,7 @@ const LogWindow = () => {
 
   // get all logs from backend
   const API_GetLogs = async () => {
-    const url = `${process.env.REACT_APP_localhost_address}/logs`;
+    const url = `${process.env.REACT_APP_production_address}/logs`;
     return await fetch(url, {
       method: "GET",
       headers: {
@@ -48,7 +48,7 @@ const LogWindow = () => {
 
   // get logfile from backend
   const API_GetLogFile = async () => {
-    const url = `${process.env.REACT_APP_localhost_address}/logfile`;
+    const url = `${process.env.REACT_APP_production_address}/logfile`;
     return await fetch(url, {
       method: "GET",
       headers: {
