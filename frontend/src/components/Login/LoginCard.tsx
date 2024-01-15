@@ -39,6 +39,7 @@ const LoginCard = () => {
       })
       .then((data) => {
         //sets the userID globally
+        console.log(data)
         localStorage.setItem("userID", username);
         localStorage.setItem("isAdmin", data.isAdmin);
         localStorage.setItem("token", data.access_token)

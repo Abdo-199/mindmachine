@@ -10,7 +10,7 @@ interface RelevantDocProps {
 const OpenFile: React.FC<RelevantDocProps> = ({ docName }) => {
 
   return (
-    <button className='button-openfile'>
+    <button className='button-openfile' style={{float: "right"}}>
       <Link to={`/FileInformation/${docName}/true`} style={{ textDecoration: "none", color: "black" }}>Open File</Link>
     </button>
   )

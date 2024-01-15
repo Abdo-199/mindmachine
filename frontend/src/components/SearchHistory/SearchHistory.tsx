@@ -57,6 +57,7 @@ const SearchHistory = () => {
     )
       .then((res) => res.json())
       .then((response) => {
+        setSearchResult(response)
         navigate(`/SearchResult/${searchEntryTest}`);
       });
   };
