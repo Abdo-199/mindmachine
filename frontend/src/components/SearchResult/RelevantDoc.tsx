@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import OpenFile from './OpenFile';
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,26 @@ interface RelevantDocProps {
 }
 
 const RelevantDoc: React.FC<RelevantDocProps> = ({ info }) => {
+    const highlightSentence = () => {
+        if (!info.sentence) return info.passage;
+
+        const sentenceIndex = info.passage.toLowerCase().indexOf(info.sentence.toLowerCase());
+
+        if (sentenceIndex === -1) {
+            // Sentence not found in the passage
+            return info.passage;
+        }
+
+        // Construct the highlighted passage
+        const highlightedPassage = (
+            info.passage.slice(0, sentenceIndex) +
+            `<span style="background-color: yellow">${info.passage.slice(sentenceIndex, sentenceIndex + info.sentence.length)}</span>` +
+            info.passage.slice(sentenceIndex + info.sentence.length)
+        );
+
+        return highlightedPassage;
+    };
+
     return (
         <div className="relevant-doc">
             <p className="docName-header">{info.doc_name}</p>
@@ -26,12 +46,12 @@ const RelevantDoc: React.FC<RelevantDocProps> = ({ info }) => {
                     </div>
                     <OpenFile docName={info.doc_name}></OpenFile>
                 </div>
-                <p>{info.passage}</p>
+                <p dangerouslySetInnerHTML={{ __html: highlightSentence() }}></p>
             </div>
 
-            {info.passage == " " ? <p>No passage found!</p> : null}
+            {info.passage.trim() === "" ? <p>No passage found!</p> : null}
         </div>
-    )
+    );
 }
 
-export default RelevantDoc
+export default RelevantDoc;

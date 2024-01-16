@@ -151,7 +151,7 @@ class Qdrant:
         relevant_pasages = self.get_scores(docs_hits)
         for ans in relevant_pasages:
             bert_ans = self.bert(search_text, ans['passage'])
-            ans['scentence'] = self.get_full_sentence(ans['passage'], bert_ans['start'], bert_ans['end'])
+            ans['sentence'] = self.get_full_sentence(ans['passage'], bert_ans['start'], bert_ans['end'])
 
         return relevant_pasages[:4]
   
