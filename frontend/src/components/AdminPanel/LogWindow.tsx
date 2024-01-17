@@ -99,7 +99,7 @@ const LogWindow = () => {
         }}
       >
         <Button
-          style={{ color: "black", backgroundColor: "#83b600" }}
+          style={{ color: "black", backgroundColor: "#76B900" }}
           onClick={() => API_GetLogFile()}
         >
           Download Log File

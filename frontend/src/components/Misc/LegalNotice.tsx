@@ -5,16 +5,16 @@ const LegalNotice = () => {
   return (
     <div id="legalNotice-container">
       <p style={{ marginTop: "0" }}>Angaben gemäß § 5 TMG</p>
-      <p>Pascal Wende <br></br>
-        Marienstraße 5<br></br>
-        16552 Schildow<br></br></p>
+      <p>Hochschule für Technik und Wirtschaft<br></br>
+        Campus Wilhelminenhof Wilhelminenhofstraße 75A<br></br>
+        12459 Berlin<br></br></p>
 
       <strong>Vertreten durch: </strong><br></br>
-      Pascal Wende<br></br><br></br>
+      Präsidentin Prof. Dr. Annabella Rauscher-Scheibe<br></br><br></br>
 
       <strong>Kontakt:</strong><br></br>
-      <p>Telefon: +49-176 3944 8586<br></br>
-        E-Mail: <a href='mailto:pascal.wende@gmx.net'>pascal.wende@gmx.net</a></p>
+      <p>Telefon: +49 30 5019 - 0<br></br>
+        E-Mail: <a href='mailto:pascal.wende@gmx.net'>webredaktion@htw-berlin.de</a></p>
 
       <strong>Haftungsausschluss:</strong><br></br><br></br>
       <strong>Haftung für Inhalte</strong><br></br>
