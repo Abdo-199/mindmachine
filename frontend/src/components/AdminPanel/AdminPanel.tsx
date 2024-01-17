@@ -77,11 +77,15 @@ const AdminPanel = () => {
   };
 
   const handleChangeLogoutTime = (event: any) => {
-    setNewLogoutTime(event.target.value);
+    if (/^[1-9]\d*$/.test(event.target.value) || event.target.value === "") {
+      setNewLogoutTime(event.target.value);
+    }
   };
 
   const handleChangeUserStorage = (event: any) => {
-    setNewMaxUserStorage(event.target.value);
+    if (/^[1-9]\d*$/.test(event.target.value) || event.target.value === "") {
+      setNewMaxUserStorage(event.target.value);
+    }
   };
 
   const API_SetLogoutTime = async () => {
@@ -97,7 +101,6 @@ const AdminPanel = () => {
           },
         }
       )
-        .then((res) => res.json())
         .then((response) => {
           setCurrentLogoutTime(newLogoutTime)
           ModalHandlerChangeLogoutTime()
@@ -167,7 +170,6 @@ const AdminPanel = () => {
         },
       }
     )
-      .then((res) => res.json())
       .then((response) => {
         setCurrentMaxUserStorage(newMaxUserStorage + " GB")
         ModalHandlerChangeMaxUserStorage()
@@ -223,7 +225,7 @@ const AdminPanel = () => {
 
 
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <h4 style={{ marginLeft: "100px", width: "50%"}}>Storage</h4>
+        <h4 style={{ marginLeft: "100px", width: "50%" }}>Storage</h4>
         <h4 style={{ marginRight: "30px", width: "50%" }}>Auto Logout</h4>
       </div>
 
@@ -233,8 +235,9 @@ const AdminPanel = () => {
           <CardContent>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginRight: "50px" }}>
 
-              <div style={{ fontSize: "2rem", fontWeight: "bold", marginLeft: "30px" }}>
-                {globalStorageUsage}
+              <div>
+                <p style={{marginLeft: "30px"}}>Global memory usage:</p>
+                <p style={{ fontSize: "2rem", fontWeight: "bold", marginLeft: "30px" }}>{globalStorageUsage}</p>
               </div>
 
               <Grid>
@@ -259,7 +262,7 @@ const AdminPanel = () => {
                 Current: {currentMaxUserStorage}
                 <Grid>
                   <Box>
-                    <Button onClick={() => API_ChangeMaxUserStorage()} style={{ color: "black", backgroundColor: "#83b600", marginLeft: "120px", marginBottom: "15px", marginTop: "50px" }}>Change storage</Button>
+                    <Button onClick={() => API_ChangeMaxUserStorage()} style={{ color: "black", backgroundColor: "#76B900", marginLeft: "120px", marginBottom: "15px", marginTop: "50px" }}>Change storage</Button>
                   </Box>
                 </Grid>
 
@@ -289,7 +292,7 @@ const AdminPanel = () => {
             </Box>{" "}
             minutes. Current is {currentLogoutTime} minutes.
           </div>
-          <Button style={{ color: "black", backgroundColor: "#83b600" }} onClick={() => API_SetLogoutTime()}>Change logout time</Button>
+          <Button style={{ color: "black", backgroundColor: "#76B900" }} onClick={() => API_SetLogoutTime()}>Change logout time</Button>
         </Card>
       </div>
 
@@ -308,7 +311,7 @@ const AdminPanel = () => {
           marginTop: "20px"
         }}>
 
-        <Button style={{ color: "black", backgroundColor: "#83b600" }} onClick={() => navigate("/LogWindow")}>Go to log files</Button>
+        <Button style={{ color: "black", backgroundColor: "#76B900" }} onClick={() => navigate("/LogWindow")}>Go to log files</Button>
       </Card>
 
 
@@ -316,7 +319,7 @@ const AdminPanel = () => {
       <h4 style={{ marginLeft: "100px", marginTop: "30px" }}>Statistics</h4>
 
       <p style={{ marginLeft: "100px" }}>Active users: {activeUsers}</p>
-      <Card style={{ minWidth: "650px", marginLeft: "100px", marginRight: "100px", marginTop: "20px" }}>
+      <Card style={{ minWidth: "650px", marginLeft: "100px", marginRight: "100px", marginTop: "20px", marginBottom: "40px" }}>
         <TableContainer component={Paper}>
           <Table
             sx={{ minWidth: "100%" }}
