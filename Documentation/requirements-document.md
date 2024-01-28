@@ -1,109 +1,33 @@
+# 1. Ziel der Anforderungsanalyse
 
-## guideline
+Dieses Dokument dient dazu, sowohl funktionale als auch nicht-funktionale Anforderungen des Systems detailliert darzustellen. Es zielt darauf ab, ein einheitliches Verständnis der Benutzerbedürfnisse und der spezifischen Systemfunktionalitäten für alle Projektbeteiligten zu schaffen. Dies ist essentiell für die erfolgreiche Entwicklung und Nachhaltigkeit der Software.
 
-Das Scoping-Dokument konzentriert sich eher auf eine hochrangige Übersicht über den Projektumfang, die Ziele und die wesentlichen Rahmenbedingungen.
-
-Die User Stories und Epics sind eher Bestandteil des Anforderungsdokuments oder eines sogenannten "Requirements Document". Dieses Dokument enthält die funktionalen und nicht-funktionalen Anforderungen an das System im Detail, einschließlich der spezifischen Bedürfnisse der Benutzer. Es stellt sicher, dass die Entwickler und alle anderen Beteiligten ein klares Verständnis für die spezifischen Funktionen und Merkmale haben, die im Laufe des Projekts implementiert werden sollen.
-
-Das Requirements Document und das Scoping-Dokument können jedoch miteinander verknüpft sein. Das Scoping-Dokument bietet den Rahmen und Kontext, während das Requirements Document die Details liefert. Beide Dokumente sind entscheidend, um sicherzustellen, dass das Projekt effizient und zielgerichtet umgesetzt wird.
-
-Hier sind einige Themen, die normalerweise in einem Requirements-Dokument behandelt werden sollten:
-
-1. **Einleitung und Projektübersicht:** Eine kurze Einführung, die den Zweck des Dokuments erklärt und eine allgemeine Übersicht über das Projekt bietet.
-    
-2. **Projekthintergrund:** Eine Beschreibung des Kontexts und der Hintergrundinformationen des Projekts, um sicherzustellen, dass alle Leser ein grundlegendes Verständnis haben.
-    
-3. **Zielsetzung:** Die klare Definition der Ziele und des Umfangs des Projekts. Was soll mit dem Projekt erreicht werden?
-    
-4. **Funktionsanforderungen:** Eine Liste der funktionalen Anforderungen, die beschreiben, welche Funktionen und Features die Software bieten muss. Dies kann in Form von User Stories oder Use Cases erfolgen.
-    
-5. **Nichtfunktionale Anforderungen:** Dies umfasst Anforderungen, die nicht direkt mit den Funktionen der Software zusammenhängen, wie z.B. Leistung, Sicherheit, Skalierbarkeit, Benutzerfreundlichkeit, und Lizenzen.
-    
-6. **Benutzeranforderungen:** Beschreibung der Benutzerprofile und ihrer spezifischen Anforderungen an das System.
-    
-7. **Datenanforderungen:** Beschreibung der Daten, die vom System verwendet und gespeichert werden, sowie deren Verwaltung.
-    
-8. **Abhängigkeiten und Einschränkungen:** Alle externen Abhängigkeiten, die das Projekt beeinflussen könnten, sowie Einschränkungen wie Zeit- und Budgetbeschränkungen.
-    
-9. **Akzeptanzkriterien:** Klar formulierte Kriterien, anhand derer überprüft wird, ob die Anforderungen erfüllt sind.
-    
-10. **Änderungsverwaltung:** Ein Prozess zur Verwaltung von Änderungen an den Anforderungen während des Projektverlaufs.
-    
-11. **Referenzen:** Alle verwendeten Referenzen, wie z.B. externe Dokumente, Gesetze oder Standards.
-    
-12. **Anhänge:** Falls erforderlich, können zusätzliche Informationen, Diagramme, Mockups oder andere relevante Dokumente angehängt werden.
-# 1. Visionen und Ziele 
-
-Die Vision für das MindMachine-Projekt ist die Schaffung einer intuitiven und leistungsstarken Browseranwendung, die es HTW-Anwendern ermöglicht, ihre Dateien effizient zu verwalten und mithilfe von KI-gestützten Suchanfragen relevante Informationen aus den Dokumenten zu extrahieren. Das Hauptziel besteht darin, eine benutzerfreundliche Plattform zu entwickeln, die nahtlos in den Arbeitsalltag der HTW-Anwender integriert werden kann.
+Es ist wichtig zu beachten, dass aufgrund begrenzter Ressourcen nicht alle in diesem Dokument identifizierten Anforderungen im Rahmen des Projektes umgesetzt werden können. Die umfassende Dokumentation sämtlicher erkannter Anforderungen erfolgt dennoch, um zukünftige Wartungs- und Entwicklungsarbeiten zu erleichtern. Eine detaillierte Auflistung der im Projektumfang enthaltenen Anforderungen sowie der definierten Projektgrenzen ist im Scoping-Dokument einsehbar.
 
 
-Die wesentlichen Ziele des Projekts sind:
+# 2. Ergebnis der Anforderungsanalyse
 
+Die Ergebnisse der Anforderungsanalyse sind in zwei wesentliche Kernaspekte unterteilt. Zum einen die funktionale Anforderungsanalyse, welche eine ausführliche Beschreibung der gewünschten Funktionalität liefert. Des Weiteren die nicht funktionalen Anforderungen, welche Spezifikationen hinschitlich der Sicherheit, Performance und Kompatibilität berücksichtigt.
+## 2.1 funktionale Anforderungen
+
+Im Rahmen eines kollaborativen Kundenworkshops wurde ein umfassendes Story Mapping durchgeführt, das als grundlegende Struktur für die Anforderungsanalyse der **MindMachine**-Anwendung dient. Dieser Workshop ermöglichte eine interaktive Zusammenarbeit zwischen den Stakeholdern und dem Entwicklungsteam, um die wesentlichen Funktionen und Anforderungen zu identifizieren. Das Story Mapping diente dabei als Orientierungspunkt, um die verschiedenen Aspekte der Anwendung zu verstehen und zu strukturieren.
   
+![[Documentation/assets/Story_Mapping_WS_result.jpg]]
 
-1. **Benutzerfreundlichkeit:** Die Anwendung soll eine leicht verständliche Benutzeroberfläche bieten, die eine intuitive Navigation und Interaktion ermöglicht. Sowohl HTW-Anwender als auch Administratoren sollen sich mühelos auf der Plattform zurechtfinden können.
 
-  
+### Übersicht über Epics und User Stories:
 
-2. **Effiziente Dateiverwaltung:** HTW-Anwender sollen in der Lage sein, ihr privates Dateiverzeichnis mithilfe der Anwendung effizient zu öffnen, Dateien hochzuladen, zu öffnen, zu löschen und umzubenennen. Die Ansicht des Dateiverzeichnisses soll dabei individuell auf den angemeldeten Benutzer zugeschnitten sein.
-
-  
-
-3. **KI-gestützte Suchanfragen:** Die Anwendung soll HTW-Anwendern die Möglichkeit bieten, Fragen in Form von Text- oder Sprachprompten zu stellen. Die KI verarbeitet diese Anfragen, generiert Suchanfragen und zeigt relevante Ergebnisse direkt auf der Benutzeroberfläche an.
-
-  
-
-4. **Sicherheit und Datenschutz:** Die Plattform muss höchsten Sicherheitsstandards genügen, insbesondere im Hinblick auf die Authentifizierung über HTW-Logins, sichere An- und Abmeldungsprozesse sowie den Schutz der Privatsphäre der Benutzer.
-
-  
-
-5. **Suchhistorie und Interaktionshistorie:** Die Anwendung soll eine Suchhistorie für HTW-Anwender bereitstellen, um vergangene Suchanfragen nachzuvollziehen. Die Möglichkeit, direkt zu den Ergebnissen vergangener Suchanfragen zu navigieren, trägt zur Effizienz und Nutzerfreundlichkeit bei.
-
-  
-
-Die erfolgreiche Umsetzung dieser Ziele wird dazu beitragen, den Workflow der HTW-Anwender zu verbessern, die Effizienz in der Dateiverwaltung zu steigern und den Zugriff auf relevante Informationen durch KI-gestützte Suchanfragen zu erleichtern. 
-
-  
-
-# 2. Anforderungsanalyse
-
-Abschnitt ergänzen in welchem darauf hingewiesen wird, dass: 
-
-Ziel der Einarbeitung dieses Abschnitts ist, dass wir unser Verständnis für die Anforderungen an nachhaltige und erfolgreiche Software-Entwicklungen kennen und im bedarfsrechten Maß einzusetzen wissen. Es geht ganz konkret **nicht** darum, dass wir die Analyse der nicht funktionalen Anforderungen als Zielsetzung  verstehen. 
-Dennoch bitte ich euch diesen Abschnitt einmal durchzulesen und Vorschläge für sinnvolle Ergänzungen mit Begründung zu notieren. Durch eure Ergänzungen bzw. Anmerkungen können wir diesen ersten Entwurf realitätsgetreuer und dezidiert für unser Projekt überarbeiten und ein besseres Verständnis der Materie beweisen. 
-## 2.1 Analyse der funktionalen Anforderungen
-
-**guideline von HTW
-
-Beschreiben Sie die wesentlichen funktionalen Anforderungen bzw. Use-Cases Ihres Systems. Dies können Sie als Use-Case-Diagramm (geeignet bei mehreren Typen von Anwendern der Software) oder als Tabelle mit funktionalen Anforderungen darstellen. 
-
-Legen Sie fest, welches Teammitglied für welchen Use-Case bzw. welche funktionale Anforderung verantwortlich ist. In diesem Abschnitt dreht sich alles um die Anforderungen aus Nutzersicht. Eine Definition von internen Abläufen ist hier nicht sinnvoll.  
-
-Alle funktionalen Anforderungen bzw. Use-Cases sollten nummeriert werden, damit man sich im Abschnitt 4 darauf beziehen kann. 
-
----
-
-Im Rahmen eines kollaborativen Kundenworkshops wurde ein umfassendes Story Mapping durchgeführt, das als grundlegende Struktur für die Anforderungsanalyse der MindMachine-Anwendung dient. Dieser Workshop ermöglichte eine interaktive Zusammenarbeit zwischen den Stakeholdern und dem Entwicklungsteam, um die wesentlichen Funktionen und Anforderungen zu identifizieren. Das Story Mapping (s. Abbildung XX) diente dabei als Orientierungspunkt, um die verschiedenen Aspekte der Anwendung zu verstehen und zu strukturieren.
-
-  
-
-![Story Mapping Diagramm](Documentation/assets/20231118_Story_Mapping_DiaWIP.jpg)
-
-**Übersicht über Epics und User Stories:**
-
-  
 
 Das Story Mapping ergab eine klare Strukturierung der Anforderungen in mehrere Epics, die jeweils einen größeren funktionalen Bereich der Anwendung repräsentieren. Die Epics und ihre zugehörigen User Stories sind:
 
 
-
-### Epic 1: Benutzerzugriff und Authentifizierung
+#### Epic 1: Benutzerzugriff und Authentifizierung
 
 - **User Story 1.1: Website öffnen als Anwender (HTW-Anwender und Admin)**
 - **User Story 1.2: Log-In für HTW-Anwender**
 - **User Story 1.3: Log-Out-Funktionalität**
 
-### Epic 2: Dateiverwaltung
+#### Epic 2: Dateiverwaltung
 
 - **User Story 2.1: Datenverzeichnis öffnen mit userspezifischer Ansicht**
 - **User Story 2.2: Dateien hochladen mit Prüfung**
@@ -111,23 +35,23 @@ Das Story Mapping ergab eine klare Strukturierung der Anforderungen in mehrere E
 - **User Story 2.4: Dokumente löschen**
 - **User Story 2.5: Dokument umbenennen**
 
-### Epic 3: Interaktion mit KI-gestützten Suchanfragen
+#### Epic 3: Interaktion mit KI-gestützten Suchanfragen
 
 - **User Story 3.1: Frage als Textprompt stellen**
 - **User Story 3.2: Frage abändern**
 - **User Story 3.3: Frage als Sprachprompt stellen**
 
-### Epic 4: Anzeige von Suchergebnissen
+#### Epic 4: Anzeige von Suchergebnissen
 
 - **User Story 4.1: Ergebnisse anzeigen lassen**
 - **User Story 4.2: Relevante Passagen kopieren**
 
-### Epic 5: Suchhistorie
+#### Epic 5: Suchhistorie
 
 - **User Story 5.1: Öffnen einer Suchhistorie**
 - **User Story 5.2: Vergangene Suchanfragen erneut auslösen**
 
-### Epic 6: Administration und Systemverwaltung
+#### Epic 6: Administration und Systemverwaltung
 
 - **User Story 6.1: Log-In für HTW-Administrator**
 - **User Story 6.2: Speicherkapazität global ändern**
@@ -137,63 +61,49 @@ Das Story Mapping ergab eine klare Strukturierung der Anforderungen in mehrere E
 - **User Story 6.6: Logging-Protokollverwaltung**
   
 
-Jedes Epic enthält spezifische Funktionen, die den Bedürfnissen der Benutzer entsprechen und gemeinsam die Gesamtfunktionalität der MindMachine-Anwendung bilden. Diese klare Strukturierung ermöglicht eine effektive Umsetzung und Priorisierung der Anforderungen im Entwicklungsprozess.
+Jedes Epic enthält spezifische Funktionen, die den Bedürfnissen der Benutzer entsprechen und gemeinsam die Gesamtfunktionalität der **MindMachine**-Anwendung bilden. Diese klare Strukturierung ermöglicht eine effektive Umsetzung und Priorisierung der Anforderungen im Entwicklungsprozess.
 
-  
+---
 
 ### Epic 1: Benutzeranmeldung und Authentifizierung (Webzugriff)
 
-  
+Das Epic 1 konzentriert sich auf den grundlegenden Benutzerzugriff und die Authentifizierung in der **MindMachine**-Webanwendung. Hierbei werden sowohl HTW-Anwender mit und ohne Administratoren-Status berücksichtigt. Die darin enthaltenen User Stories adressieren das Öffnen der Website, den sicheren Log-In von HTW-Anwendern, die Möglichkeit, sich manuell abzumelden oder automatisch bei Inaktivität auszuloggen. Durch diese Funktionen wird die Privatsphäre und Sicherheit der Benutzer gewährleistet, während ein benutzerfreundlicher Zugang zur Anwendung ermöglicht wird.
 
-Das Epic 1 konzentriert sich auf den grundlegenden Benutzerzugriff und die Authentifizierung in der MindMachine-Webanwendung. Hierbei werden sowohl HTW-Anwender mit und ohne Administratoren-Status berücksichtigt. Die darin enthaltenen User Stories adressieren das Öffnen der Website, den sicheren Log-In von HTW-Anwendern, die Möglichkeit, sich manuell abzumelden oder automatisch bei Inaktivität auszuloggen. Durch diese Funktionen wird die Privatsphäre und Sicherheit der Benutzer gewährleistet, während ein benutzerfreundlicher Zugang zur Anwendung ermöglicht wird.
-  
-
+---
 #### User Story 1.1: Website öffnen als Anwender (HTW-Anwender und Admin)
 
   
-
 **Rolle:** Als HTW-Anwender oder Administrator
 
-  
+  **Ich möchte:** die **MindMachine**-Website öffnen können.
 
-**Ich möchte:** die MindMachine-Website öffnen können.
-
-  
-
-**So dass:** ich auf die Anmeldeseite zugreifen und mich anmelden kann.
-
+  **So dass:** ich auf die Anmeldeseite zugreifen und mich anmelden kann.
   
 
 **Akzeptanzkriterien:**
 
-1. Die MindMachine-Website ist öffentlich zugänglich.
+1. Die **MindMachine**-Website ist öffentlich zugänglich. #pleasecheck
 
 2. Beim Öffnen der Website wird der Benutzer auf die Anmeldeseite weitergeleitet.
 
 
 ---
-
   
-
 #### User Story 1.2: Log-In für HTW-Anwender
 
   
-
 **Rolle:** Als HTW-Anwender
 
   
-
-**Ich möchte:** mich mit meinem HTW-Account auf der MindMachine-Website anmelden können.
+**Ich möchte:** mich mit meinem HTW-Account auf der **MindMachine**-Website anmelden können.
 
   
-
 **So dass:** ich Zugang zu meinen privaten Dateien erhalte.
 
   
-
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine klare und benutzerfreundliche Anmeldeseite.
+1. Auf der **MindMachine**-Website gibt es eine klare und benutzerfreundliche Anmeldeseite.
 
 2. Der Benutzer kann seinen HTW-Account-Namen und sein Passwort eingeben.
 
@@ -208,28 +118,23 @@ Das Epic 1 konzentriert sich auf den grundlegenden Benutzerzugriff und die Authe
 7. Die Anmeldung ist sicher und schützt die Privatsphäre des Benutzers.
 
   
-
 ---
 
 #### User Story 1.3: Log-Out-Funktionalität
-
   
 
 **Rolle:** Als HTW-Anwender oder Administrator
 
   
-
-**Ich möchte:** mich manuell von der MindMachine-Website abmelden können und automatisch ausgeloggt werden, wenn eine spezifische Inaktivitätsdauer überschritten wird.
-
+**Ich möchte:** mich manuell von der **MindMachine**-Website abmelden können und automatisch ausgeloggt werden, wenn eine spezifische Inaktivitätsdauer überschritten wird.
   
 
 **So dass:** meine Privatsphäre und Sicherheit gewährleistet sind.
 
   
-
 **Akzeptanzkriterien:**
 
-1. Als Benutzer möchte ich die Möglichkeit haben, mich manuell von der MindMachine abzumelden.
+1. Als Benutzer möchte ich die Möglichkeit haben, mich manuell von der **MindMachine** abzumelden.
 
 2. Der "Abmelden"-Button ist klar und einfach zugänglich.
 
@@ -239,37 +144,33 @@ Das Epic 1 konzentriert sich auf den grundlegenden Benutzerzugriff und die Authe
 
 5. Benutzer erhalten vor der automatischen Abmeldung aufgrund von Inaktivität eine Benachrichtigung.
 
-6. Benutzer werden automatisch abgemeldet, wenn sie innerhalb der festgelegten Inaktivitätsdauer keine Aktionen durchführen.
+6. Benutzer werden automatisch abgemeldet, wenn sie innerhalb der festgelegten Inaktivitätsdauer keine Aktionen durchführen. #scoping #pleasecheck 
 
-7. Die Inaktivitätsdauer (Kundenwunsch: 60 Minuten bis zum Log-Out) betrifft alle Benutzer.
+7. Die Inaktivitätsdauer (Kundenwunsch: 60 Minuten bis zum Log-Out) betrifft alle Benutzer. #scoping #pleasecheck 
   
 
 ---
 
 ### Epic 2: Dateieverzeichnis
 
-Dieses Epic konzentriert sich auf die Umsetzung der Funktionen rund um das Dateiverzeichnis in der MindMachine-Anwendung. Hierbei stehen die Bereiche Dateiverzeichnis öffnen mit userspezifischer Ansicht, Dateien hochladen mit Prüfung, Dokumente öffnen, Dokumente löschen und Dokument umbenennen im Fokus. Das Ziel ist es, den Benutzern eine intuitive und personalisierte Möglichkeit zu bieten, ihre Dateien zu verwalten und auf diese zuzugreifen.
+Dieses Epic konzentriert sich auf die Umsetzung der Funktionen rund um das Dateiverzeichnis in der **MindMachine**-Anwendung. Hierbei stehen die Bereiche Dateiverzeichnis öffnen mit userspezifischer Ansicht, Dateien hochladen mit Prüfung, Dokumente öffnen, Dokumente löschen und Dokument umbenennen im Fokus. Das Ziel ist es, den Benutzern eine intuitive und personalisierte Möglichkeit zu bieten, ihre Dateien zu verwalten und auf diese zuzugreifen.
 
 
 #### User Story 2.1: Datenverzeichnis öffnen mit userspezifischer Ansicht
 
-  
 
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** mein privates Dateiverzeichnis öffnen können und eine Ansicht erhalten, die spezifisch für mich ist.
 
   
-
 **So dass:** ich einen klaren und personalisierten Überblick über meine Dateien erhalte.
 
   
-
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine Option zum Öffnen des privaten Dateiverzeichnisses.
+1. Auf der **MindMachine**-Website gibt es eine Option zum Öffnen des privaten Dateiverzeichnisses.
 
 2. Die Ansicht des Dateiverzeichnisses ist spezifisch für den angemeldeten Benutzer.
 
@@ -280,30 +181,23 @@ Dieses Epic konzentriert sich auf die Umsetzung der Funktionen rund um das Datei
 5. Die Ansicht ist benutzerfreundlich und einfach zu navigieren.
 
   
-
 ---
-
   
-
 #### User Story 2.2: Dateien hochladen mit Prüfung
 
   
-
 **Rolle:** Als HTW-Anwender
-
   
 
 **Ich möchte:** Dateien in mein privates Verzeichnis hochladen können.
 
-  
 
 **So dass:** ich meine Dateien sicher und effizient verwalten kann.
 
-  
 
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine Funktion zum Hochladen von Dateien.
+1. Auf der **MindMachine**-Website gibt es eine Funktion zum Hochladen von Dateien.
 
 2. Der Benutzer kann Dateien auswählen und hochladen.
 
@@ -319,29 +213,23 @@ Dieses Epic konzentriert sich auf die Umsetzung der Funktionen rund um das Datei
 
 8. Die OCR-Prüfung respektiert die Privatsphäre des Benutzers und erfasst nur notwendige Informationen.
 
-  
-
 ---
 
 #### User Story 2.3: Dokumente öffnen
 
   
-
 **Rolle:** Als HTW-Anwender
 
-  
 
 **Ich möchte:** die Möglichkeit haben, Dokumente in meinem privaten Verzeichnis zu öffnen.
 
-  
 
 **So dass:** ich den Inhalt meiner Dateien anzeigen und bearbeiten kann.
 
-  
 
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine Option zum Öffnen von Dokumenten im privaten Verzeichnis.
+1. Auf der **MindMachine**-Website gibt es eine Option zum Öffnen von Dokumenten im privaten Verzeichnis.
 
 2. Der Benutzer kann ein Dokument auswählen und öffnen.
 
@@ -349,31 +237,27 @@ Dieses Epic konzentriert sich auf die Umsetzung der Funktionen rund um das Datei
 
 4. Die Benutzeroberfläche für das Öffnen von Dokumenten ist benutzerfreundlich gestaltet.
 
-5. Falls das Dokument schreibgeschützt ist, kann der Benutzer es dennoch anzeigen.
+6. Falls das Dokument schreibgeschützt ist, kann der Benutzer es dennoch anzeigen.
 
-6. Die Dokumentenanzeige respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
+7. Die Dokumentenanzeige respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
 
 ---
 
 #### User Story 2.4: Dokumente löschen
-
   
 
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** die Möglichkeit haben, Dokumente aus meinem privaten Verzeichnis zu löschen.
 
   
-
 **So dass:** ich mein Dateiverzeichnis aufräumen und unerwünschte Dateien entfernen kann.
 
   
-
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine Option zum Löschen von Dokumenten im privaten Verzeichnis.
+1. Auf der **MindMachine**-Website gibt es eine Option zum Löschen von Dokumenten im privaten Verzeichnis.
 
 2. Der Benutzer kann ein Dokument auswählen und löschen.
 
@@ -387,29 +271,23 @@ Dieses Epic konzentriert sich auf die Umsetzung der Funktionen rund um das Datei
 
 7. Das Löschen von Dokumenten respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
 
-  
-
 ---
 
 #### User Story 2.5: Dokument umbenennen
 
   
-
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** die Möglichkeit haben, den Namen eines Dokuments in meinem privaten Verzeichnis zu ändern.
 
   
-
 **So dass:** ich meine Dateien besser organisieren und individuell benennen kann.
-
   
 
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine Option zum Umbenennen von Dokumenten im privaten Verzeichnis.
+1. Auf der **MindMachine**-Website gibt es eine Option zum Umbenennen von Dokumenten im privaten Verzeichnis.
 
 2. Der Benutzer kann ein Dokument auswählen und den Namen bearbeiten.
 
@@ -422,34 +300,28 @@ Dieses Epic konzentriert sich auf die Umsetzung der Funktionen rund um das Datei
 6. Das Umbenennen von Dokumenten respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
 
 ---
-
   
-
 ### Epic 3: Fragen stellen
-
   
+Dieses Epic widmet sich der Funktion, Fragen an die **MindMachine** zu stellen. Die User Stories innerhalb dieses Epics ermöglichen es den HTW-Anwendern, über das Interface Fragen als Text- oder Sprachprompt zu formulieren. Dabei wird eine Benutzeroberfläche geschaffen, die klar und benutzerfreundlich ist. Die KI verarbeitet die Fragen und generiert Suchanfragen, deren Ergebnisse direkt auf der Benutzeroberfläche angezeigt werden. Der Fokus liegt darauf, eine effiziente Interaktion zwischen den Benutzern und der KI zu ermöglichen, wobei Sicherheitsrichtlinien und Datenschutz beachtet werden.
 
-Dieses Epic widmet sich der Funktion, Fragen an die MindMachine zu stellen. Die User Stories innerhalb dieses Epics ermöglichen es den HTW-Anwendern, über das Interface Fragen als Text- oder Sprachprompt zu formulieren. Dabei wird eine Benutzeroberfläche geschaffen, die klar und benutzerfreundlich ist. Die KI verarbeitet die Fragen und generiert Suchanfragen, deren Ergebnisse direkt auf der Benutzeroberfläche angezeigt werden. Der Fokus liegt darauf, eine effiziente Interaktion zwischen den Benutzern und der KI zu ermöglichen, wobei Sicherheitsrichtlinien und Datenschutz beachtet werden.
+---
 
 #### User Story 3.1: Frage als Textprompt stellen
 
   
-
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** über das Interface eine Frage als Textprompt stellen können.
 
   
-
 **So dass:** meine Suchanfrage für die ML-Integration vorbereitet wird, um Auszüge aus meinen Dateien zu generieren.
-
   
 
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine klare und benutzerfreundliche Konsole für die Eingabe von Text-Fragen.
+1. Auf der **MindMachine**-Website gibt es eine klare und benutzerfreundliche Konsole für die Eingabe von Text-Fragen.
 
 2. Der Benutzer kann seine Frage als Text eingeben. Sonderzeichen erzeugen keinen Absturz der Website
 
@@ -459,9 +331,7 @@ Dieses Epic widmet sich der Funktion, Fragen an die MindMachine zu stellen. Die 
 
 5. Die KI verarbeitet die eingegebene Frage und generiert eine Suchanfrage.
 
-6. Die Ergebnisse der Suchanfrage werden direkt auf der Benutzeroberfläche angezeigt.
-
-7. Die Interaktion respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
+6. Die Interaktion respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
   
 
 ---
@@ -469,19 +339,15 @@ Dieses Epic widmet sich der Funktion, Fragen an die MindMachine zu stellen. Die 
 #### User Story 3.2: Frage abändern
 
   
-
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** die Möglichkeit haben, meine gestellte Frage zu bearbeiten.
 
   
-
 **So dass:** ich Anpassungen vornehmen kann, ohne eine komplett neue Suchanfrage zu stellen.
 
   
-
 **Akzeptanzkriterien:**
 
 1. Nachdem die Ergebnisse meiner gestellten Frage angezeigt wurden, gibt es eine Option zur Bearbeitung der Frage.
@@ -496,29 +362,24 @@ Dieses Epic widmet sich der Funktion, Fragen an die MindMachine zu stellen. Die 
 
 6. Die Interaktion respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
 
-  
 
 ---
 
 #### User Story 3.3: Frage als Sprachprompt stellen
 
   
-
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** die Möglichkeit haben, eine Frage als Sprachprompt zu stellen.
-
   
 
 **So dass:** ich mithilfe von Sprachbefehlen meine Suchanfrage für die KI formulieren kann.
 
   
-
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine klare und benutzerfreundliche Option, eine Frage per Sprachprompt zu stellen.
+1. Auf der **MindMachine**-Website gibt es eine klare und benutzerfreundliche Option, eine Frage per Sprachprompt zu stellen.
 
 2. Der Benutzer kann die Sprachoption aktivieren und seine Frage sprechen.
 
@@ -532,34 +393,26 @@ Dieses Epic widmet sich der Funktion, Fragen an die MindMachine zu stellen. Die 
 
 7. Die Interaktion respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
 
-  
-
----
-
-  
+  ---
 
 ### Epic 4: Ergebnisse auswerten
 
-  
-
 Dieses Epic konzentriert sich darauf, die Ergebnisse von Suchanfragen auszuwerten. Die User Stories beschreiben die Anzeige der Suchergebnisse, das Öffnen von Dokumenten, das Kopieren relevanter Passagen und das Löschen von Dokumenten. Ziel ist es, den Benutzern eine umfassende Kontrolle über die gefundenen Informationen zu geben und dabei Sicherheitsrichtlinien zu respektieren. Die Benutzeroberfläche ermöglicht es, relevante Passagen zu kopieren und Dokumente zu öffnen, während die Sicherheit und Privatsphäre der Benutzer gewahrt bleiben.
+
+----
 
 #### User Story 4.1: Ergebnisse anzeigen lassen
 
-  
 
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** die Ergebnisse meiner Suchanfrage angezeigt bekommen.
 
   
-
 **So dass:** ich eine übersichtliche und priorisierte Auflistung der gefundenen Dokumente sowie relevante Passagen erhalte.
 
   
-
 **Akzeptanzkriterien:**
 
 1. Nachdem ich eine Frage gestellt habe, werden die Ergebnisse auf der Benutzeroberfläche angezeigt.
@@ -577,29 +430,22 @@ Dieses Epic konzentriert sich darauf, die Ergebnisse von Suchanfragen auszuwerte
 7. Die Benutzeroberfläche ermöglicht das Öffnen von Dokumenten an den markierten Passagen.
 
 8. Die Interaktion respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
-
-  
+ 
 
 ---
-
-  
 
 #### User Story 4.2: Relevante Passagen kopieren
 
   
-
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** die relevanten Passagen aus den Ergebnissen meiner Suchanfrage kopieren können.
 
   
-
 **So dass:** ich spezifische Informationen aus den gefundenen Dokumenten extrahieren und anderweitig verwenden kann.
 
   
-
 **Akzeptanzkriterien:**
 
 1. Nachdem die Ergebnisse meiner Suchanfrage angezeigt wurden, gibt es eine Option zum Kopieren der relevanten Passagen.
@@ -610,35 +456,29 @@ Dieses Epic konzentriert sich darauf, die Ergebnisse von Suchanfragen auszuwerte
 
 4. Das Kopieren der Passagen respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre des Benutzers.
 
-  
-
----
+  ---
 
 ### Epic 5: Suchhistorie
 
-  
-
 Dieses Epic befasst sich mit der Möglichkeit für Benutzer, ihre Suchhistorie zu verwalten. Die User Stories beschreiben das Öffnen der Suchhistorie und das Anzeigen vergangener Ergebnisse. Die Benutzer haben die Möglichkeit, vergangene Suchanfragen in einem Verzeichnis nachzuvollziehen und sich die Ergebnisse erneut anzeigen zu lassen. Hierbei wird darauf geachtet, eine übersichtliche und benutzerfreundliche Darstellung zu schaffen, die den Datenschutz berücksichtigt.
+
+---
 
 #### User Story 5.1: Öffnen einer Suchhistorie
 
   
-
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** eine Ansicht meiner Suchhistorie öffnen können.
-
   
 
 **So dass:** ich meine vergangenen Suchanfragen nachvollziehen und bei Bedarf erneut verwenden kann.
-
   
 
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine Option zum Öffnen der Suchhistorie.
+1. Auf der **MindMachine**-Website gibt es eine Option zum Öffnen der Suchhistorie.
 
 2. Der Benutzer kann eine Übersicht seiner vergangenen Suchanfragen einsehen.
 
@@ -646,27 +486,19 @@ Dieses Epic befasst sich mit der Möglichkeit für Benutzer, ihre Suchhistorie z
 
 4. Der Benutzer kann direkt in der Auflistung vergangene Suchanfragen auswählen, um eine erneute Suche zu triggern.
 
-  
-
----
-
-  
+  ---
 
 #### User Story 5.2: Vergangene Suchanfragen erneut auslösen
 
   
-
 **Rolle:** Als HTW-Anwender
 
   
-
 **Ich möchte:** über einen Direktlink in meiner Suchhistorie die vergangene Suchanfragen erneut triggern.
 
   
-
 **So dass:** ich direkt zu den neu getriggerten Ergebnissen einer bestimmten vergangenen Suchanfrage navigieren kann.
 
-  
 
 **Akzeptanzkriterien:**
 
@@ -684,28 +516,25 @@ Dieses Epic befasst sich mit der Möglichkeit für Benutzer, ihre Suchhistorie z
 ### Epic 6: Admin-Verwaltung
 
   
+Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User Stories beschreiben die globale Änderung der Speicherkapazität, das Anzeigen von Statistiken und Logging-Protokollen und das Einstellen eines automatischen Log-Outs für Benutzer. Das Ziel ist es, Administratoren die Kontrolle über systemweite Einstellungen zu geben und gleichzeitig eine effiziente Verwaltung der **MindMachine** zu ermöglichen. Dabei werden Sicherheitsaspekte und Datenschutz berücksichtigt.
 
-Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User Stories beschreiben die globale Änderung der Speicherkapazität, das Anzeigen von Statistiken und Logging-Protokollen und das Einstellen eines automatischen Log-Outs für Benutzer. Das Ziel ist es, Administratoren die Kontrolle über systemweite Einstellungen zu geben und gleichzeitig eine effiziente Verwaltung der MindMachine zu ermöglichen. Dabei werden Sicherheitsaspekte und Datenschutz berücksichtigt.
+---
 
 #### User Story 6.1: Log-In für HTW-Administrator
 
-  
 
 **Rolle:** Als HTW-Anwender mit Administrator-Status
 
+ 
+**Ich möchte:** mich mit meinem speziellen Admin-Account auf der **MindMachine**-Website anmelden können.
+
   
-
-**Ich möchte:** mich mit meinem speziellen Admin-Account auf der MindMachine-Website anmelden können.
-
-  
-
 **So dass:** ich privilegierten Zugang zum Admin-Dashboard erhalte.
 
-  
 
 **Akzeptanzkriterien:**
 
-1. Auf der MindMachine-Website gibt es eine klare und benutzerfreundliche Anmeldeseite.
+1. Auf der **MindMachine**-Website gibt es eine klare und benutzerfreundliche Anmeldeseite.
 
 2. Der Administrator kann seinen HTW-Account-Namen und sein Passwort eingeben.
 
@@ -719,24 +548,19 @@ Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User 
 
 7.  Die Admin-Anmeldung ist sicher und schützt die Privatsphäre des Administrators.
 
-
 ---
 
 #### User Story 6.2: Speicherkapazität global ändern
 
   
-
 **Rolle:** Als HTW-Anwender mit Administrator-Status
 
   
-
 **Ich möchte:** globale die maximale Speicherkapazität für alle Benutzer anpassen können.
 
   
-
 **So dass:** ich die Ressourcen effizient verwalten und die Gesamtspeicherkapazität kontrollieren kann.
 
-  
 
 **Akzeptanzkriterien:**
 
@@ -746,30 +570,26 @@ Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User 
 
 3. Die Reduzierung der globalen Speicherkapazität ist begrenzt.
 
-5. Benutzer, deren aktuelle Speichernutzung die neue globale Speicherkapazität überschreitet, erhalten eine Benachrichtigung.
+4. Benutzer, deren aktuelle Speichernutzung die neue globale Speicherkapazität überschreitet, erhalten eine Benachrichtigung.
 
-6. Die globale Speicherkapazität kann nur in einem vordefinierten Bereich geändert werden. Die Mindestanforderung an die Speicherkapazität stellt der Speicherplatz des Users mit der größten Speicherplatzbelegung dar. 
+5. Die globale Speicherkapazität kann nur in einem vordefinierten Bereich geändert werden. Die Mindestanforderung an die Speicherkapazität stellt der Speicherplatz des Users mit der größten Speicherplatzbelegung dar.
 
-7. Der Administrator erhält eine Bestätigung über die erfolgreiche Änderung der globalen Speicherkapazität.
+6. Der Administrator erhält eine Bestätigung über die erfolgreiche Änderung der globalen Speicherkapazität.
 
-8. Die Änderung der globalen Speicherkapazität respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre der Benutzer.
+7. Die Änderung der globalen Speicherkapazität respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre der Benutzer.
 
 ---
 
 #### User Story 6.3: Speicherkapazität anzeigen lassen
 
   
-
 **Rolle:** Als HTW-Anwender mit Administrator-Status
 
   
-
 **Ich möchte:** die globale Speicherkapazität des Servers anzeigen können.
 
   
-
 **So dass:** ich einen Überblick über die Gesamtspeicherkapazität erhalte und Ressourcen effizient verwalten kann.
-
   
 
 **Akzeptanzkriterien:**
@@ -793,24 +613,20 @@ Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User 
 #### User Story 6.4: Statistiken anzeigen lassen
 
   
-
 **Rolle:** Als HTW-Anwender mit Administrator-Status
 
   
-
 **Ich möchte:** Statistiken zu gestellten Frage-Prompts, Nutzerzahlen und Speicherkapazität anzeigen lassen können.
-
   
 
-**So dass:** ich einen umfassenden Überblick über die Nutzung der MindMachine erhalte und strategische Entscheidungen treffen kann.
+**So dass:** ich einen umfassenden Überblick über die Nutzung der **MindMachine** erhalte und strategische Entscheidungen treffen kann.
 
   
-
 **Akzeptanzkriterien:**
 
-1. Der Administrator kann auf der Admin-Verwaltungsseite Statistiken zu gestellten Frage-Prompts einsehen.
+1. Die Statistiken zu Frage-Prompts umfassen Informationen wie Anzahl der gestellten Fragen global und userspezifisch.
 
-2. Die Statistiken zu Frage-Prompts umfassen Informationen wie Anzahl der gestellten Fragen global und userspezifisch.
+2. Der Administrator kann auf der Admin-Verwaltungsseite Statistiken zu gestellten Frage-Prompts einsehen.
 
 3. Der Administrator kann auf der Admin-Verwaltungsseite Statistiken zu den Nutzerzahlen einsehen.
 
@@ -832,20 +648,16 @@ Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User 
 
 #### User Story 6.5: Automatisches Log-Out einstellen
 
-  
 
 **Rolle:** Als HTW-Anwender mit Administrator-Status
 
   
-
 **Ich möchte:** das maximale Zeitfenster von Benutzer-Inaktivität bis zum automatischen Logout für alle Nutzer global vorgeben können.
 
   
-
 **So dass:** ich die Sicherheit der Anwendung erhöhen und Ressourcen effizient verwalten kann.
 
   
-
 **Akzeptanzkriterien:**
 
 1. Der Administrator kann auf der Admin-Verwaltungsseite das maximale Zeitfenster für Benutzer-Inaktivität einstellen.
@@ -861,7 +673,7 @@ Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User 
 6. Das automatische Log-Out respektiert die Sicherheitsrichtlinien und schützt die Privatsphäre der Benutzer.
 
   ---
-### 6.6 User Story: Logging-Protokollverwaltung
+#### User Story 6.6: Logging-Protokollverwaltung
 
 
 **Rolle:** Als HTW-Anwender mit Administrator-Status
@@ -873,15 +685,22 @@ Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User 
 **Akzeptanzkriterien:**
 
 1. Die Anmeldung und Abmeldung von Benutzern wird im Logging-Protokoll erfasst und protokolliert.
-2. Jeder Dateiupload, Dateiöffnung, Dateilöschung und Dateiumbenennung wird im Logging-Protokoll dokumentiert.
-3. Suchanfragen, insbesondere semantische Suchanfragen, werden im Protokoll mit relevanten Details aufgezeichnet.
-4. Alle vom Administrator durchgeführten Aktionen, wie das Zurücksetzen von Passwörtern oder das Hinzufügen/Entfernen von Benutzern, werden im Logging-Protokoll festgehalten.
-5. Änderungen an der Speicherkapazität, einschließlich Erweiterungen oder Reduzierungen, werden im Logging-Protokoll erfasst und sind für den Administrator einsehbar.
-6. Das Logging-Protokoll ist über die Administrationsseite zugänglich und ermöglicht die Filterung nach Datum, Benutzeraktionen und Ereignistypen.
-7. Das System protokolliert Fehler und Ausnahmen, um eine umfassende Fehleranalyse zu ermöglichen.
-8. Das Logging-Protokoll respektiert die Datenschutzrichtlinien und zeigt nur die Informationen an, die für Administratoren relevant sind.
-9. Die Protokolldaten werden sicher gespeichert und sind vor unbefugtem Zugriff geschützt.
 
+2. Jeder Dateiupload, Dateiöffnung, Dateilöschung und Dateiumbenennung wird im Logging-Protokoll dokumentiert.
+
+3. Suchanfragen, insbesondere semantische Suchanfragen, werden im Protokoll mit relevanten Details aufgezeichnet.
+
+4. Alle vom Administrator durchgeführten Aktionen, wie das Zurücksetzen von Passwörtern oder das Hinzufügen/Entfernen von Benutzern, werden im Logging-Protokoll festgehalten.
+
+5. Änderungen an der Speicherkapazität, einschließlich Erweiterungen oder Reduzierungen, werden im Logging-Protokoll erfasst und sind für den Administrator einsehbar.
+
+6. Das Logging-Protokoll ist über die Administrationsseite zugänglich und ermöglicht die Filterung nach Datum, Benutzeraktionen und Ereignistypen.
+
+7. Das System protokolliert Fehler und Ausnahmen, um eine umfassende Fehleranalyse zu ermöglichen.
+
+8. Das Logging-Protokoll respektiert die Datenschutzrichtlinien und zeigt nur die Informationen an, die für Administratoren relevant sind.
+
+9. Die Protokolldaten werden sicher gespeichert und sind vor unbefugtem Zugriff geschützt.
 
  _Hinweis: Die Administratorrolle hat Vollzugriff auf das Logging-Protokoll, um eine umfassende Überwachung und Analyse des Systemverhaltens sicherzustellen._
  
@@ -890,19 +709,12 @@ Dieses Epic adressiert die Verwaltungsfunktionen für Administratoren. Die User 
 
 ## 2.2 Nicht-funktionale Anforderungen 
 
-**guideline von HTW
-
-Führen Sie an dieser Stelle alle nicht-funktionalen Anforderungen Ihres Systems auf. Zum Beispiel unter welchem Betriebssystem die Software laufen soll, oder welche Anforderungen an Antwort- oder Verarbeitungszeiten gestellt werden. 
-
----
-### WIP
-
-Die nicht funktionalen Anforderungen für die MindMachine-Webanwendung umfassen verschiedene Aspekte, die sicherstellen sollen, dass die Anwendung den Anforderungen an Leistung, Sicherheit und Benutzerfreundlichkeit gerecht wird.
+Die nicht funktionalen Anforderungen für die **MindMachine**-Webanwendung umfassen verschiedene Aspekte, die sicherstellen sollen, dass die Anwendung den Anforderungen an Leistung, Sicherheit und Benutzerfreundlichkeit gerecht wird.
 
 ### Leistung
 Die Software muss effizient arbeiten und schnelle Antwortzeiten bieten, um die Anforderungen einer großen Anzahl von Benutzern zu erfüllen.
 
-- **Reaktionsgeschwindigkeit**: Die MindMachine-Anwendung muss schnell auf Benutzeranfragen reagieren, um eine effiziente Nutzung zu ermöglichen.
+- **Reaktionsgeschwindigkeit**: Die **MindMachine**-Anwendung muss schnell auf Benutzeranfragen reagieren, um eine effiziente Nutzung zu ermöglichen.
 - **Skalierbarkeit**: Die Anwendung sollte in der Lage sein, mit steigender Benutzeranzahl und Datenmenge umzugehen, ohne die Leistung erheblich zu beeinträchtigen.
 - **Verfügbarkeit**: Die Anwendung muss eine hohe Verfügbarkeit aufweisen, um den Benutzern jederzeit und überall Zugang zu ermöglichen.
 
@@ -913,6 +725,7 @@ Die Sicherheit der Daten und Benutzerinformationen hat höchste Priorität. Es m
 - **Schutz vor Angriffen**: Die Anwendung muss gegen Sicherheitsbedrohungen wie SQL-Injektionen und Cross-Site-Scripting (XSS) geschützt sein.
 - **Datensicherheit**: Die Daten müssen sicher gespeichert und übertragen werden, um die Integrität und Vertraulichkeit zu gewährleisten.
 
+
 ### Benutzerfreundlichkeit
 Die Benutzeroberfläche sollte intuitiv und benutzerfreundlich gestaltet sein, um eine einfache Navigation und Interaktion zu ermöglichen.
 - **Barrierefreiheit**: Die Anwendung muss barrierefrei sein und den Zugang für Benutzer mit unterschiedlichen Fähigkeiten und Bedürfnissen erleichtern.
@@ -921,94 +734,20 @@ Die Benutzeroberfläche sollte intuitiv und benutzerfreundlich gestaltet sein, u
 Die nicht-funktionalen Anforderungen sind entscheidend für den Erfolg des Projekts, da sie sicherstellen, dass die entwickelte Software den Anforderungen der HTW Berlin und ihrer Benutzer gerecht wird. Durch die sorgfältige Planung, Umsetzung und Überprüfung dieser Anforderungen wird das Premierprojekt dazu beitragen, innovative Lösungen für die Herausforderungen in den Ingenieurwissenschaften zu entwickeln und gleichzeitig die höchsten Standards in Bezug auf Leistung, Sicherheit und Benutzerfreundlichkeit zu erfüllen.
 
 
-### Fragen an das Team bzgl der erfolgten Umsetzung für das Scoping Document
+## 2.3 Abhängigkeiten
 
+Im Rahmen der Anforderungsanalyse wurden wesentliche Systemvoraussetzungen und externe Abhängigkeiten für das **MindMachine**-Projekt ermittelt.
+#### Verwendung von Qdrant
 
+Die **MindMachine**-Anwendung nutzt Qdrant, eine Open-Source-Software, die unter der [Apache License 2.0](https://github.com/qdrant/qdrant/blob/master/LICENSE) lizenziert ist. Die Integration von Qdrant in die **MindMachine**-Anwendung erfolgt unter Beachtung folgender Lizenzbedingungen:
 
-1. **Leistung:**
-    
-    - Wie plant ihr, die Leistungsanforderungen der Software zu erfüllen? Gibt es spezielle Technologien oder Architekturen, die dafür verwendet werden?
-2. **Sicherheit:**
-    
-    - Welche Sicherheitsmechanismen sind geplant, um die Sicherheitsanforderungen der Software zu erfüllen? Werden Daten verschlüsselt oder Zugriffskontrollen implementiert?
-3. **Skalierbarkeit:**
-    
-    - Wie plant ihr, mit wachsenden Benutzerzahlen umzugehen? Werden Cloud-Ressourcen oder Lastenausgleichsmechanismen verwendet?
-4. **Benutzerfreundlichkeit:**
-    
-    - Welche Designrichtlinien oder Usability-Tests werden durchgeführt, um sicherzustellen, dass die Benutzeroberfläche benutzerfreundlich ist?
-5. **Zuverlässigkeit:**
-    
-    - Wie wird die Software auf Zuverlässigkeit getestet? Gibt es Testautomatisierung oder Überwachungstools?
-6. **Wartbarkeit:**
-    
-    - Wie wird der Quellcode organisiert und dokumentiert, um die Wartbarkeit sicherzustellen? Werden Best Practices in der Softwareentwicklung befolgt?
-7. **Dokumentation:**
-    
-    - Welche Arten von Dokumentation werden erstellt? Gibt es Pläne für Benutzerhandbücher, Entwicklerdokumentation oder Schulungsmaterialien?
+1. **Reproduktion und Distribution:** Reproduktion und Verbreitung von Qdrant im Einklang mit den Bestimmungen der Apache License 2.0.
+2. **Erstellung abgeleiteter Werke:** Möglichkeit zur Erstellung und Verbreitung abgeleiteter Werke von Qdrant, solange diese die Lizenzbedingungen erfüllen.
+3. **Öffentliche Anzeige und Aufführung:** Erlaubnis zur öffentlichen Anzeige und Aufführung von Qdrant.
+4. **Patentlizenz:** Automatische Patentlizenz für patentierte Bestandteile von Qdrant, gemäß der Lizenzbestimmungen.
 
-Diese Fragen können dem Team helfen, die Anforderungen genauer zu spezifizieren und zu überlegen, wie sie diese im Projekt umsetzen möchten.
+Es ist unerlässlich, die vollständigen Bedingungen der Apache License 2.0 gewissenhaft zu beachten und einzuhalten.
 
----
+#### Abhängigkeit von HTW-Systemen
 
-## 2.3. Risiken
-
-
-Beschreiben Sie mögliche Risiken für die erfolgreiche Umsetzung Ihres Projektes! Welche Maßnahmen können Sie ergreifen, um die Risiken zu reduzieren? Diese Darstellung sollte in einer Tabelle erfolgen. 
-
-## 2.4. GUI
-
-  
-Erstellen Sie einen Mockup Ihrer GUI. Dazu sollen für die wichtigen Anwendungsfälle die Oberflächen entworfen und ihre Funktion beschrieben werden. Das Mockup kann mit einem beliebigen Tool umgesetzt werden (Powerpoint, inkscape, Figma, Paint, WPF, egal!). 
-
-
-# 3. Realisierung 
-
-## 3.1. Komponenten 
-
-
-Legen Sie die für Ihr System zu erstellenden Komponenten fest. Ordnen Sie die Komponente dem verantwortlichen Teammitglied zu. Legen Sie fest, welche Use-Cases in welcher Komponente oder welchen Komponenten aus heutiger Sicht zu realisieren sind.  
-
-Erstellen Sie ggfs. ein Komponenten-Diagramm des zu realisierenden Programms mit den dazu erforderlichen Komponenten und zeigen Sie die Abhängigkeiten zwischen den Komponenten auf. 
-
-## 3.2 Interne Schnittstellen / Klassendiagramm 
-
-
-Erstellen Sie ein Klassendiagramm, um die zu realisierenden Schnittstellen konkret zu spezifizieren. Überlegen Sie, welche Funktionen von welcher Klasse bereitgestellt werden müssen und achten Sie auf eine sinnvolle Softwarearchitektur und ggfs. passende Entwurfsmuster. 
-
-## 3.3 Externe Schnittstellen 
-
-Beschreiben Sie die externen Schnittstellen Ihres Systems. Erstellen Sie dazu eine Tabelle, in der Sie den Namen der Schnittstelle, die Art der Schnittstelle (das könnte eine Datei, eine Serveranwendung, ein KI-Modell, eine Datenbank, eine Website etc. sein), den Typ der Schnittstellenimplementierung (Dateizugriff, http-Zugriff, COM-Zugriff o.ä.) und die Komponente oder Klasse, die für die Realisierung der externen Anbindung zuständig ist, auflisten. 
-
-## 3.4 Datenbank-Schema 
-
-  
-
-Wenn Sie eine Datenbank verwenden, erklären und skizzieren Sie hier Ihr Datenbank-Schema. 
-
-## 3.5 Tests und Qualitätssicherung 
-
-  
-
-Beschreiben Sie hier, welche Aspekte Ihrer Software Sie wie testen könnten. Aus Zeitgründen verzichten wir auf eine detaillierte Test-Strategie. Nutzen Sie diesen Abschnitt jedoch für Vorschläge, wie man (rein hypothetisch) essenzielle Funktionalitäten testen könnte. Sie müssen die hier gemachten Vorschläge nicht umsetzen. 
-
-  
-## 3.6. Lizenz 
-
- ### Verwendete Lizenzen
-
-#### Qdrant 
-
-Die MindMachine-Anwendung verwendet Qdrant, eine Open-Source-Software, die unter der [Apache License 2.0](https://github.com/qdrant/qdrant/blob/master/LICENSE) veröffentlicht ist.
-
-**Anwendung der Lizenz in der MindMachine-Anwendung:**
-
-1. **Reproduktion und Distribution:** Die MindMachine-Anwendung reproduziert und verteilt Qdrant gemäß den Bedingungen der Apache License 2.0.
-
-2. **Erstellung abgeleiteter Werke:** Die MindMachine-Anwendung kann abgeleitete Werke von Qdrant erstellen und verteilen, solange diese Werke den Bedingungen der Apache License 2.0 entsprechen.
-
-3. **Öffentliche Anzeige und Aufführung:** Die MindMachine-Anwendung kann Qdrant öffentlich anzeigen und aufführen.
-
-4. **Patentlizenz:** Durch die Verwendung von Qdrant gemäß der Apache License 2.0 erhalten die Benutzer automatisch eine Patentlizenz für eventuell patentierte Teile von Qdrant.
-
-Stellen Sie sicher, dass Sie die vollständigen Bedingungen der Apache License 2.0 sorgfältig überprüfen und einhalten. Bei Fragen oder Unklarheiten ist es ratsam, rechtlichen Rat einzuholen.
+Aufgrund der Einbettung des Projekts in den Kontext einer Hochschule ergeben sich spezifische Abhängigkeiten. Dazu gehören die Nutzung der von der HTW bereitgestellten Hardware, wie Server- und Docker-Strukturen, sowie die Abhängigkeit von IT-Personal für die Beschaffung von Sicherheitszertifikaten und technischer Unterstützung. Diese Abhängigkeiten beeinflussen sowohl die Entwicklung als auch die Wartung des **MindMachine**-Projekts.
