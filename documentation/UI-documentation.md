@@ -165,7 +165,7 @@ Nachfolgend befinden sich Mockups der wichtigsten Seiten  der Benutzeroberfläc
 *Abb. 7: Mockup des Impressums*
 
 
-![Logo](./assets/Log*o.png)
+![Logo](./assets/Logo.png)
 *Abb. 8: Logo*
 
 ---
