@@ -1,17 +1,15 @@
 In diesem Dokument wird der tatsächlich umgesetzten Projektumfang und die aus den begrenzten Ressourcen resultierenden Grenzen des Projekts erläutert. Zudem erfolgt ein Vergleich der geplanten und tatsächlichen eingehaltenen Meilenstein und Liefergegenstände der einzelnen Sprints, eine Risikoanalyse, sowie eine Auswertung des Risiko- und Projektmanagements auf Grundlage der vorangegangenen Erkenntnisse.
 
-# 1. Projektumfang und Grenzen #pleasecheck
+# 1. Projektumfang und Grenzen 
 
-  
 
- Eine detailliertere Beschreibung der funktionalen und nicht-funktionalen Anforderungsanalyse befindet sich im [requirement-document](\ **MindMachine**\Documentation\requirements-document.md).
+ Eine detailliertere Beschreibung der funktionalen und nicht-funktionalen Anforderungsanalyse befindet sich im [Requirement Dokument](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/requirements-document.md).
 
 ---
 
 ## 1.1 Funktionalen Anforderungen
 
   
-
 ### Im Projektumfang enthalten
 
   
@@ -32,7 +30,7 @@ Bei der nachfolgenden Auflistung handelt es sich um erfolgreich implementierten 
 
 - **Dateiverwaltung:**
 
-  - Privates Dateiverzeichnis für HTW-Anwender mit benutzerspezifischer Ansicht.
+  - Privates Dateiverzeichnis für HTW-Anwender mit Ansicht.
 
   - Hochladen von Dateien mit Prüfung auf Gültigkeit (OCR-PDF).
 
@@ -63,7 +61,6 @@ Bei der nachfolgenden Auflistung handelt es sich um erfolgreich implementierten 
   - Logging-Protokollverwaltung für umfassende Überwachung und Fehleranalyse.
 
   
-
 Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle User Storys zum Ende des letzten Sprints geschlossen werden konnten. Jedoch gibt es geringfügige Abweichungen bei der Erfüllung einzelner Akzeptanzkriterien der funktionalen Anforderungen. Folgende Funktionalität konnten nicht in dieser Projektphase implementiert werden und sind somit den folgenden Weiterentwicklungsprojektphase zu ergänzen:
 
   
@@ -71,6 +68,13 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 ### Nicht im Projektumfang enthaltene Funktionen
 
   
+#### User Story 1.1: Website öffnen als Anwender
+
+
+- **Nicht enthaltene Akzeptanzkriterien:**
+
+    - Punkt 1: Öffentlicher Zugang ist vorbereitet, die Freigabe in der Firewall durch die IT der HTW Berlin steht noch aus.
+
 
 #### User Story 4.1: Ergebnisse anzeigen lassen
 
@@ -118,8 +122,6 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 
 - **Nicht enthaltene Akzeptanzkriterien:**
 
-    -
-
     - Punkt 6: Der Administrator kann auf der Admin-Verwaltungsseite den Verlauf der globalen Speicherkapazität überprüfen
 
   
@@ -144,7 +146,7 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 
 - **Nicht implementierbar:**
 
-    - Punkt 4: Die Nutzerstatistiken umfassen Informationen wie Gesamtzahl der aktiven Benutzer. Nicht umsetzbar, da nicht im Code des Teams enthalten.
+    - Punkt 4: Die Nutzerstatistiken umfassen Informationen wie Gesamtzahl der aktiven Benutzer. Nicht umsetzbar.
 
   
 
@@ -184,15 +186,15 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 
 - **Authentifizierung und Autorisierung**:
 
-    - Wegen Ressourcenbeschränkung nicht umgesetzt.
+    - JW-Tokens wurden für die Authentifizierung und Autorisierung implementiert.
 
 - **Schutz vor Angriffen**:
 
-    - Kein Schutz gegen SQL-Injektionen und XSS implementiert.
+    - Kein Schutz gegen SQL-Injektionen und XSS implementiert. Nachträglich Implementierung möglich.
 
 - **Datensicherheit**:
 
-    - Keine Daten-Backups vorhanden.
+    - Keine Datensicherheit abseits von vorbereitetem HTTPS-Zertifikat vorhanden. Demnach auch keine Daten-Backups vorhanden.
 
   
 
@@ -206,7 +208,7 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 
 - **Dokumentation**:
 
-    - Verweis auf Testing Documentation und Erfüllung der Akzeptanzkriterien in UI-Documentation.
+    - Wurden erfüllt. Nachzulesen im [Testing Documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/UI-documentation.md) und [UI-Documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/UI-documentation.md)
 
   
 
@@ -216,9 +218,11 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 
 - **Testing**:
 
-    - Unittests in CI-Pipeline bei jedem Commit.
+    - Hier befindet sich eine Dokumentation der [Testing Strategie](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/testing-strategy.md). 
 
-    - Automatisches Neubauen des Projekts auf dem Produktionsserver bei Merges im Git.
+    - Während der Entwicklungsphase wurden ausschließlich manuelle Funktionstest auf der Website durchgeführt. 
+   
+    -  Derzeit erfolgt ein automatisches Neubauen des Projekts auf dem   Produktionsserver bei Merges im Git, ergänzt durch eine Vorbereitung zur Test- Implementierung.
 
   
 
@@ -251,7 +255,7 @@ Nachfolgend befindet sich ein visuelle Aufarbeitung der geplanten Meilensteine u
 
   
 
-![[\mindmachine\Documentation\assets\milestones_planned.jpg]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/milestones_planned.jpg]]
 
   
 
@@ -259,7 +263,7 @@ Nachfolgend befindet sich ein visuelle Aufarbeitung der geplanten Meilensteine u
 
   
 
-![[\mindmachine\Documentation\assets\milestones_reality.jpg]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/milestones_reality.jpg]]
 
   
 
@@ -365,19 +369,25 @@ Risiken im Projekt beinhalteten neben technische Herausforderungen, wie die Inte
 
 ---
 
-# 4.  Projektmanagement-Übersicht #pleasecheck bitte ergänzen!
+# 4.  Projektmanagement-Übersicht 
 
-  
 
-Einmal erläutern! Welche Methoden wurden genutzt. Wie wurden sie umgesetzt und ggf. im Projektverlauf angepasst. @Nils @Pascal
+Das Projekt nutzte agile Methoden in einer angepassten Form von Scrum und moderne Tools für Requirements- und Konfigurations-Management. Die Teamarbeit und enge Zusammenarbeit zwischen HTW Berlin und Studierenden waren zentrale Aspekte des Managements.
 
-textliches fine tuning kann durch mich erfolgen. Aber bitte verständliche Stichpunkte
+Im Projektverlauf wurde eine deutliche Steigerung der Teamleistung durch die angewandten und sukzessive optimierten Projektmanagement-Methoden erzielt. Dies ist deutlich anhand der Leistungssteigerung über die drei Sprint zu erkennen und kann in den nachfolgenden "Burn _out_ "-Charts nachvollzogen werden.
 
-  
 
-Das Projekt nutzte agile Methoden und moderne Tools für Requirements-Management, Konfigurations-Management, automatisiertes Testen und Projektmanagement. Die Teamarbeit und enge Zusammenarbeit zwischen HTW Berlin und Studierenden waren zentrale Aspekte des Managements.
+![[Sprint1.png]]
+*Abb.1: Burndown und Burnup-Chart von Sprint 1* #link
 
-  
+
+![[Sprint2.png]]
+*Abb.2: Burndown und Burnup-Chart von Sprint 2* #link
+
+
+![[Sprint3.png]]
+*Abb.3: Burndown und Burnup-Chart von Sprint 3* #link
+
 
 ---
 

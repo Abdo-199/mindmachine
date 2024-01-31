@@ -34,7 +34,7 @@ Die enge Zusammenarbeit zwischen der HTW Berlin und den Studierenden bei der Ent
 ---
 # 2. Installation
 
-Da es sich um eine Webanwendung handelt, ist keine lokale Installation erforderlich. Sobald sie mit dem HTW-Netzwerk verbunden sind, können Sie einfach die [MindMachine-Website](141.45.224.114.md) #pleasecheck  besuchen und auf die entsprechenden Funktionen zugreifen.
+Da es sich um eine Webanwendung handelt, ist keine lokale Installation erforderlich. Sobald sie mit dem HTW-Netzwerk verbunden sind, können Sie einfach die [MindMachine-Website](https://141.45.224.114)  besuchen und auf die entsprechenden Funktionen zugreifen.
 
 Bitte beachten Sie, dass eine Internetverbindung erforderlich ist, um auf die Anwendung zuzugreifen. Zusätzlich ist ein HTW-Account erforderlich, um sich anzumelden. Die manuelle Registrierung ist nicht möglich; verwenden Sie bitte Ihre vorhandenen HTW-Anmeldeinformationen.
 
@@ -47,10 +47,7 @@ Sollten sie sich nicht im lokalen Netzwerk der HTW befinden, können Sie einen V
 - Verweis zu Anforderungsanalyse in Requirement Docu
 - Verweis zu im Projektumfang enthalten und Grenzen in Scoping
 - Verweis zu Abhängigkeiten in SAD
-- Verweis zu Beispielen in UI: 
-    
-    - Ein einfaches Beispiel oder eine Schnellstartanleitung, um Benutzern den Einstieg zu erleichtern.
-===Verweis auf detaillierte Dokumentation mit Direktlinks etc, wenn diese fertig gestellt ist=== #endsprint
+- Verweis zu Beispielen in UI:  #link
 
 ---
 
@@ -62,7 +59,7 @@ Sollten sie sich nicht im lokalen Netzwerk der HTW befinden, können Sie einen V
 	   
 2. **Zugang zum HTW-Netzwerk sicherstellen:** Für den Zugriff auf unsere Anwendung musst du im HTW-Netzwerk angemeldet sein. Befindest du dich nicht vor Ort, ist die Einrichtung eines HTW-eigenen VPN-Zugangs auf deinem Endgerät erforderlich. Weitere Informationen findest du unter [2. Installation](README for mindmachine#2. Installation).
 	   
-3. **Browser-Kompatibilität:** Die Anwendung wurde erfolgreich in den neuesten Versionen von Chrome, Firefox und Safari getestet. Überprüfe, ob du einen dieser Browser verwendest und versuche es gegebenenfalls mit einem anderen.
+3. **Browser-Kompatibilität:** Die Anwendung wurde erfolgreich in den neuesten Versionen von Chrome, Edge und Firefox getestet. Überprüfe, ob du einen dieser Browser verwendest und versuche es gegebenenfalls mit einem anderen.
     
 4. **Cache leeren:** Wenn unerklärliche Fehler auftreten, versuche, den Browser-Cache zu leeren, um sicherzustellen, dass du die neueste Version der Anwendung verwendest.
     
@@ -78,39 +75,38 @@ Sollten sie sich nicht im lokalen Netzwerk der HTW befinden, können Sie einen V
 
 ## Weitere Unterstützung
 
-Wenn die oben genannten Schritte das Problem nicht lösen, zögere nicht, ===[unser Support-Team](mailto:memorymachine.softeng@gmail.com)===  zu kontaktieren, um weitere Unterstützung zu erhalten.
+Wenn die oben genannten Schritte das Problem nicht lösen, zögere nicht, [unser Support-Team](mailto:memorymachine.softeng@gmail.com)  zu kontaktieren, um weitere Unterstützung zu erhalten.
 
 ---
 
 # 5. Kontakt
 
 **SOFTENG MemoryMachine**
+
 memorymachine.softeng@gmail.com
+
 Hochschule für Technik und Wirtschaft
+
 Campus Wilhelminenhof
+
 Wilhelminenhofstraße 75A, 12459 Berlin
 
 
 ---
 # 6. Lizenzierung und Urheberrecht
 
-## Hinweis zur Verwendung von qdrant
+© 2023 SOFTENG MemoryMachine. 
 
-Die MindMachine-Anwendung verwendet Qdrant, eine Open-Source-Software, die unter der [Apache License 2.0](https://github.com/qdrant/qdrant/blob/master/LICENSE) veröffentlicht ist.
+```
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-**Anwendung der Lizenz in der MindMachine-Anwendung:**
+    http://www.apache.org/licenses/LICENSE-2.0
 
-1. **Reproduktion und Distribution:** Die MindMachine-Anwendung reproduziert und verteilt Qdrant gemäß den Bedingungen der Apache License 2.0.
-    
-2. **Erstellung abgeleiteter Werke:** Die MindMachine-Anwendung kann abgeleitete Werke von Qdrant erstellen und verteilen, solange diese Werke den Bedingungen der Apache License 2.0 entsprechen.
-    
-3. **Öffentliche Anzeige und Aufführung:** Die MindMachine-Anwendung kann Qdrant öffentlich anzeigen und aufführen.
-    
-4. **Patentlizenz:** Durch die Verwendung von Qdrant gemäß der Apache License 2.0 erhalten die Benutzer automatisch eine Patentlizenz für eventuell patentierte Teile von Qdrant.
-    
-
-Stellen Sie sicher, dass Sie die vollständigen Bedingungen der Apache License 2.0 sorgfältig überprüfen und einhalten. Bei Fragen oder Unklarheiten ist es ratsam, rechtlichen Rat einzuholen.
-
-Die MindMachine-Webanwendung unterliegt der [Apache 2.0 Lizenz](https://www.apache.org/licenses/LICENSE-2.0).
-
-© 2023 SOFTENG MemoryMachine. Alle Rechte vorbehalten.  #pleasecheck 
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```

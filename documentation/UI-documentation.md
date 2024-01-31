@@ -19,7 +19,7 @@ Die Anwendung soll eine leicht verständliche Benutzeroberfläche bieten, die ei
 
   
 
-Folgende Auflistung fasst die wichtigsten Anforderungen an die Benutzeroberfläche, die auf den Bedürfnissen und Erwartungen der Benutzer basieren, zusammen.
+Folgende Auflistung fasst die **wichtigsten Anforderungen** an die Benutzeroberfläche, die auf den Bedürfnissen und Erwartungen der Benutzer basieren, zusammen.
 
   
 
@@ -49,25 +49,17 @@ Folgende Auflistung fasst die wichtigsten Anforderungen an die Benutzeroberfläc
 
 7. **Benutzerfreundlichkeit**: Die Benutzeroberfläche muss intuitiv und benutzerfreundlich gestaltet sein, damit Benutzer ohne größere Schwierigkeiten navigieren und Aufgaben erledigen können.
 
-  
-
-8. **Barrierefreiheit**: Die UI muss barrierefrei sein und die relevanten Standards und Richtlinien für Webzugänglichkeit (z. B. WCAG) erfüllen. #pleasecheck erfüllen wir das?
-
-  
-
-9. **Responsives Design**: Die Benutzeroberfläche muss auf verschiedenen Bildschirmgrößen und Geräten korrekt angezeigt werden und ein responsives Design aufweisen. #pleasecheck
 
   
 
 ---
-
-  
+ 
 
 # 2. UI-Designkonzepte
 
   
 
-Das UI-Designkonzept orientiert sich an den Designvorgaben der HTW Berlin.
+Das UI-Designkonzept orientiert sich an den [Designvorgaben der HTW Berlin](https://corporatedesign.htw-berlin.de/).
 
 Demnach wurden folgende Designelemente gewählt:
 
@@ -95,15 +87,13 @@ Demnach wurden folgende Designelemente gewählt:
 
   
 
-# 3. Wireframes und Mockups
+# 3. Wireframes und Mockups #endsprint #link
 
   
 
-Die Navigation zwischen Seiten erfolgt hauptsätzlich beim Klicken auf Buttons und kann in *Abb. 1: Wireframes nachvollzogen werden*
+Die Navigation zwischen Seiten erfolgt hauptsätzlich beim Klicken auf Buttons und kann in Abb. 1: Wireframes nachvollzogen werden
 
-  
-
-![[]] #endsprint
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Mind-Machine-Prototyping.png]] 
 
 *Abb. 1: Wireframes der Webanwendung*
 
@@ -139,15 +129,15 @@ Der Interaktionsfluss besteht im Wesentlichen aus den folgenden Schritten:
 
     - Home: Redirect zur Library-Ansicht
 
-    - Search history: Übersicht über vergangene Suchanfragen
+    - Search History: Übersicht über vergangene Suchanfragen
 
-    - Log out: Redirect zur Anmeldeseite
+    - Log Out: Redirect zur Anmeldeseite
 
-    - Admin panel: Zugriff auf die Admin-Page (vorausgesetzt Adminstatus vorhanden)
+    - Admin Panel: Zugriff auf die Admin-Page (vorausgesetzt Adminstatus vorhanden)
 
   
 
-## 3.2 Mockups #endsprint
+## 3.2 Mockups #endsprint #link
 
   
 
@@ -155,56 +145,56 @@ Nachfolgend befinden sich Mockups der wichtigsten Seiten  der Benutzeroberfläc
 
   
 
-![[.\mindmachine\Documentation\assets\1Mockup_Startseite.png]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%201image_startseite.png]]
 
 *Abb. 2: Mockup Startseite*
 
   
   
 
-![[.\mindmachine\Documentation\assets\2MockUp_Profilseite.png]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%202image_Profilseite.png]]
 
 *Abb. 3: Mockup userspezifischen Bibliothek-Startseite*
 
   
   
 
-![[\mindmachine\Documentation\assets\3Mockup_Search.png]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%203image_Results.png]]
 
 *Abb. 4: Mockup Ergebnisseite der aktuellen Suchanfrage
 
   
   
 
-![[\mindmachine\Documentation\assets\4Mockup_Results.png]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%204image_Search.png]]
 
 *Abb. 5: Mockup der Ergebnisseite beim erneuten Ausläsen einer Suchanfrage aus der Suchhistroie
 
   
   
 
-![[\mindmachine\Documentation\assets\5MockUp_FileInformation.png]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%205image_FileInformation.png]]
 
 *Abb. 6: Mockup der Ansicht von Dokumenteninformationen
 
   
   
 
-![[\mindmachine\Documentation\assets\6MockUp_SearchHistory.png]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%205image_searchHistory.png]]
 
 *Abb. 7: Mockup der Suchhistorie
 
   
   
 
-![[\mindmachine\Documentation\assets\7MockUp_Statistics.png]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%207image_Statistics.png]]
 
 *Abb. 8: Mockup der Statistiken im Admin-Panel
 
   
   
 
-![[\mindmachine\Documentation\assets\8MuckUp_Impressum.png]]
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%208image_Impressum.png]]
 
 *Abb. 9: Mockup des Impressums
 
@@ -218,7 +208,7 @@ Nachfolgend befinden sich Mockups der wichtigsten Seiten  der Benutzeroberfläc
 
   
 
-## 4.1 Barrierefreiheit #pleasecheck
+## 4.1 Barrierefreiheit 
 
   
 
@@ -226,19 +216,15 @@ Die Barrierefreiheit ist ein wesentlicher Aspekt unseres Projekts MindMachine, d
 
   
 
-1. **Text-Alternative**: Bilder, Grafiken und andere nicht-textuelle Inhalte sollten alternative Textbeschreibungen haben, damit Menschen mit Sehbehinderungen den Inhalt verstehen können. Screenreader können diese Textbeschreibungen vorlesen.
+1. **Text-Alternative**: Bilder, Grafiken und andere nicht-textuelle Inhalte sollten alternative Textbeschreibungen haben, damit Menschen mit Sehbehinderungen den Inhalt verstehen können. Screenreader können diese Textbeschreibungen vorlese
 
   
 
-2. **Tastaturzugänglichkeit**: Alle Funktionen und Interaktionen in der Anwendung sollten auch über die Tastatur bedienbar sein, da einige Benutzer möglicherweise keine Maus verwenden können.
+2. **Kontrast und Farbgestaltung**: Die Farben und der Kontrast in der Anwendung sollten so gestaltet sein, dass sie auch für Menschen mit Sehbehinderungen gut sichtbar sind.
 
   
 
-3. **Kontrast und Farbgestaltung**: Die Farben und der Kontrast in der Anwendung sollten so gestaltet sein, dass sie auch für Menschen mit Sehbehinderungen gut sichtbar sind.
-
-  
-
-4. **Strukturierte Semantik**: Die Verwendung von HTML-Elementen sollte semantisch korrekt sein, um die Informationen in einer logischen und verständlichen Reihenfolge darzustellen. Dies hilft Screenreadern und anderen Hilfsmitteln, den Inhalt richtig zu interpretieren.
+3. **Strukturierte Semantik**: Die Verwendung von HTML-Elementen sollte semantisch korrekt sein, um die Informationen in einer logischen und verständlichen Reihenfolge darzustellen. Dies hilft Screenreadern und anderen Hilfsmitteln, den Inhalt richtig zu interpretieren.
 
   
 
@@ -248,40 +234,12 @@ Die Barrierefreiheit ist ein wesentlicher Aspekt unseres Projekts MindMachine, d
 
 - Die Benutzeroberfläche muss auf den gängigsten Webbrowsern korrekt angezeigt werden.
 
-- Die Benutzeroberfläche muss auf verschiedenen Bildschirmgrößen responsive sein.
+- Die Ladezeiten für Seiten oder Funktionen dürfen 2 Sekunden nicht überschreiten.
 
-- Die Ladezeiten für Seiten oder Funktionen dürfen bestimmte Grenzwerte nicht überschreiten.
-
-  
-
-Alle Akzeptanzkriterien hinsichtlich der Benutzeroberfläche konnten wie geplant erfüllt werden werden und sind damit losgelöst vom [Scoping Document](\mindmachine\Documentation\scoping-document.md) dokumentiert.
+Alle Akzeptanzkriterien hinsichtlich der Benutzeroberfläche konnten wie geplant erfüllt werden werden und sind damit losgelöst vom [Scoping Document](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/scoping-document.md) dokumentiert.
 
   
 
 Im Zuge einer Weiterentwicklung der **MindMachine**-Webanwendung könnte das responsive Design ggf. für Smartphones ausgeweitet werden. Dies war in dieser Projektphase jedoch nicht von sonderlich hoher Bedeutung, da ein Zugriff auf die Webadresse nur bei Verbindung mit der HTW-Netzwerk möglich ist.
 
   
-
----
-
-  
-
-# 5. Bildschirmaufnahmen und Beispiele
-
-  
-
-#endsprint #pleasecheck
-
-  
-
-Einloggen
-
-PDF-hochladen
-
-Frage stellen
-
-Suchhistorie
-
-Admin Panel
-
-===Ein einfaches Beispiel oder eine Schnellstartanleitung.===
