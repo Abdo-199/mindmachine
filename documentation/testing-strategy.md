@@ -19,7 +19,6 @@ Verschiedene Testszenarien wurden durchgeführt, darunter:
 
 ## 1. Testfall: test_pdfReader.py
 
-#pleasecheck Hier fehlt die Beschreibung zum Anwendungsfall bzw zu den Testszenarien (s. Testfall 2 und 3)
 
 **Testumgebung:** Ausgeführt in einer Python-Umgebung mit PyPDF2 und anderen notwendigen Bibliotheken.
 
@@ -159,7 +158,7 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 
 ### Testergebnis für Testfall 1
 
-![Testergebnisbericht Testfall 1](Testbericht_TF1.jpg)
+![Testergebnisbericht Testfall 1](Testbericht_TF1.jpg) #link
 
 ## 2. Testfall:  test_Qdrant.py
 
@@ -167,8 +166,7 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
     - Überprüfung vorhandener und nicht existierender Benutzer
     - Hinzufügen von Dokumentvektoren
     - Abrufen von Suchergebnissen aus der Qdrant-Datenbank 
-      #pleasecheck meines Erachtens Doppelung mit Auflistung der Testfälle
-      #pleasecheck es gilt auch bei den inhaltlichen Vorleistungen auf eine allgemeingültige Struktur zu achten. Bitte einheitliche Bezeichnung für diesen Abschnitt Testfälle und -szenarien bzw. Anwendungsfälle in allen Testfall-Abschnitten einarbeiten
+   es gilt auch bei den inhaltlichen Vorleistungen auf eine allgemeingültige Struktur zu achten. Bitte einheitliche Bezeichnung für diesen Abschnitt Testfälle und -szenarien bzw. Anwendungsfälle in allen Testfall-Abschnitten einarbeiten
 
 **Testumgebung:** Die Tests wurden in einer Python-Umgebung mit dem Qdrant-Client und den erforderlichen Bibliotheken durchgeführt.
 
@@ -196,17 +194,13 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 
 **2.3 Testfall:**  Dokument Vektor hinzufügen
 
-**2.4 Testfall:** Abfrage von Treffen des Qdrant-Clients #pleasecheck korrekte Testbezeichnung?
+**2.4 Testfall:** Abrufen von Treffern aus Qdrant
 
 **2.5 Testfall:** Abrufen von Ergebnissen aus Treffern
 
 **2.6 Testfall:** Suchfunktionalität
 
 #### 2.1 Testfall: Überprüfung der vorhandenen Benutzer
-
--  Erhalten Sie Ergebnisse von Hits
--    Suchfunktionalität 
-#pleasecheck Warum steht das hier?
 
 **Zweck:** Überprüfen, ob der Qdrant-Client einen vorhandenen Benutzer in der Datenbank korrekt identifizieren und die Vektorzählung abrufen kann.
 
@@ -254,7 +248,7 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 
 **Pass/Fail Criteria**: Besteht, wenn die upload_records-Methode die richtige Anzahl von Malen (einmal für das Dokument und einmal für jeden Absatz) aufgerufen wird.
 
-#### 2.4 Testfall: Abfrage von Treffern des Qdrant-Clients #pleasecheck 
+#### 2.4 Testfall: Abrufen von Treffern aus Qdrant
 
 **Zweck:** Validierung der Funktionalität zum Abrufen von Suchtreffern vom Qdrant-Client anhand einer Abfrage.
 
@@ -309,7 +303,7 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 ### Testergebnis für Testfall 2
 
 ![Testergebnisbericht Testfall 2](Testbericht_TF2.jpg)
-
+#link
 ## Testfall 3: test_databaseHandler.py
 
 **Anwendungsbereich:** Die Tests umfassen verschiedene Vorgänge wie das Hinzufügen, Abrufen, Aktualisieren und Löschen von Benutzerdatensätzen sowie das Protokollieren und Abrufen des Suchverlaufs und das Ermitteln aktiver und inaktiver Benutzer.
@@ -351,8 +345,6 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 **3.8 Testfall:** Get Active Users
 
 **3.9 Testfall:** Get Inactive Users
-
-**3.10 Testfall:** Detailed Test Cases
 
 #### 3.1 Testfall: Add User
 
@@ -476,23 +468,32 @@ Erwartete Ergebnisse: Es sollten nur Benutzer zurückgegeben werden, die sich k�
 
 **Pass/Fail Kriterien:** Bestanden, wenn nur aktive Benutzer abgerufen werden.
 
-#### 3.9 Testfall: Get Inactive Users #pleasecheck FEHLT!!!!!
+#### 3.9 Testfall: Get Inactive Users 
 
-#### 3.10 Testfall: Detailed Test Cases #pleasecheck FEHLT!!!!
+  
+
+**Zweck:** Um zu überprüfen, ob das System in der Lage ist, inaktive Benutzer korrekt zu identifizieren und abzurufen.
+
+**Voraussetzungen:** Benutzer mit unterschiedlichen letzten Anmeldezeiten werden zur Datenbank hinzugefügt.
+
+**Testschritte:**
+
+- Retrieve inactive users from the database.
+
+Erwartete Ergebnisse: Es sollten nur Benutzer zurückgegeben werden, die sich nicht kürzlich (basierend auf einer festgelegten Schwelle) eingeloggt haben.
+
+**Pass/Fail Kriterien:** B Erfolgreich, wenn nur inaktive Benutzer abgerufen werden.
 
 ### Mock Objects und Testdaten
 
 **Keine erforderlich:** Echte Datenbankinteraktionen werden getestet.
 
-### Testergebnis für Testfall 3 #pleasecheck hier fehlt ein Testbericht in der Übersicht (9/10 abgebildet)
+### Testergebnis für Testfall 3 
 
 ![Testergebnisbericht Testfall 1](Testbericht_TF3.jpg)
-
-
+#link
 
 ## Testfall 4: test_fileSystemHandler.py
-
-#pleasecheck einheitliche Bezeichnung.....
 
 **Umfang:** Die Tests umfassen Initialisierungsprüfungen, Hochladen und Löschen von Dateien, Manipulation des Dateisystems und Dienstprogrammmethoden wie Dateigrößenkonvertierung und Abruf des letzten Änderungsdatums. 
 
@@ -665,8 +666,8 @@ Beschreibung: Die TestFileSystemHandler-Suite wurde entwickelt, um die Funktiona
 ### Testergebnis für Testfall 4
 
 ![Testergebnis für Testfall 4](Testbericht_TF4.jpg)
-
-# 5. Qualitätssicherung
+#link
+# 3. Qualitätssicherung
 
 Unsere Testhierarchie ist in drei Ebenen gegliedert, wobei 90% Unittests, 8% Integrationstests und 2% Softwarequalitätstests sind. Softwarequalitätstests, wie beispielsweise die simultane Anmeldung einer hohen Anzahl von Benutzern, sind umfangreiche Tests, die in unserem Rahmen nicht durchführbar sind und üblicherweise von größeren Unternehmen umgesetzt werden. Diese Einschränkungen spiegeln die Skalierbarkeit und Ressourcen eines kleineren Projektes wider.
 

@@ -5,8 +5,6 @@ Dieses Dokument bietet einen Überblick über die Benutzeroberfläche (UI) des [
 
 Es beschreibt die wichtigsten Aspekte der Benutzeroberfläche und wie Benutzer damit interagieren können.
 
-  
-
 ---
 
 # 1. Benutzeranforderungen
@@ -87,15 +85,15 @@ Demnach wurden folgende Designelemente gewählt:
 
   
 
-# 3. Wireframes und Mockups #endsprint #link
+# 3. Wireframes und Mockups 
 
   
 
 Die Navigation zwischen Seiten erfolgt hauptsätzlich beim Klicken auf Buttons und kann in Abb. 1: Wireframes nachvollzogen werden
 
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Mind-Machine-Prototyping.png]] 
+![[Mind-Machine-Prototyping.png]]
 
-*Abb. 1: Wireframes der Webanwendung*
+*Abb. 1: Wireframes der Webanwendung*  #endsprint #link
 
 ## 3.1 Interaktionsfluss
 
@@ -137,7 +135,7 @@ Der Interaktionsfluss besteht im Wesentlichen aus den folgenden Schritten:
 
   
 
-## 3.2 Mockups #endsprint #link
+## 3.2 Mockups
 
   
 
@@ -145,60 +143,33 @@ Nachfolgend befinden sich Mockups der wichtigsten Seiten  der Benutzeroberfläc
 
   
 
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%201image_startseite.png]]
+![[Wireframe - 1Login.png]]
+*Abb. 2: Mockup Startseite* #link
 
-*Abb. 2: Mockup Startseite*
+  
+ ![[Wireframe - 2Home.png]]
+*Abb. 3: Mockup userspezifischen Bibliothek-Startseite* #link
 
   
   
-
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%202image_Profilseite.png]]
-
-*Abb. 3: Mockup userspezifischen Bibliothek-Startseite*
+![[Wireframe - 3Result.png]]
+*Abb. 4: Mockup Ergebnisseite der aktuellen Suchanfrage #link
 
   
   
+![[Wireframe - 5FileInformation.png]]
+*Abb. 5: Mockup Dokumenteninformation  #link
 
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%203image_Results.png]]
-
-*Abb. 4: Mockup Ergebnisseite der aktuellen Suchanfrage
-
-  
-  
-
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%204image_Search.png]]
-
-*Abb. 5: Mockup der Ergebnisseite beim erneuten Ausläsen einer Suchanfrage aus der Suchhistroie
+ ![[Wireframe - 4SearchHistory.png]]
+  *Abb. 6: Mockup der Suchhistorie #link
 
   
-  
+  ![[Wireframe - 6Impressum.png]]
+*Abb. 7: Mockup des Impressums #link 
 
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%205image_FileInformation.png]]
 
-*Abb. 6: Mockup der Ansicht von Dokumenteninformationen
-
-  
-  
-
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%205image_searchHistory.png]]
-
-*Abb. 7: Mockup der Suchhistorie
-
-  
-  
-
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%207image_Statistics.png]]
-
-*Abb. 8: Mockup der Statistiken im Admin-Panel
-
-  
-  
-
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Wireframe%20-%208image_Impressum.png]]
-
-*Abb. 9: Mockup des Impressums
-
-  
+![[Wireframe - 6Impressum.png]]
+  *Abb. 8: Logo #link 
 
 ---
 

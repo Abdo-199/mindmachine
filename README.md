@@ -44,10 +44,32 @@ Sollten sie sich nicht im lokalen Netzwerk der HTW befinden, können Sie einen V
 ---
 # 3. Verweise auf detaillierte Dokumentation 
 
-- Verweis zu Anforderungsanalyse in Requirement Docu
-- Verweis zu im Projektumfang enthalten und Grenzen in Scoping
-- Verweis zu Abhängigkeiten in SAD
-- Verweis zu Beispielen in UI:  #link
+- [Requirement Dokument](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/requirements-document.md): 
+	- Analyse der funktionalen und nicht funktionalen Anforderungen
+	- Abhängigkeiten des Projekts
+- [Scoping Document](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/scoping-document.md):
+	- Projektumfang und Grenzen
+	- Meilensteine und Liefergegenstände
+	- Risikoanalyse und -management
+	- Vorgeschlagene Erfolgsmetrik für zukünftige Bewertungen
+- [Solution Architecture Documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/solution-architecture-documentation.md):
+	- Architekturübersicht
+	- Technologie-Stack
+	- Architekturdiagramme und Beschreibungen
+	- Datenarchitektur
+	- Sicherheit mit JWTs
+- [Testing-Strategy](![[Pasted image 20240131220839.png]]):
+	- Testsrategie
+	- Testfälle und -szenarien
+	- Qualitätssicherung
+- [UI-Documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/UI-documentation.md): 
+	- Benutzeranforderungen
+	- UI-Designkonzept
+	- Wireframes und Mockups
+- [Assets](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/tree/main/documentation/assets): 
+	- Abbildungen
+- [weiterführende Dokumentation](https://drive.google.com/drive/folders/14MsLNHH44BggoVpwQHEIkWiQ-ytvKqxk): 
+	- Protokolle
 
 ---
 

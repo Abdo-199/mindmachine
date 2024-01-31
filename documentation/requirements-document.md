@@ -7,9 +7,10 @@ Es ist wichtig zu beachten, dass aufgrund begrenzter Ressourcen nicht alle in di
 # 2. Ergebnis der Anforderungsanalyse
 
 Im Rahmen eines kollaborativen Kundenworkshops wurde ein umfassendes Story Mapping durchgeführt, das als grundlegende Struktur für die Anforderungsanalyse der **MindMachine**-Anwendung dient. Dieser Workshop ermöglichte eine interaktive Zusammenarbeit zwischen den Kunden bzw. Stakeholder und dem Entwicklungsteam, um die wesentlichen Funktionen und technischen Anforderungen zu identifizieren. Das Story Mapping diente dabei als Orientierungspunkt, um die verschiedenen Aspekte der Anwendung zu verstehen und zu strukturieren.
-  
+
+![[Story_Mapping_WS_result.jpg]]
 ![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Story_Mapping_WS_result.jpg]]
-*Abb. 1: Story Mapping Board (Ergebnis der Workshops mit dem Kunden)* 
+*Abb. 1: Story Mapping Board (Ergebnis der Workshops mit dem Kunden)*  #link
 
 ### Übersicht über Epics und User Stories:
 
@@ -62,7 +63,7 @@ Die Ergebnisse der Anforderungsanalyse sind in zwei wesentliche Kernaspekte unte
 
 Das Use Case Diagramm stellt eine visuelle Übersicht über die identifizierten funktionalen Anforderungen in Form von klar definierten Anwendungsfällen "Use Cases" in gegenseitiger und in Abhängigkeit von den Interaktionen zwischen Benutzern und dem System dar. Die Hauptakteure sind "Nutzer" und "Admin", die verschiedene Funktionen innerhalb des Systems ausführen.
 
-![[UseCase_Diagramm.png]]
+![[UseCasediagramm.png]]
 *Abb. 2: Use Case Diagramm für **MindMachine*** #link
 
 Der "Nutzer" kann sich mit seinem HTW-Account anmelden, Fragen stellen und umformulieren, sowie Ergebnisse auflisten, kopieren und vergangene Ergebnisse anzeigen. Er kann auch das Dateiverzeichnis anzeigen, Dateien hochladen, öffnen, löschen und Dateinamen editieren. Zusätzlich kann der Nutzer die Website öffnen und sich ausloggen.

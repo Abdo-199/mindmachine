@@ -9,9 +9,8 @@ In diesem Dokument wird der tatsächlich umgesetzten Projektumfang und die aus d
 
 ## 1.1 Funktionalen Anforderungen
 
-  
-### Im Projektumfang enthalten
 
+### Im Projektumfang enthalten
   
 
 Bei der nachfolgenden Auflistung handelt es sich um erfolgreich implementierten Funktionalitäten in priorisierter Reihenfolge:
@@ -154,11 +153,8 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 
 ## 1.2 Umsetzung der nicht-funktionale Anforderungen
 
-  
 
 ### Leistung
-
-  
 
 - **Reaktionsgeschwindigkeit**:
 
@@ -173,12 +169,9 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
     - Gute Skalierbarkeit, anpassbar auf Kundenwunsch.
 
     - Verbesserung durch bessere Hardware und effizientere Verteilung von Nutzerzugriffen auf verschiedene Docker möglich.
-
-  
+ 
 
 ### Sicherheit
-
-  
 
 - **Benutzerdatenschutz**:
 
@@ -195,12 +188,9 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 - **Datensicherheit**:
 
     - Keine Datensicherheit abseits von vorbereitetem HTTPS-Zertifikat vorhanden. Demnach auch keine Daten-Backups vorhanden.
-
   
 
 ### Benutzerfreundlichkeit
-
-  
 
 - **Barrierefreiheit**:
 
@@ -208,13 +198,10 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 
 - **Dokumentation**:
 
-    - Wurden erfüllt. Nachzulesen im [Testing Documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/UI-documentation.md) und [UI-Documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/UI-documentation.md)
+    - Nachzulesen im [Testing Documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/UI-documentation.md) und [UI-Documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/UI-documentation.md)
 
   
-
 ### Zuverlässigkeit
-
-  
 
 - **Testing**:
 
@@ -225,10 +212,7 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
     -  Derzeit erfolgt ein automatisches Neubauen des Projekts auf dem   Produktionsserver bei Merges im Git, ergänzt durch eine Vorbereitung zur Test- Implementierung.
 
   
-
 ### Wartbarkeit
-
-  
 
 - **Kommentierungsrichtlinien**:
 
@@ -236,12 +220,29 @@ Hinsichtlich der funktionalen Anforderungen kann festgehalten werden, dass alle 
 
     - Detaillierte Richtlinien für Code-Kommentare, inklusive Header-, Funktions-/Methoden- und Inline-Kommentare.
 
-  
-  
+
+### Testing-Infrastruktur und Evaluierung der Suchalgorithmen
+
+Im Rahmen der Weiterentwicklung der **MindMachine**-Anwendung wurde eine umfangreiche Testing-Pipeline etabliert, die es ermöglicht, die Effektivität unterschiedlicher Suchmethoden zu evaluieren. Folgende Hyperparameter können für jeden Test konfiguriert werden:
+
+1. **Encoder**: Definition des spezifischen Encoders.
+2. **Distance**: Auswahl der Distanzfunktion, entweder COS oder DOT, die die Ähnlichkeitsmessung bestimmt.
+3. **Chunk Size**: Festlegung, ob und wie Dokumente in kleinere Segmente aufgeteilt werden, um die maximale Sequenzlänge des Encoders nicht zu überschreiten.
+4. **Remove Stop-Words**: Entscheidung über das Entfernen von Füllwörtern aus dem Text zur Optimierung der Suchergebnisse.
+5. **Overlap**: Bestimmung des Überlappungsgrades zwischen aufeinanderfolgenden Textsegmenten, falls eine Aufteilung stattfindet.
+
+Diese Pipeline analysiert die eingereichten Fragen aus einem definierten Datensatz, encodet die zugehörigen Dokumente und integriert diese in Qdrant, wobei jeder Testlauf einem spezifischen Collectionnamen zugewiesen wird. Anschließend erfolgt eine systematische Abfrage dieser Kollektion, um die Präzision der Suchergebnisse zu bestimmen. 
+
+![](https://lh7-us.googleusercontent.com/Oluzaa4uyx8aGQtn-9J5o5c2GjD9t49FkhKtnZWYq3wkXo5q4kA9XlHh99crsd1PPYAZNdi7k7kLB4Ir2RrtitnaOYmKktXbAfrXAOn-ZXz4aO4lfYULYijKjyNoPmic_4UDErERW9qeQeWzWCssG1Q)
+*Abb 1.: Testergebnisse für Englisch und Deutsch im Vergleich mit den selben vier Testkategorien*    #link
+
+Die Genauigkeit wird pro Sprache und Kategorie dargestellt und in einem Genauigkeitsplot visualisiert, der die durchschnittliche Präzision über alle Kategorien hinweg zeigt.
+
+Die höchste Präzision wurde mit dem Modell 'multi-qa-mpnet-base-dot-v1' erreicht, bei Verwendung der DOT-Distanzfunktion, einem Überlappungswert von 30 und ohne Entfernung von Stop-Words. Diese Konfiguration erzielte eine Genauigkeit von 100 % bei englischen und 58 % bei deutschen Dokumenten. Basierend auf den Anforderungen, die Suche primär in Englisch durchzuführen, wurde diese Methode für die Implementierung ausgewählt.
+
+Die Suchanfragen in Qdrant geben eine Passage von maximal 512 Wörtern zurück, was der maximalen Sequenzlänge des 'mpnet'-Modells entspricht. Zur Extraktion der spezifischen Antworten aus diesen Passagen wird ein Extractive Question-Answering BERT-Modell ('distilbert-base-cased-distilled-squad') verwendet, das nach einem Satzende sucht, um eine vollständige Antwort zu liefern. Schließlich wird dem Frontend ein Dictionary bereitgestellt, das Dokumentennamen, Passagen und den extrahierten Satz enthält.
 
 ---
-
-  
 
 # 2. Meilensteine und Liefergegenstände
 
@@ -253,27 +254,17 @@ Die Hauptziele des Projekts waren die Entwicklung einer benutzerfreundlichen Web
 
 Nachfolgend befindet sich ein visuelle Aufarbeitung der geplanten Meilensteine und entsprechenden Liefergegenstände und eine visuelle Aufarbeitung des tatsächliche Projektverlaufs.
 
-  
 
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/milestones_planned.jpg]]
+![[milestones_planned.jpg]]
+*Abb. 2: geplante Sprintverläufe* #link
 
-  
 
-*Abb. 1: geplante Sprintverläufe*
-
-  
-
-![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/milestones_reality.jpg]]
-
-  
-
-*Abb 2.: tatsächlicher Sprintverläufe*
+  ![[milestones_reality.jpg]]
+*Abb 3.: tatsächlicher Sprintverläufe*  #link
 
   
 
 Vergleicht man die die geplanten und die tatsächlichen Sprintverläufe wird offensichtlich, dass trotz starker Abweichungen vom ursprünglichen Plan alle User Storys bis Projektende implementiert werden konnten. Dies ist unteranderem auf die steile Lernkurve des Teams als auch auf die agile Arbeitsweise im Projekt zurückzuführen.
-
-  
 
 ---
 
@@ -378,22 +369,22 @@ Im Projektverlauf wurde eine deutliche Steigerung der Teamleistung durch die ang
 
 
 ![[Sprint1.png]]
-*Abb.1: Burndown und Burnup-Chart von Sprint 1* #link
+*Abb. 4.: Burndown und Burnup-Chart von Sprint 1* #link
 
 
 ![[Sprint2.png]]
-*Abb.2: Burndown und Burnup-Chart von Sprint 2* #link
+*Abb. 5.: Burndown und Burnup-Chart von Sprint 2* #link
 
 
 ![[Sprint3.png]]
-*Abb.3: Burndown und Burnup-Chart von Sprint 3* #link
+*Abb. 6.:: Burndown und Burnup-Chart von Sprint 3* #link
 
 
 ---
 
 # 5. Vorgeschlagene Erfolgsmetriken für zukünftige Bewertung
 
-  
+
 
 **Zweck:** Dieser Abschnitt skizziert Metriken, die für die zukünftige Bewertung und kontinuierliche Verbesserung des **MindMachine**-Projekts vorgeschlagen werden. Diese Metriken sind darauf ausgerichtet, die Effektivität der Anwendung in Bezug auf Benutzerfreundlichkeit, Leistung und Sicherheit zu messen.
 
