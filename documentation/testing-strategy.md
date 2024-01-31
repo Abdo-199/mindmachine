@@ -567,7 +567,7 @@ Beschreibung: Die TestFileSystemHandler-Suite wurde entwickelt, um die Funktiona
 
 - Versuchen Sie, eine angegebene Datei zu löschen.
 
-**Erwartete Ergebnisse:** Das Dateisystem sollte die Existenz der Datei&#39 bestätigen und dann löschen.
+**Erwartete Ergebnisse:** Das Dateisystem sollte die Existenz der Datei bestätigen und dann löschen.
 
 **Pass/Fail Kriterien:** Bestanden, wenn die Datei korrekt als vorhanden identifiziert und dann gelöscht wurde.
 
