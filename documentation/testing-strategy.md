@@ -193,17 +193,13 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 
 **2.3 Testfall:**  Dokument Vektor hinzufügen
 
-**2.4 Testfall:** Abfrage von Treffen des Qdrant-Clients #pleasecheck korrekte Testbezeichnung?
+**2.4 Testfall:** AAbrufen von Treffern aus Qdrantu
 
 **2.5 Testfall:** Abrufen von Ergebnissen aus Treffern
 
 **2.6 Testfall:** Suchfunktionalität
 
 #### 2.1 Testfall: Überprüfung der vorhandenen Benutzer
-
--  Erhalten Sie Ergebnisse von Hits
--    Suchfunktionalität 
-#pleasecheck Warum steht das hier?
 
 **Zweck:** Überprüfen, ob der Qdrant-Client einen vorhandenen Benutzer in der Datenbank korrekt identifizieren und die Vektorzählung abrufen kann.
 
@@ -349,8 +345,6 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 
 **3.9 Testfall:** Get Inactive Users
 
-**3.10 Testfall:** Detailed Test Cases
-
 #### 3.1 Testfall: Add User
 
 **Zweck:** Überprüfen, ob das System einen neuen Benutzer korrekt zur Datenbank hinzufügen kann.
@@ -474,8 +468,12 @@ Erwartete Ergebnisse: Es sollten nur Benutzer zurückgegeben werden, die sich k�
 **Pass/Fail Kriterien:** Bestanden, wenn nur aktive Benutzer abgerufen werden.
 
 #### 3.9 Testfall: Get Inactive Users #pleasecheck FEHLT!!!!!
-
-#### 3.10 Testfall: Detailed Test Cases #pleasecheck FEHLT!!!!
+**Zweck:** Um zu überprüfen, ob das System in der Lage ist, inaktive Benutzer korrekt zu identifizieren und abzurufen.
+**Voraussetzungen:** Benutzer mit unterschiedlichen letzten Anmeldezeiten werden zur Datenbank hinzugefügt.
+**Testschritte:**
+-Retrieve inactive users from the database.
+Erwartete Ergebnisse: Es sollten nur Benutzer zurückgegeben werden, die sich nicht kürzlich (basierend auf einer festgelegten Schwelle) eingeloggt haben.
+**Pass/Fail Kriterien:** B Erfolgreich, wenn nur inaktive Benutzer abgerufen werden.
 
 ### Mock Objects und Testdaten
 
