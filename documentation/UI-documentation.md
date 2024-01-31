@@ -91,9 +91,9 @@ Demnach wurden folgende Designelemente gewählt:
 
 Die Navigation zwischen Seiten erfolgt hauptsätzlich beim Klicken auf Buttons und kann in Abb. 1: Wireframes nachvollzogen werden
 
-![[Mind-Machine-Prototyping.png]]
+![Prototyp](./assets/Mind-Machine-Prototyping.png)
 
-*Abb. 1: Wireframes der Webanwendung*  #endsprint #link
+*Abb. 1: Wireframes der Webanwendung* 
 
 ## 3.1 Interaktionsfluss
 
@@ -142,34 +142,31 @@ Der Interaktionsfluss besteht im Wesentlichen aus den folgenden Schritten:
 Nachfolgend befinden sich Mockups der wichtigsten Seiten  der Benutzeroberfläche, um den visuellen Entwurf zu verdeutlichen.
 
   
-
-![[Wireframe - 1Login.png]]
-*Abb. 2: Mockup Startseite* #link
-
-  
- ![[Wireframe - 2Home.png]]
-*Abb. 3: Mockup userspezifischen Bibliothek-Startseite* #link
+![Wireframe-Login](./assets/Wireframe%20-%201Login.png)
+*Abb. 2: Mockup Startseite* 
 
   
-  
-![[Wireframe - 3Result.png]]
-*Abb. 4: Mockup Ergebnisseite der aktuellen Suchanfrage #link
+![Wireframe-Home](./assets/Wireframe%20-%202Home.png)
+*Abb. 3: Mockup userspezifischen Bibliothek-Startseite* 
 
   
-  
-![[Wireframe - 5FileInformation.png]]
-*Abb. 5: Mockup Dokumenteninformation  #link
-
- ![[Wireframe - 4SearchHistory.png]]
-  *Abb. 6: Mockup der Suchhistorie #link
+![Wireframe-Results](./assets/Wireframe%20-%203Result.png)
+*Abb. 4: Mockup Ergebnisseite der aktuellen Suchanfrage
 
   
-  ![[Wireframe - 6Impressum.png]]
-*Abb. 7: Mockup des Impressums #link 
+![Wireframe-FileInformation](./assets/Wireframe%20-%205FileInformation.png)
+*Abb. 5: Mockup Dokumenteninformation
+
+![Wireframe-SearchHistory](./assets/Wireframe%20-%204SearchHistory.png)
+*Abb. 6: Mockup der Suchhistorie
+
+  
+![Wireframe-Impressum](./assets/Wireframe%20-%206Impressum.png)
+*Abb. 7: Mockup des Impressums 
 
 
-![[Wireframe - 6Impressum.png]]
-  *Abb. 8: Logo #link 
+![Logo](./assets/Logo.png)
+  *Abb. 8: Logo
 
 ---
 
