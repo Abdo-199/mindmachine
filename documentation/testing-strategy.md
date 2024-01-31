@@ -158,7 +158,7 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 
 ### Testergebnis für Testfall 1
 
-![Testergebnisbericht Testfall 1](Testbericht_TF1.jpg) #link
+![Testergebnisbericht Testfall 1](./assets/Testbericht_TF1.jpg)
 
 ## 2. Testfall:  test_Qdrant.py
 
@@ -302,8 +302,8 @@ Mock PDF Reader und Encoder: Wird verwendet, um verschiedene Szenarien für die 
 
 ### Testergebnis für Testfall 2
 
-![Testergebnisbericht Testfall 2](Testbericht_TF2.jpg)
-#link
+![Testergebnisbericht Testfall 2](./assets/Testbericht_TF2.jpg)
+
 ## Testfall 3: test_databaseHandler.py
 
 **Anwendungsbereich:** Die Tests umfassen verschiedene Vorgänge wie das Hinzufügen, Abrufen, Aktualisieren und Löschen von Benutzerdatensätzen sowie das Protokollieren und Abrufen des Suchverlaufs und das Ermitteln aktiver und inaktiver Benutzer.
@@ -490,8 +490,7 @@ Erwartete Ergebnisse: Es sollten nur Benutzer zurückgegeben werden, die sich ni
 
 ### Testergebnis für Testfall 3 
 
-![Testergebnisbericht Testfall 1](Testbericht_TF3.jpg)
-#link
+![Testergebnisbericht Testfall 1](./assets/Testbericht_TF3.jpg)
 
 ## Testfall 4: test_fileSystemHandler.py
 
@@ -665,8 +664,8 @@ Beschreibung: Die TestFileSystemHandler-Suite wurde entwickelt, um die Funktiona
 
 ### Testergebnis für Testfall 4
 
-![Testergebnis für Testfall 4](Testbericht_TF4.jpg)
-#link
+![Testergebnis für Testfall 4](./assets/Testbericht_TF4.jpg)
+
 # 3. Qualitätssicherung
 
 Unsere Testhierarchie ist in drei Ebenen gegliedert, wobei 90% Unittests, 8% Integrationstests und 2% Softwarequalitätstests sind. Softwarequalitätstests, wie beispielsweise die simultane Anmeldung einer hohen Anzahl von Benutzern, sind umfangreiche Tests, die in unserem Rahmen nicht durchführbar sind und üblicherweise von größeren Unternehmen umgesetzt werden. Diese Einschränkungen spiegeln die Skalierbarkeit und Ressourcen eines kleineren Projektes wider.

@@ -233,8 +233,8 @@ Im Rahmen der Weiterentwicklung der **MindMachine**-Anwendung wurde eine umfangr
 
 Diese Pipeline analysiert die eingereichten Fragen aus einem definierten Datensatz, encodet die zugehörigen Dokumente und integriert diese in Qdrant, wobei jeder Testlauf einem spezifischen Collectionnamen zugewiesen wird. Anschließend erfolgt eine systematische Abfrage dieser Kollektion, um die Präzision der Suchergebnisse zu bestimmen. 
 
-![](https://lh7-us.googleusercontent.com/Oluzaa4uyx8aGQtn-9J5o5c2GjD9t49FkhKtnZWYq3wkXo5q4kA9XlHh99crsd1PPYAZNdi7k7kLB4Ir2RrtitnaOYmKktXbAfrXAOn-ZXz4aO4lfYULYijKjyNoPmic_4UDErERW9qeQeWzWCssG1Q)
-*Abb 1.: Testergebnisse für Englisch und Deutsch im Vergleich mit den selben vier Testkategorien*    #link
+![Testergebnisse KI-Suche](https://lh7-us.googleusercontent.com/Oluzaa4uyx8aGQtn-9J5o5c2GjD9t49FkhKtnZWYq3wkXo5q4kA9XlHh99crsd1PPYAZNdi7k7kLB4Ir2RrtitnaOYmKktXbAfrXAOn-ZXz4aO4lfYULYijKjyNoPmic_4UDErERW9qeQeWzWCssG1Q)
+*Abb 1.: Testergebnisse für Englisch und Deutsch im Vergleich mit den selben vier Testkategorien* 
 
 Die Genauigkeit wird pro Sprache und Kategorie dargestellt und in einem Genauigkeitsplot visualisiert, der die durchschnittliche Präzision über alle Kategorien hinweg zeigt.
 
@@ -255,12 +255,12 @@ Die Hauptziele des Projekts waren die Entwicklung einer benutzerfreundlichen Web
 Nachfolgend befindet sich ein visuelle Aufarbeitung der geplanten Meilensteine und entsprechenden Liefergegenstände und eine visuelle Aufarbeitung des tatsächliche Projektverlaufs.
 
 
-![[milestones_planned.jpg]]
-*Abb. 2: geplante Sprintverläufe* #link
+![Geplante Milestones](./assets/milestones_planned.jpg)
+*Abb. 2: geplante Sprintverläufe*
 
 
-  ![[milestones_reality.jpg]]
-*Abb 3.: tatsächlicher Sprintverläufe*  #link
+![Tatsächliche Milestones](./assets/milestones_reality.jpg)
+*Abb 3.: tatsächlicher Sprintverläufe*
 
   
 
@@ -368,16 +368,16 @@ Das Projekt nutzte agile Methoden in einer angepassten Form von Scrum und modern
 Im Projektverlauf wurde eine deutliche Steigerung der Teamleistung durch die angewandten und sukzessive optimierten Projektmanagement-Methoden erzielt. Dies ist deutlich anhand der Leistungssteigerung über die drei Sprint zu erkennen und kann in den nachfolgenden "Burn _out_ "-Charts nachvollzogen werden.
 
 
-![[Sprint1.png]]
-*Abb. 4.: Burndown und Burnup-Chart von Sprint 1* #link
+![Sprint 1](./assets/Sprint1.png)
+*Abb. 4.: Burndown und Burnup-Chart von Sprint 1*
 
 
-![[Sprint2.png]]
-*Abb. 5.: Burndown und Burnup-Chart von Sprint 2* #link
+![Sprint 2](./assets/Sprint2.png)
+*Abb. 5.: Burndown und Burnup-Chart von Sprint 2*
 
 
-![[Sprint3.png]]
-*Abb. 6.:: Burndown und Burnup-Chart von Sprint 3* #link
+![Sprint 3](./assets/Sprint3.png)
+*Abb. 6.:: Burndown und Burnup-Chart von Sprint 3*
 
 
 ---

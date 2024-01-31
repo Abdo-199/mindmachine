@@ -75,8 +75,8 @@ Die Daten für die Anmeldung sind in **HTW LDAP Server** angelegt.
 
 ## 3.1 Systemstruktur
 
-![[Strukturdiagramm.png]](./Strukturdiagramm.png) 
-*Abb. 1: Strukturdiagramm der **MindMachine**-Anwendung* #link
+![[Strukturdiagramm.png]](./assets/Strukturdiagramm.png) 
+*Abb. 1: Strukturdiagramm der **MindMachine**-Anwendung*
 
 Das Strukturdiagramm illustriert den Aufbau der Software-Architektur für das **MindMachine**-Projekt. Es zeigt, wie das System in mehrere Schichten und Komponenten unterteilt ist. Implementierungseinzelheiten sind für den Teil nicht relevant. Hier sind die Beziehungen und Zugehörigkeit der Komponenten im Fokus:
 
@@ -93,8 +93,8 @@ Das Strukturdiagramm illustriert den Aufbau der Software-Architektur für das **
 
 Das Verteilungsdiagramm stellt die Deployment-Architektur für das System dar. Hier sind nicht die Beziehungen zwischen Subsystem im Fokus, sondern werden Komponenten und Artefakte in Relation zu ihrem Einsatzort innerhalb des implementierten Systems angezeigt. 
 
-![[Verteilungsdiagramm.png]](./Verteilungsdiagramm.png)
-*Abb 2: Verteilungsdiagramm der **MindMachine**-Anwendung* #endsprint #link
+![[Verteilungsdiagramm.png]](./assets/Verteilungsdiagramm.png)
+*Abb 2: Verteilungsdiagramm der **MindMachine**-Anwendung*
 
 Die Architektur ist in drei Hauptbereiche gegliedert: 
 
@@ -108,8 +108,8 @@ Die Architektur ist in drei Hauptbereiche gegliedert:
 
 Die Wahl der Struktur ist auch auf spezifische Anforderungen des Projekts zurückzuführen, wie die Notwendigkeit, die Authentifizierung klar von den Geschäftslogiken zu trennen und eine flexible Datenverwaltung zu ermöglichen, die unterschiedliche Typen von Datenbanken (wie Vektor- und relationale Datenbanken) unterstützt.
 
-![[Klassendiagramm.png]]
-*Abb. 3.: Klassendiagramm der **MindMachine**-Anwendung* #link  
+![[Klassendiagramm.png]](./assets/Klassendiagramm.png)
+*Abb. 3.: Klassendiagramm der **MindMachine**-Anwendung*
 
 Hier einige Gründe für die gewählte Struktur:
 

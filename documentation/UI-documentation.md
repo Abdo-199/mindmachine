@@ -151,22 +151,22 @@ Nachfolgend befinden sich Mockups der wichtigsten Seiten  der Benutzeroberfläc
 
   
 ![Wireframe-Results](./assets/Wireframe%20-%203Result.png)
-*Abb. 4: Mockup Ergebnisseite der aktuellen Suchanfrage
+*Abb. 4: Mockup Ergebnisseite der aktuellen Suchanfrage*
 
   
 ![Wireframe-FileInformation](./assets/Wireframe%20-%205FileInformation.png)
-*Abb. 5: Mockup Dokumenteninformation
+*Abb. 5: Mockup Dokumenteninformation*
 
 ![Wireframe-SearchHistory](./assets/Wireframe%20-%204SearchHistory.png)
-*Abb. 6: Mockup der Suchhistorie
+*Abb. 6: Mockup der Suchhistorie*
 
   
 ![Wireframe-Impressum](./assets/Wireframe%20-%206Impressum.png)
-*Abb. 7: Mockup des Impressums 
+*Abb. 7: Mockup des Impressums*
 
 
-![Logo](./assets/Logo.png)
-  *Abb. 8: Logo
+![Logo](./assets/Log*o.png)
+*Abb. 8: Logo*
 
 ---
 

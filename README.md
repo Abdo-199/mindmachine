@@ -1,4 +1,3 @@
-
 # 1. Projektbeschreibung: MindMachine - Projekt der HTW Berlin
 
 ## Vision 
