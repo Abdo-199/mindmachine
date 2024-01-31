@@ -1,7 +1,7 @@
   
   
 
-Dieses Dokument bietet einen Überblick über die Benutzeroberfläche (UI) des [Projekts MindMachine](\mindmachine\README.md).
+Dieses Dokument bietet einen Überblick über die Benutzeroberfläche (UI) des [Projekts MindMachine](../README.md).
 
 Es beschreibt die wichtigsten Aspekte der Benutzeroberfläche und wie Benutzer damit interagieren können.
 
