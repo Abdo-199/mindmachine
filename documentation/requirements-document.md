@@ -2,24 +2,18 @@
 
 Dieses Dokument dient dazu, sowohl funktionale als auch nicht-funktionale Anforderungen des Systems detailliert darzustellen. Es zielt darauf ab, ein einheitliches Verständnis der Benutzerbedürfnisse und der spezifischen Systemfunktionalitäten für alle Projektbeteiligten zu schaffen. Dies ist essentiell für die erfolgreiche Entwicklung und Nachhaltigkeit der Software.
 
-Es ist wichtig zu beachten, dass aufgrund begrenzter Ressourcen nicht alle in diesem Dokument identifizierten Anforderungen im Rahmen des Projektes umgesetzt werden können. Die umfassende Dokumentation sämtlicher erkannter Anforderungen erfolgt dennoch, um zukünftige Wartungs- und Entwicklungsarbeiten zu erleichtern. Eine detaillierte Auflistung der im Projektumfang enthaltenen Anforderungen sowie der definierten Projektgrenzen ist im Scoping-Dokument einsehbar.
-
+Es ist wichtig zu beachten, dass aufgrund begrenzter Ressourcen nicht alle in diesem Dokument identifizierten Anforderungen im Rahmen dieser Erstentwicklungsphase umgesetzt werden konnten. Die umfassende Dokumentation sämtlicher erkannter Anforderungen erfolgt dennoch, um zukünftige Wartungs- und Entwicklungsarbeiten zu erleichtern. Eine detaillierte Auflistung der im Projektumfang enthaltenen Anforderungen sowie der definierten Projektgrenzen ist im [Scoping-Dokument](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/scoping-document.md) einsehbar.
 
 # 2. Ergebnis der Anforderungsanalyse
 
-Die Ergebnisse der Anforderungsanalyse sind in zwei wesentliche Kernaspekte unterteilt. Zum einen die funktionale Anforderungsanalyse, welche eine ausführliche Beschreibung der gewünschten Funktionalität liefert. Des Weiteren die nicht funktionalen Anforderungen, welche Spezifikationen hinschitlich der Sicherheit, Performance und Kompatibilität berücksichtigt.
-## 2.1 funktionale Anforderungen
-
-Im Rahmen eines kollaborativen Kundenworkshops wurde ein umfassendes Story Mapping durchgeführt, das als grundlegende Struktur für die Anforderungsanalyse der **MindMachine**-Anwendung dient. Dieser Workshop ermöglichte eine interaktive Zusammenarbeit zwischen den Stakeholdern und dem Entwicklungsteam, um die wesentlichen Funktionen und Anforderungen zu identifizieren. Das Story Mapping diente dabei als Orientierungspunkt, um die verschiedenen Aspekte der Anwendung zu verstehen und zu strukturieren.
+Im Rahmen eines kollaborativen Kundenworkshops wurde ein umfassendes Story Mapping durchgeführt, das als grundlegende Struktur für die Anforderungsanalyse der **MindMachine**-Anwendung dient. Dieser Workshop ermöglichte eine interaktive Zusammenarbeit zwischen den Kunden bzw. Stakeholder und dem Entwicklungsteam, um die wesentlichen Funktionen und technischen Anforderungen zu identifizieren. Das Story Mapping diente dabei als Orientierungspunkt, um die verschiedenen Aspekte der Anwendung zu verstehen und zu strukturieren.
   
-![[Story_Mapping_WS_result.jpg]]
-
+![[https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/assets/Story_Mapping_WS_result.jpg]]
+*Abb. 1: Story Mapping Board (Ergebnis der Workshops mit dem Kunden)* 
 
 ### Übersicht über Epics und User Stories:
 
-
 Das Story Mapping ergab eine klare Strukturierung der Anforderungen in mehrere Epics, die jeweils einen größeren funktionalen Bereich der Anwendung repräsentieren. Die Epics und ihre zugehörigen User Stories sind:
-
 
 #### Epic 1: Benutzerzugriff und Authentifizierung
 
@@ -63,6 +57,23 @@ Das Story Mapping ergab eine klare Strukturierung der Anforderungen in mehrere E
 
 Jedes Epic enthält spezifische Funktionen, die den Bedürfnissen der Benutzer entsprechen und gemeinsam die Gesamtfunktionalität der **MindMachine**-Anwendung bilden. Diese klare Strukturierung ermöglicht eine effektive Umsetzung und Priorisierung der Anforderungen im Entwicklungsprozess.
 
+Die Ergebnisse der Anforderungsanalyse sind in zwei wesentliche Kernaspekte unterteilt. Zum einen die funktionale Anforderungsanalyse, welche eine ausführliche Beschreibung der gewünschten Funktionalität liefert. Des Weiteren die nicht funktionalen Anforderungen, welche Spezifikationen hinsichtlich der Sicherheit, Performance und Kompatibilität berücksichtigt.
+## 2.1 Funktionale Anforderungen
+
+Das Use Case Diagramm stellt eine visuelle Übersicht über die identifizierten funktionalen Anforderungen in Form von klar definierten Anwendungsfällen "Use Cases" in gegenseitiger und in Abhängigkeit von den Interaktionen zwischen Benutzern und dem System dar. Die Hauptakteure sind "Nutzer" und "Admin", die verschiedene Funktionen innerhalb des Systems ausführen.
+
+![[UseCase_Diagramm.png]]
+*Abb. 2: Use Case Diagramm für **MindMachine*** #link
+
+Der "Nutzer" kann sich mit seinem HTW-Account anmelden, Fragen stellen und umformulieren, sowie Ergebnisse auflisten, kopieren und vergangene Ergebnisse anzeigen. Er kann auch das Dateiverzeichnis anzeigen, Dateien hochladen, öffnen, löschen und Dateinamen editieren. Zusätzlich kann der Nutzer die Website öffnen und sich ausloggen.
+
+Der "Admin" hat speziellere Funktionen wie Login als Admin, Änderung der Auto-Logout-Zeit, Anzeige und Änderung der Speicherkapazität sowie Anzeige von Statistiken.
+
+Das Diagramm zeigt, wie diese Akteure mit dem System interagieren, um die verschiedenen Funktionen auszuführen. Es gibt Beziehungen wie "include" und "extend" zwischen einigen Use Cases, die darauf hinweisen, dass bestimmte Funktionen andere einbeziehen oder erweitern. Beispielsweise beinhaltet das Anzeigen des Dateiverzeichnisses auch das Öffnen der Website, und das Stellen einer Frage kann das Auflisten von Ergebnissen beinhalten.
+
+Insgesamt bietet das Diagramm einen umfassenden Überblick über die Funktionalitäten der Anwendung aus der Perspektive der Benutzerinteraktion. Nachfolgend befindet sich eine dezidierte Beschreibung der einzelnen User Stories. 
+
+
 ---
 
 ### Epic 1: Benutzeranmeldung und Authentifizierung (Webzugriff)
@@ -82,9 +93,9 @@ Das Epic 1 konzentriert sich auf den grundlegenden Benutzerzugriff und die Authe
 
 **Akzeptanzkriterien:**
 
-1. Die **MindMachine**-Website ist öffentlich zugänglich. #pleasecheck
+1. Die **MindMachine**-Website ist öffentlich zugänglich. 
 
-2. Beim Öffnen der Website wird der Benutzer auf die Anmeldeseite weitergeleitet.
+2. Beim Öffnen der Website wird der Benutzer auf die Anmeldeseite weitergeleitet
 
 
 ---
@@ -144,14 +155,13 @@ Das Epic 1 konzentriert sich auf den grundlegenden Benutzerzugriff und die Authe
 
 5. Benutzer erhalten vor der automatischen Abmeldung aufgrund von Inaktivität eine Benachrichtigung.
 
-6. Benutzer werden automatisch abgemeldet, wenn sie innerhalb der festgelegten Inaktivitätsdauer keine Aktionen durchführen. #scoping #pleasecheck 
+6. Benutzer werden automatisch abgemeldet, wenn sie innerhalb der festgelegten Inaktivitätsdauer keine Aktionen durchführen. 
 
-7. Die Inaktivitätsdauer (Kundenwunsch: 60 Minuten bis zum Log-Out) betrifft alle Benutzer. #scoping #pleasecheck 
-  
+7. Die Inaktivitätsdauer (Kundenwunsch: 60 Minuten bis zum Log-Out) betrifft alle Benutzer. 
 
 ---
 
-### Epic 2: Dateieverzeichnis
+### Epic 2: Dateiverzeichnis
 
 Dieses Epic konzentriert sich auf die Umsetzung der Funktionen rund um das Dateiverzeichnis in der **MindMachine**-Anwendung. Hierbei stehen die Bereiche Dateiverzeichnis öffnen mit userspezifischer Ansicht, Dateien hochladen mit Prüfung, Dokumente öffnen, Dokumente löschen und Dokument umbenennen im Fokus. Das Ziel ist es, den Benutzern eine intuitive und personalisierte Möglichkeit zu bieten, ihre Dateien zu verwalten und auf diese zuzugreifen.
 
@@ -723,7 +733,7 @@ Die Sicherheit der Daten und Benutzerinformationen hat höchste Priorität. Es m
 - **Benutzerdatenschutz**: Die Datenschutzrichtlinien müssen strikt eingehalten werden, um die sensiblen Informationen der Benutzer zu schützen.
 - **Authentifizierung und Autorisierung**: Nur autorisierte Benutzer sollten auf bestimmte Funktionen und Daten zugreifen können.
 - **Schutz vor Angriffen**: Die Anwendung muss gegen Sicherheitsbedrohungen wie SQL-Injektionen und Cross-Site-Scripting (XSS) geschützt sein.
-- **Datensicherheit**: Die Daten müssen sicher gespeichert und übertragen werden, um die Integrität und Vertraulichkeit zu gewährleisten.
+- **Datensicherheit**: Die Daten müssen sicher mittels HTTPS übertragen werden, um die Integrität und Vertraulichkeit zu gewährleisten.
 
 
 ### Benutzerfreundlichkeit
@@ -731,7 +741,7 @@ Die Benutzeroberfläche sollte intuitiv und benutzerfreundlich gestaltet sein, u
 - **Barrierefreiheit**: Die Anwendung muss barrierefrei sein und den Zugang für Benutzer mit unterschiedlichen Fähigkeiten und Bedürfnissen erleichtern.
 - **Dokumentation**: Eine umfassende Dokumentation sollte verfügbar sein, um Benutzern bei der Verwendung der Anwendung zu helfen und Probleme zu beheben.
 
-Detaillierte Beschreibungen der Anforderungen an die Benutzeroberfläche können im [UI-documentation](\mindmachine\Documentation\UI-documentation) nachgelesen werden.
+Detaillierte Beschreibungen der Anforderungen an die Benutzeroberfläche können im [UI-documentation](https://gitlab.rz.htw-berlin.de/iiw-vertiefung-softwareengineering/202324-wise/mindmachine/mindmachine/-/blob/main/documentation/UI-documentation.md) nachgelesen werden.
 
 Die nicht-funktionalen Anforderungen sind entscheidend für den Erfolg des Projekts, da sie sicherstellen, dass die entwickelte Software den Anforderungen der HTW Berlin und ihrer Benutzer gerecht wird. Durch die sorgfältige Planung, Umsetzung und Überprüfung dieser Anforderungen wird das Premierprojekt dazu beitragen, innovative Lösungen für die Herausforderungen in den Ingenieurwissenschaften zu entwickeln und gleichzeitig die höchsten Standards in Bezug auf Leistung, Sicherheit und Benutzerfreundlichkeit zu erfüllen.
 

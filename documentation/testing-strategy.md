@@ -1,8 +1,10 @@
 # 1.Teststrategie
 
-Diese Dokumentation richtet sich an Entwickler, Tester und Betreuer des Backends und bietet einen detaillierten und strukturierten Überblick über die Testlandschaft, Testfälle und ihre Ergebnisse. Es beschreibt die Testmethodik für das Backend der Webanwendung, einschließlich der Verwendung von Qdrant für Datenverarbeitung und Abruf. Ziel der Teststrategie ist es, die Zuverlässigkeit, Funktionalität und Integrität der Backend-Dienste sicherzustellen.
+Diese Dokumentation richtet sich an Entwickler, Tester und Betreuer des Backends und bietet einen detaillierten und strukturierten Überblick über die strategische Testlandschaft, Testfälle und ihre Ergebnisse. Es beschreibt die Testmethodik für das Backend der Webanwendung, einschließlich der Verwendung von Qdrant für Datenverarbeitung und Abruf. Ziel der Teststrategie ist es, die Zuverlässigkeit, Funktionalität und Integrität der Backend-Dienste sicherzustellen.
 
 # 2. Testfälle und -szenarien
+
+Im Rahmen unserer Testumgebung wurde vorrangig auf Mock- und Unittests zurückgegriffen, die bereits in der Dokumentation erwähnt sind. Die Unittests werden zu Beginn definiert und am Ende hinsichtlich des erwarteten Ergebnisses überprüft. Sie resultieren in einer klaren Aussage: bestanden oder nicht bestanden, ohne eine tiefergehende Bewertung. 
 
 Verschiedene Testszenarien wurden durchgeführt, darunter:
 
@@ -18,6 +20,7 @@ Verschiedene Testszenarien wurden durchgeführt, darunter:
 ## 1. Testfall: test_pdfReader.py
 
 #pleasecheck Hier fehlt die Beschreibung zum Anwendungsfall bzw zu den Testszenarien (s. Testfall 2 und 3)
+
 **Testumgebung:** Ausgeführt in einer Python-Umgebung mit PyPDF2 und anderen notwendigen Bibliotheken.
 
 **High-Level Beschreibung**: Die TestPdfProcessingSuite sorgt für die genaue Extraktion von Text und die Konvertierung in Dokumentvektoren aus PDF-Dateien. Es testet Funktionalität unter normalen Bedingungen, verschiedene Formate, große Dateien und Fehlerszenarien.
@@ -40,7 +43,7 @@ Verschiedene Testszenarien wurden durchgeführt, darunter:
 
 **1.1 Testfall:** Konvertierung von PDF in Text
 
-**1.2 Testfall:** DF zu Dokument-Vektor Konvertierung
+**1.2 Testfall:** PDF zu Dokument-Vektor Konvertierung
 
 **1.3 Testfall:** PDF zu Dokument Vektor mit verschiedenen Absätzen
 
@@ -665,10 +668,6 @@ Beschreibung: Die TestFileSystemHandler-Suite wurde entwickelt, um die Funktiona
 
 # 5. Qualitätssicherung
 
-Die Dokumentation dient als Leitfaden für aktuelle und zukünftige Entwickler und Tester, um die Qualität der Backend-Funktionen zu gewährleisten und zu überprüfen, dass alle Funktionen den Standards entsprechen.
+Unsere Testhierarchie ist in drei Ebenen gegliedert, wobei 90% Unittests, 8% Integrationstests und 2% Softwarequalitätstests sind. Softwarequalitätstests, wie beispielsweise die simultane Anmeldung einer hohen Anzahl von Benutzern, sind umfangreiche Tests, die in unserem Rahmen nicht durchführbar sind und üblicherweise von größeren Unternehmen umgesetzt werden. Diese Einschränkungen spiegeln die Skalierbarkeit und Ressourcen eines kleineren Projektes wider.
 
-### Fehlende Aspekte oder Unpassende Inhalte #pleasecheck 
-
-- Eine explizite Zusammenfassung der allgemeinen Testergebnisse und eine Gesamtbewertung der Softwarequalität fehlen.
-- Es gibt keine spezifischen Angaben zur Konfiguration der Testumgebung, wie z. B. Hardware- oder Netzwerkeinstellungen.
-- Es fehlen detaillierte Informationen über das Vorgehen bei Fehlern und deren Behebung.
+Die Dokumentation dient als Leitfaden für aktuelle und zukünftige Entwickler und Tester, um die Qualität der Backend-Funktionen zu gewährleisten und zu überprüfen, dass alle Funktionen den Standards entsprechen. 
